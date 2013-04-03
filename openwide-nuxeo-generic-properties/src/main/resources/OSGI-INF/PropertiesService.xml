@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<component name="fr.openwide.nuxeo.properties.PropertiesService">
+
+  <implementation class="fr.openwide.nuxeo.properties.PropertiesServiceImpl" />
+
+  <service>
+    <provide interface="fr.openwide.nuxeo.properties.PropertiesService" />
+  </service>
+
+  <extension-point name="properties">
+    <object class="fr.openwide.nuxeo.properties.PropertyDescriptor" />
+  </extension-point>
+  
+</component>

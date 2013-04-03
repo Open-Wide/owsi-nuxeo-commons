@@ -42,6 +42,7 @@
     <module>openwide-nuxeo-tests-helper</module>
     <module>openwide-nuxeo-utils</module>
     <module>openwide-nuxeo-property-sync</module>
+    <module>openwide-nuxeo-generic-properties</module>
   </modules>
 
   <dependencies>
@@ -106,6 +107,11 @@
       <dependency>
         <groupId>fr.openwide.nuxeo.commons</groupId>
         <artifactId>openwide-nuxeo-property-sync</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>fr.openwide.nuxeo.commons</groupId>
+        <artifactId>openwide-nuxeo-generic-properties</artifactId>
         <version>${project.version}</version>
       </dependency>
     </dependencies>

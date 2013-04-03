@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<component name="fr.openwide.nuxeo.commons.genericprops.contrib.test">
+
+  <extension target="fr.openwide.nuxeo.properties.PropertiesService" point="properties">
+    <property name="hello" type="string"> world  </property>
+    <property name="default">yo</property>
+    <property name="mynumber" type="number"> 40
+    </property>
+    <property name="mylist" type="list">
+      <value>A</value>
+      <value>B</value>
+      <value> C </value>
+    </property>
+    <property name="mymap" type="map">
+      <value key="haha">hoho</value>
+    </property>
+  </extension>
+
+</component>
