@@ -1,0 +1,24 @@
+<div xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:nxu="http://nuxeo.org/nxweb/util"
+  class="facetedSearchActionBar">
+
+<nxu:set var="contentViewName"
+  value="#{facetedSearchActions.currentContentViewName}">
+
+  <h:commandLink action="#{facetedSearchActions.clearSearch()}"
+    immediate="true">
+    <h:outputText value="#{messages['command.faceted.search.clear']}" />
+  </h:commandLink>
+  <h:commandButton
+    value="#{messages['command.faceted.search.go']}"
+    action="faceted_search_results"
+    styleClass="button">
+    <nxu:actionListenerMethod
+      value="#{contentViewActions.refreshAndRewind(contentViewName)}" />
+  </h:commandButton>
+
+</nxu:set>
+
+<div style="clear: both;"></div>
+
+</div>
