@@ -1,6 +1,11 @@
-*.class
+# Temporary files
+*~
+*.tmp
 
-# Package Files #
-*.jar
-*.war
-*.ear
+# Hidden files
+.*
+
+# Build output
+bin/
+build/
+target/

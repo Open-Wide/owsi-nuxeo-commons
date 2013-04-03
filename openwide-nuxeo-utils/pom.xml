@@ -1,0 +1,34 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>fr.openwide.nuxeo.commons</groupId>
+    <artifactId>openwide-nuxeo-commons</artifactId>
+    <version>5.6-1.0.0-SNAPSHOT</version>
+    <relativePath>..</relativePath>
+  </parent>
+  
+  <artifactId>openwide-nuxeo-utils</artifactId>
+  <name>Open Wide : Nuxeo Utils</name>
+  <packaging>jar</packaging>
+  
+  <dependencies>
+    <dependency>
+        <groupId>fr.openwide.nuxeo.commons</groupId>
+        <artifactId>openwide-nuxeo-constants</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>fr.openwide.nuxeo.commons</groupId>
+        <artifactId>openwide-nuxeo-tests-helper</artifactId>
+    </dependency>
+    
+    <!-- Nuxeo Automation -->
+    <dependency>
+      <groupId>org.nuxeo.ecm.automation</groupId>
+      <artifactId>nuxeo-automation-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.nuxeo.ecm.automation</groupId>
+      <artifactId>nuxeo-automation-jsf</artifactId>
+    </dependency>
+  </dependencies>
+</project>

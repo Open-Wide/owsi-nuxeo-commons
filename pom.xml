@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.nuxeo.ecm.platform</groupId>
+    <artifactId>nuxeo-features-parent</artifactId>
+    <version>5.6</version>
+  </parent>
+  
+  <groupId>fr.openwide.nuxeo.commons</groupId>
+  <artifactId>openwide-nuxeo-commons</artifactId>
+  <version>5.6-1.0.0-SNAPSHOT</version>
+  <name>GED Ekium</name>
+  <packaging>pom</packaging>
+  <description>Reusable resources for Nuxeo projects</description>
+
+  <developers>
+    <developer>
+      <id>schambon</id>
+      <name>Sylvain Chambon</name>
+      <email>sylvain.chambon@openwide.fr</email>
+      <organization>Open Wide</organization>
+    </developer>
+    <developer>
+      <id>mkalam-alami</id>
+      <name>Marwane Kalam-Alami</name>
+      <email>marwane.kalam-alami@openwide.fr</email>
+      <organization>Open Wide</organization>
+    </developer>
+  </developers>
+
+  <scm>
+    <developerConnection>scm:git:https://github.com/Open-Wide/openwide-nuxeo-commons.git</developerConnection>
+  </scm>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <modules>
+    <module>openwide-nuxeo-constants</module>
+    <module>openwide-nuxeo-tests-helper</module>
+    <module>openwide-nuxeo-utils</module>
+    <module>openwide-nuxeo-property-sync</module>
+  </modules>
+
+  <dependencies>
+    <!-- Common dependencies -->
+    <dependency>
+      <groupId>org.nuxeo.ecm.core</groupId>
+      <artifactId>nuxeo-core-api</artifactId>
+    </dependency>
+    
+    <!-- Common dependencies for tests -->
+    <dependency>
+      <groupId>org.nuxeo.runtime</groupId>
+      <artifactId>nuxeo-runtime-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.nuxeo.ecm.core</groupId>
+      <artifactId>nuxeo-core-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.nuxeo.ecm.platform</groupId>
+      <artifactId>nuxeo-features-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.nuxeo.ecm.platform</groupId>
+      <artifactId>nuxeo-platform-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- Open Wide projects -->
+      <dependency>
+        <groupId>fr.openwide.nuxeo.commons</groupId>
+        <artifactId>openwide-nuxeo-tests-helper</artifactId>
+        <version>${project.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>fr.openwide.nuxeo.commons</groupId>
+        <artifactId>openwide-nuxeo-constants</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>fr.openwide.nuxeo.commons</groupId>
+        <artifactId>openwide-nuxeo-utils</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>fr.openwide.nuxeo.commons</groupId>
+        <artifactId>openwide-nuxeo-property-sync</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <repositories>
+    <!-- Nuxeo repositories -->
+    <repository>
+      <id>nuxeo-public</id>
+      <url>http://maven.nuxeo.org/nexus/content/groups/public</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>nuxeo-public-snapshots</id>
+      <url>http://maven.nuxeo.org/nexus/content/groups/public-snapshot</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+</project>

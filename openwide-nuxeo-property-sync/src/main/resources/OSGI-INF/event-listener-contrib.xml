@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<component name="fr.openwide.nuxeo.propertysync.listener.contrib" version="1.0">
+
+  <extension target="org.nuxeo.ecm.core.event.EventServiceComponent" point="listener">
+    <listener name="updateMetadata" class="fr.openwide.nuxeo.propertysync.listener.PropertySyncListener"
+      postCommit="false" async="false" priority="160">
+      <event>emptyDocumentModelCreated</event>
+      <event>documentCreated</event>
+      <event>documentCreatedByCopy</event>
+      <event>documentMoved</event>
+      <event>beforeDocumentModification</event>
+    </listener>
+  </extension>
+
+</component>

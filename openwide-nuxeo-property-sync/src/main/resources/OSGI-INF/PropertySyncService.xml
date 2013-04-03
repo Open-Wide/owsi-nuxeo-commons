@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<component name="fr.openwide.nuxeo.propertysync.service.PropertySyncService" version="1.0">
+
+  <service>
+    <provide interface="fr.openwide.nuxeo.propertysync.service.PropertySyncService" />
+  </service>
+
+  <implementation class="fr.openwide.nuxeo.propertysync.service.PropertySyncServiceImpl" />
+
+  <extension-point name="rule">
+    <object class="fr.openwide.nuxeo.propertysync.service.RuleDescriptor" />
+    <documentation>
+      Example :
+      - matches both Notes and documents HiddenInNavigation
+      - copies folder's title to the description unless it's already set
+      <code>
+        <rule name="descriptionFromParentFolder">
+          <target>
+            <type>Note</type>
+            <facet>HiddenInNavigation</facet>
+          </target>
+          <metadata>
+            <setProperty xpath="dc:description" ancestorType="Folder" ancestorXpath="dc:title" onlyIfNull="true" />
+          </metadata>
+        </rule>
+      </code>
+    </documentation>
+  </extension-point>
+  
+</component>

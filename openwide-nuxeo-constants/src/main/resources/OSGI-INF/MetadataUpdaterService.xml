@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<component name="fr.openwide.nuxeo.propertysync.service.MetadataUpdaterService" version="1.0">
+
+  <service>
+    <provide interface="fr.openwide.nuxeo.propertysync.service.MetadataUpdaterService" />
+  </service>
+
+  <implementation class="fr.openwide.ekium.metadata.MetadataUpdaterServiceImpl" />
+
+  <extension-point name="rule">
+    <documentation>
+      Example :
+      - matches both Notes and documents HiddenInNavigation
+      - copies folder's title to the description unless it's already set
+      <code>
+        <rule name="descriptionFromParentFolder">
+          <target>
+            <type>Note</type>
+            <facet>HiddenInNavigation</facet>
+          </target>
+          <metadata>
+            <setProperty name="dc:description" ancestor="Folder" property="dc:title" onlyIfNull="true" />
+          </metadata>
+        </rule>
+      </code>
+    </documentation>
+    <object class="fr.openwide.ekium.metadata.RuleDescriptor" />
+  </extension-point>
+
+  <extension target="org.nuxeo.ecm.core.event.EventServiceComponent" point="listener">
+    <listener name="updateMetadata" class="fr.openwide.ekium.metadata.MetadataListener"
+      postCommit="false" async="false" priority="160">
+      <event>emptyDocumentModelCreated</event>
+      <event>documentCreated</event>
+      <event>documentCreatedByCopy</event>
+      <event>documentMoved</event>
+      <event>beforeDocumentModification</event>
+    </listener>
+  </extension>
+  
+</component>
