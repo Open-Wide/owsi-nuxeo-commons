@@ -38,13 +38,13 @@
   </properties>
 
   <modules>
-    <module>openwide-nuxeo-constants</module>
-    <module>openwide-nuxeo-tests-helper</module>
-    <module>openwide-nuxeo-utils</module>
-    <module>openwide-nuxeo-property-sync</module>
-    <module>openwide-nuxeo-generic-properties</module>
-    <module>openwide-nuxeo-avatar-importer</module>
-    <module>openwide-nuxeo-document-creation-script</module>
+    <module>openwide-nuxeo-core/openwide-nuxeo-constants</module>
+    <module>openwide-nuxeo-core/openwide-nuxeo-tests-helper</module>
+    <module>openwide-nuxeo-core/openwide-nuxeo-utils</module>
+    <module>openwide-nuxeo-features/openwide-nuxeo-property-sync</module>
+    <module>openwide-nuxeo-features/openwide-nuxeo-generic-properties</module>
+    <module>openwide-nuxeo-features/openwide-nuxeo-avatar-importer</module>
+    <module>openwide-nuxeo-features/openwide-nuxeo-document-creation-script</module>
   </modules>
 
   <dependencies>

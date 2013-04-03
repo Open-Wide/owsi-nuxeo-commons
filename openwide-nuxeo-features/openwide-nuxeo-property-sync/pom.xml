@@ -5,11 +5,11 @@
     <groupId>fr.openwide.nuxeo.commons</groupId>
     <artifactId>openwide-nuxeo-commons</artifactId>
     <version>5.6-1.0.0-SNAPSHOT</version>
-    <relativePath>..</relativePath>
+    <relativePath>../..</relativePath>
   </parent>
 
-  <artifactId>openwide-nuxeo-document-creation-script</artifactId>
-  <name>Open Wide : Nuxeo Document Creation Script</name>
+  <artifactId>openwide-nuxeo-property-sync</artifactId>
+  <name>Open Wide : Nuxeo Property Sync</name>
   <packaging>jar</packaging>
 
   <dependencies>

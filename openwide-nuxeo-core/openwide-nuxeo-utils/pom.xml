@@ -4,7 +4,7 @@
     <groupId>fr.openwide.nuxeo.commons</groupId>
     <artifactId>openwide-nuxeo-commons</artifactId>
     <version>5.6-1.0.0-SNAPSHOT</version>
-    <relativePath>..</relativePath>
+    <relativePath>../..</relativePath>
   </parent>
   
   <artifactId>openwide-nuxeo-utils</artifactId>
