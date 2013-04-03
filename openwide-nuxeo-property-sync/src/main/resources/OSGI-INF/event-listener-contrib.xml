@@ -2,7 +2,7 @@
 <component name="fr.openwide.nuxeo.propertysync.listener.contrib" version="1.0">
 
   <extension target="org.nuxeo.ecm.core.event.EventServiceComponent" point="listener">
-    <listener name="updateMetadata" class="fr.openwide.nuxeo.propertysync.listener.PropertySyncListener"
+    <listener name="propertySyncListener" class="fr.openwide.nuxeo.propertysync.listener.PropertySyncListener"
       postCommit="false" async="false" priority="160">
       <event>emptyDocumentModelCreated</event>
       <event>documentCreated</event>

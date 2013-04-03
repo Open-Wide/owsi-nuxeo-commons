@@ -35,6 +35,8 @@ import fr.openwide.nuxeo.types.TypeNote;
  * 
  */
 @Deploy({
+    "org.nuxeo.ecm.platform.types.api",
+    "org.nuxeo.ecm.platform.types.core", // Contains the TypeManager service
     "fr.openwide.nuxeo.commons.constants",
     "fr.openwide.nuxeo.commons.propertysync"
 })
