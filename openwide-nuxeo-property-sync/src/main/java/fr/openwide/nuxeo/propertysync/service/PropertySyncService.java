@@ -24,9 +24,9 @@ import org.nuxeo.ecm.core.api.DocumentModel;
  */
 public interface PropertySyncService {
 
-    static final String CONTEXT_EVENT_FROM_METADATA_UPDATER = "metadataUpdater";
+    static final String CONTEXT_TRIGGERED_BY_PROPERTY_SYNC = "propertySync";
     
-    static final String CONTEXT_BYPASS_METADATA_UPDATER = "bypassMetadataUpdater";
+    static final String CONTEXT_BYPASS_PROPERTY_SYNC = "bypassMetadataUpdater";
 
     static final String XPATH_NAME = "ecm:name";
 

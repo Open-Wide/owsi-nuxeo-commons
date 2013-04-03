@@ -26,7 +26,7 @@ import org.nuxeo.ecm.platform.query.nxql.NXQLQueryBuilder;
 import fr.openwide.nuxeo.propertysync.PropertySyncException;
 import fr.openwide.nuxeo.propertysync.service.PropertySyncService;
 import fr.openwide.nuxeo.propertysync.service.RuleDescriptor;
-import fr.openwide.nuxeo.propertysync.service.SetPropertyDescriptor;
+import fr.openwide.nuxeo.propertysync.service.PropertyDescriptor;
 import fr.openwide.nuxeo.utils.document.DocumentUtils;
 
 /**
@@ -57,19 +57,25 @@ public class PropertySyncChildrenRunner extends AbstractPropertySyncRunner {
         
         Map<String, RuleDescriptor> descriptorsByDoctypes = metadataUpdater.getTargetDoctypes(doctype);
         if (descriptorsByDoctypes != null && descriptorsByDoctypes.size() > 0) {
-            for (Entry<String, RuleDescriptor> d : descriptorsByDoctypes.entrySet()) {
-                String queryByDoctype = NXQLQueryBuilder.getQuery(TEMPLATE_QUERY_CHILDREN_BY_DOCTYPE,
-                        new String[]{ d.getKey(), doc.getPathAsString()}, false, true);
-                copyToChildren(session, doc, queryByDoctype, d.getValue());
+            for (Entry<String, RuleDescriptor> entry : descriptorsByDoctypes.entrySet()) {
+                RuleDescriptor descriptor = entry.getValue();
+                if (!descriptor.getNoMassUpdate()) {
+                    String queryByDoctype = NXQLQueryBuilder.getQuery(TEMPLATE_QUERY_CHILDREN_BY_DOCTYPE,
+                            new String[]{ entry.getKey(), doc.getPathAsString() }, false, true);
+                    copyToChildren(session, doc, queryByDoctype, descriptor);
+                }
             }
         }
 
         Map<String, RuleDescriptor> descriptorsByFacets = metadataUpdater.getTargetFacets(doctype);
         if (descriptorsByFacets != null && descriptorsByFacets.size() > 0) {
-            for (Entry<String, RuleDescriptor> d : descriptorsByFacets.entrySet()) {
-                String queryByFacets = NXQLQueryBuilder.getQuery(TEMPLATE_QUERY_CHILDREN_BY_FACET,
-                        new String[]{ d.getKey(), doc.getPathAsString()}, false, true);
-                copyToChildren(session, doc, queryByFacets, d.getValue());
+            for (Entry<String, RuleDescriptor> entry : descriptorsByFacets.entrySet()) {
+                RuleDescriptor descriptor = entry.getValue();
+                if (!descriptor.getNoMassUpdate()) {
+                    String queryByFacets = NXQLQueryBuilder.getQuery(TEMPLATE_QUERY_CHILDREN_BY_FACET,
+                            new String[]{ entry.getKey(), doc.getPathAsString() }, false, true);
+                    copyToChildren(session, doc, queryByFacets, descriptor);
+                }
             }
         }
     }
@@ -79,12 +85,12 @@ public class PropertySyncChildrenRunner extends AbstractPropertySyncRunner {
         try {
             // TODO Update only when the properties to copy are specifically modified
             DocumentModelList children = coreSession.query(childrenQuery);
-            for (SetPropertyDescriptor propertyDescriptor : d.getPropertyDescriptors()) {
+            for (PropertyDescriptor propertyDescriptor : d.getPropertyDescriptors()) {
                 if (DocumentUtils.isAssignable(doc.getType(), propertyDescriptor.getAncestorType())) {
                     for (DocumentModel child : children) {
                         copyPropertyValue(doc, propertyDescriptor.getAncestorXpath(), child, propertyDescriptor.getXpath(),
                                 propertyDescriptor.getOnlyIfNull());
-                        child.putContextData(PropertySyncService.CONTEXT_EVENT_FROM_METADATA_UPDATER, true);
+                        child.putContextData(PropertySyncService.CONTEXT_TRIGGERED_BY_PROPERTY_SYNC, true);
                     }
                 }
             }

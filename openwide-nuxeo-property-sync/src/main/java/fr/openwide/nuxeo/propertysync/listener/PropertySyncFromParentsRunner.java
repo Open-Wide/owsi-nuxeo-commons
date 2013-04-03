@@ -21,7 +21,7 @@ import org.nuxeo.ecm.core.api.DocumentModel;
 
 import fr.openwide.nuxeo.propertysync.PropertySyncException;
 import fr.openwide.nuxeo.propertysync.service.RuleDescriptor;
-import fr.openwide.nuxeo.propertysync.service.SetPropertyDescriptor;
+import fr.openwide.nuxeo.propertysync.service.PropertyDescriptor;
 import fr.openwide.nuxeo.types.TypeRoot;
 import fr.openwide.nuxeo.utils.document.DocumentUtils;
 
@@ -47,7 +47,7 @@ public class PropertySyncFromParentsRunner extends AbstractPropertySyncRunner {
         
         for (RuleDescriptor d : descriptors) {
             try {
-                for (SetPropertyDescriptor propertyDescriptor : d.getPropertyDescriptors()) {
+                for (PropertyDescriptor propertyDescriptor : d.getPropertyDescriptors()) {
                     DocumentModel ancestor = session.getDocument(doc.getParentRef());
                     boolean found = false;
                     while (ancestor != null && ! TypeRoot.TYPE.equals(ancestor.getType())) {

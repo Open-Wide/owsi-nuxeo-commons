@@ -81,13 +81,13 @@ public class PropertySyncTest extends AbstractNuxeoTest {
         note2 = documentManager.move(note1.getRef(), folder1.getRef(), "n2");
         Assert.assertEquals(FOLDER_1_TITLE, note2.getPropertyValue(TypeNote.XPATH_DESCRIPTION));
 
-        file1 = documentManager.createDocumentModel(folder1.getPathAsString(), "f1", TypeFile.TYPE);
+        file1 = documentManager.createDocumentModel(folder1.getPathAsString(), "file1", TypeFile.TYPE);
         file1.addFacet(MATCHING_FACET);
         file1 = documentManager.createDocument(file1);
         Assert.assertEquals(FOLDER_1_TITLE, file1.getPropertyValue(TypeNote.XPATH_DESCRIPTION));
         
         // Creation : Ignore not matching
-        DocumentModel file2 = documentManager.createDocumentModel(folder1.getPathAsString(), "f2", TypeFile.TYPE);
+        DocumentModel file2 = documentManager.createDocumentModel(folder1.getPathAsString(), "file2", TypeFile.TYPE);
         file2 = documentManager.createDocument(file2);
         Assert.assertNull(file2.getPropertyValue(TypeFile.XPATH_DESCRIPTION));
         
@@ -100,6 +100,9 @@ public class PropertySyncTest extends AbstractNuxeoTest {
     
     @Test
     public void testUpdateOnAncestorAction() throws Exception {
+        DocumentModel folder3 = documentManager.createDocumentModel(folder1.getPathAsString(), "f3", TypeFolder.TYPE);
+        folder3 = documentManager.createDocument(folder3);
+        
         // Update parent
         folder1.setPropertyValue(TypeFolder.XPATH_TITLE, FOLDER_2_TITLE);
         documentManager.saveDocument(folder1);
@@ -111,6 +114,10 @@ public class PropertySyncTest extends AbstractNuxeoTest {
         // Check on facet
         file1 = documentManager.getDocument(file1.getRef());
         Assert.assertEquals(FOLDER_2_TITLE, file1.getPropertyValue(TypeNote.XPATH_DESCRIPTION));
+        
+        // Check no mass update
+        folder3 = documentManager.getDocument(folder3.getRef());
+        Assert.assertEquals(FOLDER_1_TITLE, folder3.getPropertyValue(TypeFolder.XPATH_DESCRIPTION));
     }
 
 }

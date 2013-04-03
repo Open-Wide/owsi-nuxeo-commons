@@ -27,22 +27,25 @@ public class RuleDescriptor {
     @XNode("@name")
     public String name;
 
+    @XNode("@noMassUpdate")
+    public boolean noMassUpdate = false;
+    
     private String[] types;
     
     private String[] facets;
     
-    private SetPropertyDescriptor[] propertyDescriptors;
+    private PropertyDescriptor[] propertyDescriptors;
 
     @XNodeList(
-            value = "metadata/setProperty",
-            componentType = SetPropertyDescriptor.class,
-            type = SetPropertyDescriptor[].class
+            value = "properties/property",
+            componentType = PropertyDescriptor.class,
+            type = PropertyDescriptor[].class
     )
-    public void setSetProperties(SetPropertyDescriptor[] setProperties) {
+    public void setProperties(PropertyDescriptor[] setProperties) {
         this.propertyDescriptors = setProperties;
     }
     
-    public SetPropertyDescriptor[] getPropertyDescriptors() {
+    public PropertyDescriptor[] getPropertyDescriptors() {
         return propertyDescriptors;
     }
 
@@ -71,7 +74,15 @@ public class RuleDescriptor {
     public String[] getFacets() {
         return facets;
     }
+    
+    public boolean getNoMassUpdate() {
+        return noMassUpdate;
+    }
 
+    public void setNoMassUpdate(boolean noMassUpdate) {
+        this.noMassUpdate = noMassUpdate;
+    }
+    
     @Override
     public String toString() {
         return "RuleDescriptor " + name + " (Types=" + types + ", Facets=" + facets + ")";

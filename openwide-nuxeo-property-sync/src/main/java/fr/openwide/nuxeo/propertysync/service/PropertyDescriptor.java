@@ -21,7 +21,7 @@ import org.nuxeo.common.xmap.annotation.XObject;
  * @author mkalam-alami
  */
 @XObject("setProperty")
-public class SetPropertyDescriptor {
+public class PropertyDescriptor {
 
     /**
      * Required.

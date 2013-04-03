@@ -38,26 +38,26 @@ public class PropertySyncListener implements EventListener {
     @SuppressWarnings("unused")
     private static final Log logger = LogFactory.getLog(PropertySyncListener.class);
     
-    private PropertySyncService metadataUpdaterService;
+    private PropertySyncService propertySyncService;
 
     @Override
     public void handleEvent(Event event) throws ClientException {
-        PropertySyncService metadataUpdater = getMetadataUpdaterService();
+        PropertySyncService propertySync = getPropertySyncService();
         DocumentEventContext ctx = (DocumentEventContext) event.getContext();
         DocumentModel doc = ctx.getSourceDocument();
         CoreSession coreSession = ctx.getCoreSession();
         
-        if (doc.getContextData(PropertySyncService.CONTEXT_BYPASS_METADATA_UPDATER) != null
+        if (doc.getContextData(PropertySyncService.CONTEXT_BYPASS_PROPERTY_SYNC) != null
                 || doc.isVersion() || doc.isProxy()) {
             return;
         }
         
         if (DocumentEventTypes.BEFORE_DOC_UPDATE.equals(event.getName())) {
             // Copy to children
-            new PropertySyncChildrenRunner(coreSession, doc, metadataUpdater).runUnrestricted();
+            new PropertySyncChildrenRunner(coreSession, doc, propertySync).runUnrestricted();
         }
         else {
-            List<RuleDescriptor> descriptors = metadataUpdater.getDescriptors(doc);
+            List<RuleDescriptor> descriptors = propertySync.getDescriptors(doc);
 
             if (descriptors != null && descriptors.size() > 0) {
                 if (DocumentEventTypes.EMPTY_DOCUMENTMODEL_CREATED.equals(event.getName())) {
@@ -76,12 +76,12 @@ public class PropertySyncListener implements EventListener {
         }
     }
 
-    private PropertySyncService getMetadataUpdaterService() throws ClientException {
+    private PropertySyncService getPropertySyncService() throws ClientException {
         try {
-            if (metadataUpdaterService == null) {
-                metadataUpdaterService = Framework.getService(PropertySyncService.class);
+            if (propertySyncService == null) {
+                propertySyncService = Framework.getService(PropertySyncService.class);
             }
-            return metadataUpdaterService;
+            return propertySyncService;
         } catch (Exception e) {
             throw new ClientException("Cannot get service", e);
         }

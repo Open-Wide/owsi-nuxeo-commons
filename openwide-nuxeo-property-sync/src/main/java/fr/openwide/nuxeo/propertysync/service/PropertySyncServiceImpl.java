@@ -61,7 +61,7 @@ public class PropertySyncServiceImpl extends DefaultComponent implements Propert
             descriptorsByTargetType.get(doctype).add(descriptor);
 
             // Register inverse references
-            for (SetPropertyDescriptor propertyDescriptor : descriptor.getPropertyDescriptors()) {
+            for (PropertyDescriptor propertyDescriptor : descriptor.getPropertyDescriptors()) {
                 String sourceType = propertyDescriptor.getAncestorType();
                 if (!descriptorsBySourceType.containsKey(sourceType)) {
                     descriptorsBySourceType.put(sourceType, new HashMap<String, RuleDescriptor>());
@@ -78,7 +78,7 @@ public class PropertySyncServiceImpl extends DefaultComponent implements Propert
             descriptorsByTargetFacet.get(facet).add(descriptor);
 
             // Register inverse references
-            for (SetPropertyDescriptor propertyDescriptor : descriptor.getPropertyDescriptors()) {
+            for (PropertyDescriptor propertyDescriptor : descriptor.getPropertyDescriptors()) {
                 String sourceType = propertyDescriptor.getAncestorType();
                 if (!descriptorsBySourceFacet.containsKey(sourceType)) {
                     descriptorsBySourceFacet.put(sourceType, new HashMap<String, RuleDescriptor>());

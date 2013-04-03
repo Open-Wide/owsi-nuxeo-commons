@@ -10,18 +10,24 @@
   <extension-point name="rule">
     <object class="fr.openwide.nuxeo.propertysync.service.RuleDescriptor" />
     <documentation>
-      Example :
-      - matches both Notes and documents HiddenInNavigation
-      - copies folder's title to the description unless it's already set
+      Property Sync is a useful tool allowing to synchronize some properties from a document to its children.
+      
+      The following contribution:
+      * matches Notes and Files, and any document that has the facet Sync
+      * copies their workspace's description unless it's already set.
+        The copy works even if the workspace is not the direct parent,
+        or if the workspace is actually a subtype of the document type Workspace.
+        
       <code>
-        <rule name="descriptionFromParentFolder">
+        <rule name="descriptionFromWorkspace">
           <target>
             <type>Note</type>
-            <facet>HiddenInNavigation</facet>
+            <type>File</type>
+            <facet>Sync</facet>
           </target>
-          <metadata>
-            <setProperty xpath="dc:description" ancestorType="Folder" ancestorXpath="dc:title" onlyIfNull="true" />
-          </metadata>
+          <properties>
+            <property xpath="dc:description" ancestorType="Workspace" ancestorXpath="dc:description" onlyIfNull="true" />
+          </properties>
         </rule>
       </code>
     </documentation>
