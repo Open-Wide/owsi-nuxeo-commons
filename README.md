@@ -11,9 +11,9 @@ These projects are not (yet) deployed to any public Maven Repository. Clone this
 
 ## Licensing
 
-The contents of this repository, unless otherwise mentioned, is licensed under the [LGPL][http://www.gnu.org/copyleft/lesser.html).
+The contents of this repository, unless otherwise mentioned, is licensed under the [LGPL](http://www.gnu.org/copyleft/lesser.html).
 
 ## Links
 
-* [Nuxeo corporate website](http://www.nuxeo.com/fr)
 * [Open Wide corporate website](http://www.openwide.fr/)
+* [Nuxeo corporate website](http://www.nuxeo.com/fr)
