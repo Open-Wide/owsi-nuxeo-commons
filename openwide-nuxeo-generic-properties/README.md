@@ -9,9 +9,11 @@ Generic Properties provides a generic XML extension point to store and retrieve 
 
 ## Example
   
+**XML contribution**
+  
 ```xml
-<extension target="fr.openwide.ekium.properties.PropertiesService" point="properties">
-  <property name="my.namespace.mystring" <!-- type="string" -->>hello world</property>
+<extension target="fr.openwide.nuxeo.properties.PropertiesService" point="properties">
+  <property name="my.namespace.mystring" type="string">hello world</property>
   <property name="my.namespace.mynumber" type="number">9001</property>
   <property name="my.namespace.mylist" type="list">
     <value>A</value>
@@ -24,6 +26,10 @@ Generic Properties provides a generic XML extension point to store and retrieve 
   </property>
 </extension>
 ```
+
+Note: the *type* attribute is optional and defaults to *string*.
+
+**Accessing the data**
 
 ```java
 Framework.getService(PropertiesService.class).getListValue("my.namespace.mylist");

@@ -43,6 +43,8 @@
     <module>openwide-nuxeo-utils</module>
     <module>openwide-nuxeo-property-sync</module>
     <module>openwide-nuxeo-generic-properties</module>
+    <module>openwide-nuxeo-avatar-importer</module>
+    <module>openwide-nuxeo-document-creation-script</module>
   </modules>
 
   <dependencies>
@@ -112,6 +114,16 @@
       <dependency>
         <groupId>fr.openwide.nuxeo.commons</groupId>
         <artifactId>openwide-nuxeo-generic-properties</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>fr.openwide.nuxeo.commons</groupId>
+        <artifactId>openwide-nuxeo-avatar-importer</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>fr.openwide.nuxeo.commons</groupId>
+        <artifactId>openwide-nuxeo-document-creation-script</artifactId>
         <version>${project.version}</version>
       </dependency>
     </dependencies>

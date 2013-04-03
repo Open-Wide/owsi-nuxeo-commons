@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-Vendor: Open Wide
+Bundle-ActivationPolicy: lazy
+Bundle-Name: openwide-nuxeo-dcs
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: fr.openwide.nuxeo.commons.dcs;singleton:=true
+Nuxeo-Component: OSGI-INF/DocumentCreationScriptService.xml

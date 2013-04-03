@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<component name="fr.openwide.nuxeo.dcs.service.DocumentCreationScriptService">
+
+  <implementation class="fr.openwide.nuxeo.dcs.service.DocumentCreationScriptServiceImpl" />
+
+  <service>
+    <provide interface="fr.openwide.nuxeo.dcs.service.DocumentCreationScriptService" />
+  </service>
+
+  <extension-point name="scripts">
+    <object class="fr.openwide.nuxeo.dcs.service.DocumentCreationScriptDescriptor" />
+  </extension-point>
+  
+</component>

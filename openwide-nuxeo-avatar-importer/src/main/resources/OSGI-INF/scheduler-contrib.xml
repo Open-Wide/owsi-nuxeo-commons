@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<component name="fr.openwide.nuxeo.avatar.scheduler.contrib">
+
+  <extension target="org.nuxeo.ecm.core.scheduler.SchedulerService" point="schedule">
+    <!-- Run import every minute -->
+    <schedule id="avatarImporter">
+      <username>Administrator</username>
+      <event>avatarImport</event>
+      <cronExpression>0 * * * * ?</cronExpression>
+    </schedule>
+  </extension>
+
+</component>

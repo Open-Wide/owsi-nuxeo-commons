@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<component name="fr.openwide.nuxeo.avatar.avatarimporter.contrib.test">
+
+  <extension target="fr.openwide.nuxeo.avatar.AvatarImporterService" point="config">
+    <configuration>
+      <dossierAvatars>target/test-classes/avatars</dossierAvatars>
+    </configuration>
+  </extension>
+
+</component>

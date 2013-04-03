@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<component name="fr.openwide.nuxeo.commons.dcs.dcs.contrib.test">
+
+    <extension target="fr.openwide.nuxeo.dcs.service.DocumentCreationScriptService" point="scripts">
+        <script name="test">
+            <document path="fichierLocal" doctype="File" title="Foo">
+                <acl blockInheritance="false">
+                    <ace principal="Bob" permission="Everything" granted="true" />
+                </acl>
+                <properties>
+                    <property xpath="dc:description" value="Bar" />
+                </properties>
+                <facets>
+                    <facet>HiddenInNavigation</facet>
+                </facets>
+<!--                 <allowedTypes> -->
+<!--                     <type>...</type> -->
+<!--                 </allowedTypes> -->
+            </document>
+        </script>
+    </extension>
+
+</component>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<component name="fr.openwide.nuxeo.avatar.AvatarImporterService">
+
+  <implementation class="fr.openwide.nuxeo.avatar.AvatarImporterServiceImpl" />
+
+  <service>
+    <provide interface="fr.openwide.nuxeo.avatar.AvatarImporterService" />
+  </service>
+
+  <extension-point name="config">
+    <object class="fr.openwide.nuxeo.avatar.AvatarImporterConfigDescriptor" />
+  </extension-point>
+
+</component>
