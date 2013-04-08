@@ -1,6 +1,7 @@
 # Temporary files
 *~
 *.tmp
+*.versionsBackup
 
 # Hidden files
 .*
