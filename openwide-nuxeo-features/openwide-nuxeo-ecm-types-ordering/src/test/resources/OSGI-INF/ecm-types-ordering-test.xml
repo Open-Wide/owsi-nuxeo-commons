@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<component name="fr.openwide.nuxeo.commons.ecmtypesordering.test.contrib">
+
+  <extension target="fr.openwide.nuxeo.ordering.service.EcmTypesOrderingService" point="ordering">
+    <ordering name="folderTypesOrdering" sort="alphabetical">
+      <filter name="allFolders">
+        <rule grant="true">
+          <type>Folder</type>
+        </rule>
+      </filter>
+      <category name="Useful">
+        <type>Note</type>
+        <type>File</type>
+        <type>Picture</type>
+      </category>
+      <category name="Default" default="true" />
+    </ordering>
+    
+    <config>
+        <columnSize>6</columnSize>
+    </config>
+  </extension>
+
+</component>

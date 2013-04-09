@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<component name="fr.openwide.nuxeo.ordering.service.EcmTypesOrderingService" version="1.0">
+
+  <service>
+    <provide interface="fr.openwide.nuxeo.ordering.service.EcmTypesOrderingService" />
+  </service>
+
+  <implementation class="fr.openwide.nuxeo.ordering.service.EcmTypesOrderingServiceImpl" />
+
+  <extension-point name="ordering">
+    <object class="fr.openwide.nuxeo.ordering.service.OrderingDescriptor" />
+    <documentation>
+      Allows to override the way types are sorted in the "New document" popup.
+      Default (and already localized) category names are: SimpleDocument, Collaborative, SuperDocument, misc
+
+      <code>
+        <ordering name="folderTypesOrdering" sort="alphabetical">
+          <filter name="folders">
+            <rule grant="true">
+              <type>Folder</type>
+            </rule>
+          </filter>
+          <category name="Useful">
+            <type>Note</type>
+            <type>File</type>
+            <type>Picture</type>
+          </category>
+          <category name="Default" default="true" />
+        </ordering>
+      </code>
+    </documentation>
+  </extension-point>
+
+  <extension-point name="config">
+    <object class="fr.openwide.nuxeo.ordering.service.OrderingConfigDescriptor" />
+    <documentation>
+      General configuration for the "New document" popup.
+
+      <code>
+        <config>
+          <columnSize>6</columnSize>
+        </config>
+      </code>
+    </documentation>
+  </extension-point>
+
+</component>

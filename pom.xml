@@ -45,6 +45,7 @@
     <module>openwide-nuxeo-features/openwide-nuxeo-generic-properties</module>
     <module>openwide-nuxeo-features/openwide-nuxeo-avatar-importer</module>
     <module>openwide-nuxeo-features/openwide-nuxeo-document-creation-script</module>
+    <module>openwide-nuxeo-features/openwide-nuxeo-ecm-types-ordering</module>
   </modules>
 
   <dependencies>
@@ -156,11 +157,11 @@
   <distributionManagement>
     <repository>
       <id>OWSI-Nuxeo</id>
-      <url>https://projects.openwide.fr/services/nexus/content/repositories/owsi-nuxeo/</url>
+      <url>https://projects.openwide.fr/services/nexus/content/repositories/owsi-nuxeo</url>
     </repository>
     <snapshotRepository>
       <id>OWSI-Nuxeo-Snapshots</id>
-      <url>https://projects.openwide.fr/services/nexus/content/repositories/owsi-nuxeo-snapshots/</url>
+      <url>https://projects.openwide.fr/services/nexus/content/repositories/owsi-nuxeo-snapshots</url>
     </snapshotRepository>
   </distributionManagement>
   
