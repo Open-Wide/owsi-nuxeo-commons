@@ -17,6 +17,7 @@ This repository provides various reusable resources for your Nuxeo projects. Mos
 * `openwide-nuxeo-avatar-importer`: Watches a given folder to import its contents as avatars.
 * `openwide-nuxeo-document-creation-script`: An alternative to the Content Template service.
 * `openwide-nuxeo-generic-properties`: Generic extension point to store simple data.
+* `openwide-nuxeo-ecm-types-ordering`: Customize the appearance of the doctype selection pop-up.
 
 ## How to
 
