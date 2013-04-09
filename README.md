@@ -20,9 +20,12 @@ This repository provides various reusable resources for your Nuxeo projects. Mos
 
 ## How to
 
-These projects are not (yet) deployed to any public Maven Repository. Clone this repository (or download the sources [by tag](https://github.com/Open-Wide/openwide-nuxeo-commons/tags)) and simply run `mvn install` to add the latest version of these projects to your local repository.
+These projects are not (yet) deployed to any public Maven Repository. Clone this repository, then run `git checkout release` and `mvn install` to add the latest version of these projects to your local repository. Alternately, you can download the sources [by tag](https://github.com/Open-Wide/openwide-nuxeo-commons/tags).
 
-Then, add the desired Maven dependencies to your Nuxeo modules' POMs, and deploy the JARs to your Nuxeo setup the way you prefer (either manually, or through a Marketplace assembly of your modules).
+To use the bundles:
+
+* If necessary, add the desired Maven dependencies to your Nuxeo modules' POMs
+* Deploy the JARs to your Nuxeo setup the way you prefer (usually either manually or through a Marketplace assembly of your modules).
 
 ## Licensing
 
