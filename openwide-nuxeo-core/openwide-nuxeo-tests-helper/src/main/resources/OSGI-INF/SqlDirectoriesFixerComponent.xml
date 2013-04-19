@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<component name="fr.openwide.nuxeo.test.directories.SqlDirectoriesFixer">
+
+  <require>org.nuxeo.ecm.directory.DirectoryServiceImpl</require>
+  <require>org.nuxeo.ecm.directory.sql.SQLDirectoryFactory</require>
+  
+  <implementation class="fr.openwide.nuxeo.test.directories.SqlDirectoriesFixerComponent" />
+
+  <extension-point name="directories">
+    <object class="fr.openwide.nuxeo.test.directories.SqlDirectoryReferenceDescriptor" />
+  </extension-point>
+
+</component>
