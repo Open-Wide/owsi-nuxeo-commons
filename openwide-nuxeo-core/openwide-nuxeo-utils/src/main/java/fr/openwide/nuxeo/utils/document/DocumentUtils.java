@@ -103,4 +103,8 @@ public class DocumentUtils {
         Collections.addAll(superTypes, typeManager.getSuperTypes(from));
         return superTypes.contains(to);
     }
+    
+    public static String toValidFilename(String string) {
+        return string.replaceAll("[<>\"\\\\|?!:/%*]", "-");
+    }
 }
