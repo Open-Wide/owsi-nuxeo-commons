@@ -20,6 +20,7 @@ import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
 
 import fr.openwide.nuxeo.propertysync.PropertySyncException;
+import fr.openwide.nuxeo.propertysync.service.PropertySyncService;
 import fr.openwide.nuxeo.propertysync.service.RuleDescriptor;
 import fr.openwide.nuxeo.propertysync.service.PropertyDescriptor;
 import fr.openwide.nuxeo.types.TypeRoot;
@@ -72,6 +73,7 @@ public class PropertySyncFromParentsRunner extends AbstractPropertySyncRunner {
         }
         
         if (save) {
+            doc.putContextData(PropertySyncService.CONTEXT_TRIGGERED_BY_PROPERTY_SYNC, true);
             session.saveDocument(doc);
         }
     }
