@@ -16,7 +16,7 @@ This extension point fixes the 'datasource lookup' errors when manipulating dire
 <?xml version="1.0"?>
 <component name="myproject.directoriesfixer.test.contrib">
 
-  <require>{THE COMPONENTS THE FIRST REGISTERED THE DIRECTORIES YOU WANT TO FIX}</require>
+  <require>(the components that first registered the directories to fix)</require>
 
   <extension target="fr.openwide.nuxeo.test.directories.SqlDirectoriesFixer" point="directories">
     <directory name="mydirectory1" />
@@ -40,5 +40,6 @@ To make the contribution work, you have both to deploy it and deploy the `tests-
 @RunWith(FeaturesRunner.class)
 @Features(PlatformFeature.class)
 public class MyTest {
+    ...
     
 ```
