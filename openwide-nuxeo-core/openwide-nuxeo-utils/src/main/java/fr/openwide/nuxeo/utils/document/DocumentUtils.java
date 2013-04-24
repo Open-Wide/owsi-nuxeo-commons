@@ -14,9 +14,12 @@
 package fr.openwide.nuxeo.utils.document;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
@@ -36,6 +39,10 @@ import fr.openwide.nuxeo.types.TypeDocument;
  */
 public class DocumentUtils {
 
+    /**
+     * @return The name of the the default repository, in a way that also works
+     *         for tests.
+     */
     public static final String getRepositoryName() {
         return Framework.isTestModeSet() ? "test" : "default";
     }
@@ -63,13 +70,35 @@ public class DocumentUtils {
         return defaultValue;
     }
 
-    public static DocumentModel createDocument(CoreSession session, String type,
-            String parentPath, String name, String title) throws ClientException {
+    /**
+     * Creates a document with a title.
+     * 
+     * @param session
+     * @param type
+     * @param parentPath
+     * @param name
+     * @param title
+     * @return
+     * @throws ClientException
+     */
+    public static DocumentModel createDocument(CoreSession session, String type, String parentPath, String name,
+            String title) throws ClientException {
         Map<String, Serializable> properties = new HashMap<String, Serializable>();
         properties.put(TypeDocument.XPATH_TITLE, title);
         return createDocument(session, type, parentPath, name, properties);
     }
 
+    /**
+     * Creates a document and attaches some properties.
+     * 
+     * @param session
+     * @param type
+     * @param parentPath
+     * @param name
+     * @param properties
+     * @return
+     * @throws ClientException
+     */
     public static DocumentModel createDocument(CoreSession session, String type, String parentPath, String name,
             Map<String, Serializable> properties) throws ClientException {
         DocumentModel model = session.createDocumentModel(parentPath, name, type);
@@ -83,8 +112,11 @@ public class DocumentUtils {
 
     /**
      * Returns true if and only if the "to" doctype is a supertype of "from"
-     * @param from target type
-     * @param to queried supertype
+     * 
+     * @param from
+     *            target type
+     * @param to
+     *            queried supertype
      * @return true if to is a supertype of from
      */
     public static boolean isAssignable(String from, String to) {
@@ -103,8 +135,64 @@ public class DocumentUtils {
         Collections.addAll(superTypes, typeManager.getSuperTypes(from));
         return superTypes.contains(to);
     }
-    
+
+    /**
+     * Formats the given string to make it usable as a file name
+     * 
+     * @param string
+     * @return
+     */
     public static String toValidFilename(String string) {
         return string.replaceAll("[<>\"\\\\|?!:/%*]", "-");
+    }
+
+    /**
+     * Returns the properties that differ between two versions of a document.
+     * - If a schema is missing from a model, all of its properties will be returned
+     * - Only basic types and string arrays as supported. More complex properties will always be considered modified. 
+     * 
+     * @param m1
+     * @param m2
+     * @return A list of xpaths
+     * @throws ClientException
+     */
+    public static List<String> getDifferingProperties(DocumentModel m1, DocumentModel m2) throws ClientException {
+        List<String> differingProperties = new ArrayList<String>();
+
+        Set<String> schemas = new HashSet<String>();
+        schemas.addAll(Arrays.asList(m1.getSchemas()));
+        schemas.addAll(Arrays.asList(m2.getSchemas()));
+        
+        for (String schema : schemas) {
+            if (m1.hasSchema(schema)) {
+                if (m2.hasSchema(schema)) {
+                    Map<String, Object> p1 = m1.getProperties(schema);
+                    Map<String, Object> p2 = m2.getProperties(schema);
+                    for (Entry<String, Object> property : p1.entrySet()) {
+                        boolean differs = false;
+                        Object value1 = property.getValue();
+                        Object value2 = p2.get(property.getKey());
+                        if (value1 == null) {
+                            differs = value2 != null;
+                        } else {
+                            if (value1 instanceof String[]) {
+                                differs = !Arrays.equals((String[]) value1, (String[]) value2);
+                            } else {
+                                differs = !value1.equals(value2);
+                            }
+                        }
+                        if (differs) {
+                            differingProperties.add(property.getKey());
+                        }
+                    }
+                } else {
+                    differingProperties.addAll(m1.getProperties(schema).keySet());
+                }
+            } else {
+                differingProperties.addAll(m2.getProperties(schema).keySet());
+            }
+        }
+        
+        return differingProperties;
     }
 }
