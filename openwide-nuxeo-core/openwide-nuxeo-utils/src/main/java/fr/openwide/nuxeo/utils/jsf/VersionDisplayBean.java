@@ -93,7 +93,7 @@ public class VersionDisplayBean implements Serializable {
         return versionCache;
     }
 
-    public static String extractVersion(String bundlePath) {
+    public String extractVersion(String bundlePath) {
         String[] splitName = bundlePath.split("(-|\\.[a-zA-Z].*$)");
         String versionNumber = null;
         for (String namePart : splitName) {

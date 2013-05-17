@@ -27,9 +27,10 @@ public class VersionDisplayServiceTest extends AbstractNuxeoTest  {
     
     @Test
     public void testVersionParsing() throws ClientException {
-        Assert.assertEquals("1.0", VersionDisplayBean.extractVersion("hello-1.0.jar"));
-        Assert.assertEquals("1.1", VersionDisplayBean.extractVersion("hello-1-world-1.1.jar"));
-        Assert.assertEquals("1.2-SNAPSHOT", VersionDisplayBean.extractVersion("hello-world-1.2-SNAPSHOT.jar"));
-        Assert.assertEquals("1.3-SNAPSHOT", VersionDisplayBean.extractVersion("hello-1.5-world-1.3-SNAPSHOT.zip"));
+        VersionDisplayBean versionDisplayBean = new VersionDisplayBean();
+        Assert.assertEquals("1.0", versionDisplayBean.extractVersion("hello-1.0.jar"));
+        Assert.assertEquals("1.1", versionDisplayBean.extractVersion("hello-1-world-1.1.jar"));
+        Assert.assertEquals("1.2-SNAPSHOT", versionDisplayBean.extractVersion("hello-world-1.2-SNAPSHOT.jar"));
+        Assert.assertEquals("1.3-SNAPSHOT", versionDisplayBean.extractVersion("hello-1.5-world-1.3-SNAPSHOT.zip"));
     }
 }
