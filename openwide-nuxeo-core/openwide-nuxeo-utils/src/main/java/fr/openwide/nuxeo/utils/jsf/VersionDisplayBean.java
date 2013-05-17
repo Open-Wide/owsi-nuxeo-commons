@@ -58,11 +58,18 @@ public class VersionDisplayBean implements Serializable {
     }
     
     public String getPrefix() throws Exception {
-        return Framework.getService(VersionDisplayService.class).getVersionPrefix();
+        String versionPrefix = Framework.getService(VersionDisplayService.class).getVersionPrefix();
+        return versionPrefix != null ? versionPrefix : ""; // Empty string by default
     }
     
     public String getNumber() throws Exception {
         Pattern bundleNamePattern = Framework.getService(VersionDisplayService.class).getBundleMatchPattern();
+        if (bundleNamePattern == null) {
+            // If no pattern is set, display nothing
+            versionCache = ""; 
+            return "";
+        }
+        
         if (versionCache == null) {
             // Gather all bundle names
             String resourceJarPath = this.getClass().getResource("/").getPath();

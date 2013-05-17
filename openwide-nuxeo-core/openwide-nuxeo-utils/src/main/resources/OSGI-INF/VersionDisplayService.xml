@@ -51,12 +51,4 @@
     </action>
   </extension>
   
-  <!-- Default config -->
-  <extension target="fr.openwide.commons.utils.jsf.VersionDisplayService" point="config">
-    <config>
-      <versionNumberPrefix>MyProject v</versionNumberPrefix>
-      <bundleMatchRegexp>openwide-.*</bundleMatchRegexp>
-    </config>
-  </extension>
-
 </component>
