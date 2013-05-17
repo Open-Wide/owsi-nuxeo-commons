@@ -7,17 +7,17 @@ This repository provides various reusable resources for your Nuxeo projects. Mos
 
 **Core**
 
-* `openwide-nuxeo-constants`: Various constants exposed on Java classes, mainly to ease the manipulation of documents. Most other bundles rely on this.
+* `openwide-nuxeo-constants`: Various constants exposed on Java classes, mainly to ease the manipulation of documents.
 * `openwide-nuxeo-tests-helper`: Thin helper to set up tests.
-* `openwide-nuxeo-utils`: Miscellaneous utility methods and extension points.
+* `openwide-nuxeo-utils`: Miscellaneous utility methods, plus an extension point to display your project version.
 
 **Features**
 
-* `openwide-nuxeo-property-sync`: Allows to synchronize properties from a document to its children.
+* `openwide-nuxeo-property-sync`: Synchronizes properties from documents to their children.
 * `openwide-nuxeo-avatar-importer`: Watches a given folder to import its contents as avatars.
+* `openwide-nuxeo-ecm-types-ordering`: Customizes the appearance of the doctype selection pop-up.
 * `openwide-nuxeo-document-creation-script`: An alternative to the Content Template service.
 * `openwide-nuxeo-generic-properties`: Generic extension point to store simple data.
-* `openwide-nuxeo-ecm-types-ordering`: Customize the appearance of the doctype selection pop-up.
 
 ## How to
 
