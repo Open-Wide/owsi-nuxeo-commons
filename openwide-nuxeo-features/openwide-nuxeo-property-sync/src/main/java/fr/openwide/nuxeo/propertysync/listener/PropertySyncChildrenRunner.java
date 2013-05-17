@@ -45,17 +45,17 @@ public class PropertySyncChildrenRunner extends AbstractPropertySyncRunner {
             " AND " + NXQL.ECM_PATH + " STARTSWITH '?'" +
             " AND " + NXQL.ECM_ISVERSION + " = 0";
     
-    protected PropertySyncService metadataUpdater;
+    protected PropertySyncService propertySyncService;
 
-    protected PropertySyncChildrenRunner(CoreSession session, DocumentModel doc, PropertySyncService metadataUpdater) {
+    protected PropertySyncChildrenRunner(CoreSession session, DocumentModel doc, PropertySyncService propertySyncService) {
         super(session, doc);
-        this.metadataUpdater = metadataUpdater;
+        this.propertySyncService = propertySyncService;
     }
 
     public void run() throws ClientException {
         String doctype = doc.getType();
         
-        Map<String, RuleDescriptor> descriptorsByDoctypes = metadataUpdater.getTargetDoctypes(doctype);
+        Map<String, RuleDescriptor> descriptorsByDoctypes = propertySyncService.getTargetDoctypes(doctype);
         if (descriptorsByDoctypes != null && descriptorsByDoctypes.size() > 0) {
             for (Entry<String, RuleDescriptor> entry : descriptorsByDoctypes.entrySet()) {
                 RuleDescriptor descriptor = entry.getValue();
@@ -67,7 +67,7 @@ public class PropertySyncChildrenRunner extends AbstractPropertySyncRunner {
             }
         }
 
-        Map<String, RuleDescriptor> descriptorsByFacets = metadataUpdater.getTargetFacets(doctype);
+        Map<String, RuleDescriptor> descriptorsByFacets = propertySyncService.getTargetFacets(doctype);
         if (descriptorsByFacets != null && descriptorsByFacets.size() > 0) {
             for (Entry<String, RuleDescriptor> entry : descriptorsByFacets.entrySet()) {
                 RuleDescriptor descriptor = entry.getValue();

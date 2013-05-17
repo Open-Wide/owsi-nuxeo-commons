@@ -3,6 +3,8 @@
 
   <extension target="org.nuxeo.ecm.core.schema.TypeService" point="doctype">
     <facet name="Sync" />
+    <doctype name="FolderChild" extends="Folder"></doctype>
+    <doctype name="NoteChild" extends="Note"></doctype>
   </extension>
   
   <extension target="fr.openwide.nuxeo.propertysync.service.PropertySyncService" point="rule">

@@ -26,7 +26,7 @@ public interface PropertySyncService {
 
     static final String CONTEXT_TRIGGERED_BY_PROPERTY_SYNC = "propertySync";
     
-    static final String CONTEXT_BYPASS_PROPERTY_SYNC = "bypassMetadataUpdater";
+    static final String CONTEXT_BYPASS_PROPERTY_SYNC = "bypassPropertySync";
 
     static final String XPATH_NAME = "ecm:name";
 

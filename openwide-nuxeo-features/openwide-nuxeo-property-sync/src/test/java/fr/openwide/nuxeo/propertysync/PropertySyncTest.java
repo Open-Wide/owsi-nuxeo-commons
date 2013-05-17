@@ -13,6 +13,8 @@
  ******************************************************************************/
 package fr.openwide.nuxeo.propertysync;
 
+import java.io.Serializable;
+
 import junit.framework.Assert;
 
 import org.junit.Test;
@@ -48,6 +50,8 @@ public class PropertySyncTest extends AbstractNuxeoTest {
     private static final String FOLDER_1_TITLE = "f1";
     
     private static final String FOLDER_2_TITLE = "f2";
+
+    private static final Serializable FOLDER_CHILD_TITLE = "fc";
 
     private static DocumentModel folder1;
 
@@ -117,9 +121,16 @@ public class PropertySyncTest extends AbstractNuxeoTest {
         file1 = documentManager.getDocument(file1.getRef());
         Assert.assertEquals(FOLDER_2_TITLE, file1.getPropertyValue(TypeNote.XPATH_DESCRIPTION));
         
-        // Check no mass update
-        folder3 = documentManager.getDocument(folder3.getRef());
-        Assert.assertEquals(FOLDER_1_TITLE, folder3.getPropertyValue(TypeFolder.XPATH_DESCRIPTION));
+        // Check subtypes
+        DocumentModel folderChild1 = documentManager.createDocumentModel(folder1.getPathAsString(),
+                "fchild1", "FolderChild");
+        folderChild1.setPropertyValue(TypeFolder.XPATH_TITLE, FOLDER_CHILD_TITLE);
+        folderChild1 = documentManager.createDocument(folderChild1);
+        
+        DocumentModel nchild1 = documentManager.createDocumentModel(folderChild1.getPathAsString(), "nchild1", "NoteChild");
+        nchild1 = documentManager.createDocument(nchild1);
+        Assert.assertEquals(FOLDER_CHILD_TITLE, nchild1.getPropertyValue(TypeNote.XPATH_DESCRIPTION));
+        Assert.assertEquals(FOLDER_CHILD_TITLE, nchild1.getPropertyValue(TypeNote.XPATH_TITLE));
     }
 
 }

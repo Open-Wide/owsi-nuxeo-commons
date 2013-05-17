@@ -14,12 +14,16 @@
 package fr.openwide.nuxeo.propertysync.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.log4j.Logger;
 import org.nuxeo.ecm.core.api.DocumentModel;
+import org.nuxeo.ecm.platform.types.TypeManager;
+import org.nuxeo.runtime.api.Framework;
 import org.nuxeo.runtime.model.ComponentInstance;
 import org.nuxeo.runtime.model.DefaultComponent;
 
@@ -30,6 +34,8 @@ import org.nuxeo.runtime.model.DefaultComponent;
 public class PropertySyncServiceImpl extends DefaultComponent implements PropertySyncService {
 
     public static final String EXTENSION_POINT_RULE = "rule";
+    
+    private final Logger logger = Logger.getLogger(PropertySyncServiceImpl.class);
     
     /**
      * Sorted by doctypes/facets on which metadata will be copied
@@ -42,6 +48,9 @@ public class PropertySyncServiceImpl extends DefaultComponent implements Propert
      */
     private Map<String, Map<String, RuleDescriptor>> descriptorsBySourceType = new HashMap<String, Map<String, RuleDescriptor>>();
     private Map<String, Map<String, RuleDescriptor>> descriptorsBySourceFacet = new HashMap<String, Map<String, RuleDescriptor>>();
+
+    private TypeManager typeManagerCache;
+
 
     @Override
     public void registerContribution(Object contribution, String extensionPoint, ComponentInstance contributor)
@@ -88,15 +97,36 @@ public class PropertySyncServiceImpl extends DefaultComponent implements Propert
         }
     }
 
-    @Override
-    public List<RuleDescriptor> getDescriptors(DocumentModel targetModel) {
-        List<RuleDescriptor> descriptors = new ArrayList<RuleDescriptor>();
-        List<RuleDescriptor> byType = descriptorsByTargetType.get(targetModel.getType());
-        if (byType != null) {
-            descriptors.addAll(byType);
+    /**
+     * @return the typeManager
+     */
+    public TypeManager getTypeManager() {
+        if (typeManagerCache == null) {
+            try {
+                typeManagerCache = Framework.getService(TypeManager.class);
+            }
+            catch (Exception e) {
+                logger.error("Failed to get TypeManager, PropertySyncService won't work", e);
+            }
         }
+        return typeManagerCache;
+    }
+
+    @Override
+    public List<RuleDescriptor> getDescriptors(DocumentModel model) {
+        List<RuleDescriptor> descriptors = new ArrayList<RuleDescriptor>();
+        
+        String modelDoctype = model.getType();
+        List<String> typeHierarchy = getTypeHierarchy(modelDoctype);
+        for (String doctype : typeHierarchy) {
+            List<RuleDescriptor> byType = descriptorsByTargetType.get(doctype);
+            if (byType != null) {
+                descriptors.addAll(byType);
+            }
+        }
+        
         for (Entry<String, List<RuleDescriptor>> descriptorsByFacet : descriptorsByTargetFacet.entrySet()) {
-            if (targetModel.hasFacet(descriptorsByFacet.getKey())) {
+            if (model.hasFacet(descriptorsByFacet.getKey())) {
                 for (RuleDescriptor descriptorByFacet : descriptorsByFacet.getValue()) {
                     if (!descriptors.contains(descriptorByFacet)) {
                         descriptors.add(descriptorByFacet);
@@ -109,12 +139,33 @@ public class PropertySyncServiceImpl extends DefaultComponent implements Propert
 
     @Override
     public Map<String, RuleDescriptor> getTargetDoctypes(String sourceType) {
-        return descriptorsBySourceType.get(sourceType);
+        Map<String, RuleDescriptor> descriptorMap = new HashMap<String, RuleDescriptor>();
+        List<String> typeHierarchy = getTypeHierarchy(sourceType);
+        for (String doctype : typeHierarchy) {
+            if (descriptorsBySourceType.containsKey(doctype)) {
+                descriptorMap.putAll(descriptorsBySourceType.get(doctype));
+            }
+        }
+        return descriptorMap;
     }
     
     @Override
     public Map<String, RuleDescriptor> getTargetFacets(String sourceType) {
-        return descriptorsBySourceFacet.get(sourceType);
+        Map<String, RuleDescriptor> descriptorMap = new HashMap<String, RuleDescriptor>();
+        List<String> typeHierarchy = getTypeHierarchy(sourceType);
+        for (String doctype : typeHierarchy) {
+            if (descriptorsBySourceFacet.containsKey(doctype)) {
+                descriptorMap.putAll(descriptorsBySourceFacet.get(doctype));
+            }
+        }
+        return descriptorMap;
+    }
+
+    private List<String> getTypeHierarchy(String modelDoctype) {
+        List<String> typeHierarchy = new ArrayList<String>();
+        typeHierarchy.addAll(Arrays.asList(getTypeManager().getSuperTypes(modelDoctype)));
+        typeHierarchy.add(modelDoctype);
+        return typeHierarchy;
     }
 
 }
