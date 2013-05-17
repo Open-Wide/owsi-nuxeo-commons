@@ -83,6 +83,9 @@ public class DocumentCreationScriptServiceImpl extends DefaultComponent implemen
         if (script != null) {
             script.run(session, overwrite);
         }
+        else {
+            logger.warn("Script '" + name + "' not registered");
+        }
     }
 
     @Override
@@ -91,6 +94,9 @@ public class DocumentCreationScriptServiceImpl extends DefaultComponent implemen
         DocumentCreationScript script = scripts.get(name);
         if (script != null) {
             script.run(session, context, overwrite);
+        }
+        else {
+            logger.warn("Script '" + name + "' not registered");
         }
     }
 

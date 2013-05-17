@@ -27,9 +27,11 @@ public interface TypeDocument {
     static final String XPATH_MODIFIED = "dc:modified";
 
     static final String XPATH_DESCRIPTION = "dc:description";
+
+    static final String XPATH_CREATOR = "dc:creator";
     
     /**
-     * Stocke un path (ex: "/img/EQS.png")
+     * Holds a path (e.g. "/img/file.png")
      */
     static final String XPATH_ICON = "icon";
     
