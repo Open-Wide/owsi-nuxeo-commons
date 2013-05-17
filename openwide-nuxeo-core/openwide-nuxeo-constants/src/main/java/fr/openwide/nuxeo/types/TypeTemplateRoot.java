@@ -18,8 +18,8 @@ package fr.openwide.nuxeo.types;
  * @author mkalam-alami
  *
  */
-public interface TypeSectionRoot extends TypeFolder {
+public interface TypeTemplateRoot extends TypeFolder {
 
-    static final String TYPE = "SectionRoot";
+    static final String TYPE = "TemplateRoot";
     
 }
