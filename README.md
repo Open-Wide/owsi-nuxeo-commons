@@ -7,9 +7,9 @@ This repository provides various reusable resources for your Nuxeo projects. Mos
 
 **Core**
 
-* `openwide-nuxeo-constants`: Various constants exposed on Java classes, mainly to ease the manipulation of documents.
+* `openwide-nuxeo-constants`: Various constants exposed on Java classes, mainly to ease the manipulation of documents. Most other bundles rely on this.
 * `openwide-nuxeo-tests-helper`: Thin helper to set up tests.
-* `openwide-nuxeo-utils`: Miscellaneous utility methods.
+* `openwide-nuxeo-utils`: Miscellaneous utility methods and extension points.
 
 **Features**
 
@@ -30,7 +30,7 @@ To use the bundles:
 
 ## Licensing
 
-The contents of this repository, unless otherwise mentioned, is licensed under the [LGPL](http://www.gnu.org/copyleft/lesser.html).
+The contents of this repository, unless otherwise mentioned, are licensed under the [LGPL](http://www.gnu.org/copyleft/lesser.html).
 
 ## Links
 
