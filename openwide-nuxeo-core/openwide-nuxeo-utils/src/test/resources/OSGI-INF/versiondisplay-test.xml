@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<component name="fr.openwide.nuxeo.commons.versiondisplay.test.contrib">
+
+  <extension target="fr.openwide.commons.utils.jsf.VersionDisplayService" point="config">
+    <config>
+      <versionNumberPrefix>hello</versionNumberPrefix>
+      <bundleMatchRegexp>world</bundleMatchRegexp>
+    </config>
+  </extension>
+  
+</component>

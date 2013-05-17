@@ -11,17 +11,33 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  ******************************************************************************/
+
 package fr.openwide.nuxeo.utils.jsf;
 
-import org.nuxeo.ecm.core.api.ClientException;
-import org.nuxeo.ecm.core.api.DocumentModel;
+import java.util.regex.Pattern;
+
+import org.nuxeo.common.xmap.annotation.XNode;
+import org.nuxeo.common.xmap.annotation.XObject;
 
 /**
  * @author mkalam-alami
  *
  */
-public interface SelectItemLabelBuilder {
-    
-    String getLabel(DocumentModel model) throws ClientException;
+@XObject("config")
+public class VersionDisplayConfigDescriptor {
 
+    @XNode("versionNumberPrefix")
+    protected String versionNumberPrefix;
+    
+    @XNode("bundleMatchRegexp")
+    protected String bundleMatchRegexp;
+    
+    public String getVersionNumberPrefix() {
+        return versionNumberPrefix;
+    }
+    
+    public Pattern getBundleMatchPattern() {
+        return Pattern.compile(bundleMatchRegexp);
+    }
+    
 }
