@@ -9,6 +9,8 @@ The problem: creating a new "Content View", adding some widgets and simply check
 
 ## Getting a working faceted search
 
+> Links: [Faceted Search](http://doc.nuxeo.com/display/NXDOC/Faceted+Search) documentation, ["layouts"](http://explorer.nuxeo.org/nuxeo/site/distribution/current/viewExtensionPoint/org.nuxeo.ecm.platform.forms.layout.WebLayoutManager--layouts) and ["widget"](http://explorer.nuxeo.org/nuxeo/site/distribution/current/viewExtensionPoint/org.nuxeo.ecm.platform.forms.layout.WebLayoutManager--widgets) extension point
+
 #### Pre-requisites
 
 * Having a content view with at least one widget (for example, add fulltext search with a simple drag'n'drop of the *"Featured Widgets > Full text"* widget).
