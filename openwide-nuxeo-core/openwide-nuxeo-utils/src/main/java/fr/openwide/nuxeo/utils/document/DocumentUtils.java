@@ -113,10 +113,8 @@ public class DocumentUtils {
     /**
      * Returns true if and only if the "to" doctype is a supertype of "from"
      * 
-     * @param from
-     *            target type
-     * @param to
-     *            queried supertype
+     * @param from target type
+     * @param to queried supertype
      * @return true if to is a supertype of from
      */
     public static boolean isAssignable(String from, String to) {
