@@ -56,7 +56,7 @@ public class DocumentUtilsTest extends AbstractNuxeoTest  {
         // Special cases
         pathFormatter = new PathFormatter(documentManager);
         DocumentModel rootDocument = documentManager.getRootDocument();
-        String rootName = rootDocument.getName();
+        String rootName = rootDocument.getId();
         Assert.assertEquals(rootName, pathFormatter.getFormattedPath(documentManager.getRootDocument()));
         pathFormatter.setShowLeaf(false);
         Assert.assertEquals(rootName, pathFormatter.getFormattedPath(documentManager.getRootDocument()));

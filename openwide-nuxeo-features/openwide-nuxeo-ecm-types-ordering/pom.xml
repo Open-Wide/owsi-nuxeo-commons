@@ -9,7 +9,7 @@
   </parent>
 
   <artifactId>openwide-nuxeo-ecm-types-ordering</artifactId>
-  <name>Open Wide : ECM Types Ordering</name>
+  <name>Open Wide : Nuxeo ECM Types Ordering</name>
   <packaging>jar</packaging>
 
   <dependencies>
