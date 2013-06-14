@@ -64,7 +64,7 @@ Add the automation definition to *Setting & Versioning > Registries > Automation
     "signature": [ "void", "void" ],
     "params": [
       { "name": "scriptName", "type": "string", "required": true, "order": 0, "values": [] },
-      { "name": "context", "type": "document", "required": false, "order": 0, "values": [] },
+      { "name": "contextPath", "type": "string", "required": false, "order": 0, "values": [] },
       { "name": "overwrite", "type": "boolean", "required": false, "order": 0, "values": [] }
     ]
   }
