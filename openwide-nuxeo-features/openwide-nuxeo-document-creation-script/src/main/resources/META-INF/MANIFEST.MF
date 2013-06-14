@@ -4,4 +4,5 @@ Bundle-ActivationPolicy: lazy
 Bundle-Name: openwide-nuxeo-dcs
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: fr.openwide.nuxeo.commons.dcs;singleton:=true
-Nuxeo-Component: OSGI-INF/DocumentCreationScriptService.xml
+Nuxeo-Component: OSGI-INF/DocumentCreationScriptService.xml,
+ OSGI-INF/automation-contrib.xml
