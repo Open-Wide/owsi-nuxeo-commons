@@ -3,8 +3,10 @@ package fr.openwide.nuxeo.dcs;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
+import org.nuxeo.common.utils.IdUtils;
 import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
@@ -42,8 +44,8 @@ public class DocumentCreationScriptImpl implements DocumentCreationScript {
     }
     
     public void appendDocumentCreation(DocumentCreationDescriptor descriptor) throws InvalidParameterException {
-        if (descriptor.path == null) {
-            throw new InvalidParameterException("Path can't be null");
+        if (descriptor.path == null && descriptor.title == null) {
+            throw new InvalidParameterException("Path and title can't be both null");
         }
         creationDescriptors.add(descriptor);
     }
@@ -63,6 +65,12 @@ public class DocumentCreationScriptImpl implements DocumentCreationScript {
             
             // Build path
             String path = descriptor.path;
+            if (path == null) {
+                path = generatePathSegment(descriptor.title);
+            }
+            else if (path.endsWith("/")) {
+                path = path.concat(generatePathSegment(descriptor.title));
+            }
             if (!path.startsWith("/")) {
                 path = contextPath.concat(path);
             }
@@ -157,5 +165,24 @@ public class DocumentCreationScriptImpl implements DocumentCreationScript {
     public String getName() {
         return scriptName;
     }
-    
+
+    // Taken from PathSegmentServiceDefault
+    public Pattern stupidRegexp = Pattern.compile("^[- .,;?!:/\\\\'\"]*$");
+    public int maxSize = 24;
+    protected String generatePathSegment(String s) throws ClientException {
+        if (s == null) {
+            s = "";
+        }
+        s = s.trim().toLowerCase();
+        if (s.length() > maxSize) {
+            s = s.substring(0, maxSize).trim();
+        }
+        s = s.replace('/', '-');
+        s = s.replace('\\', '-');
+        if (stupidRegexp.matcher(s).matches()) {
+            return IdUtils.generateStringId();
+        }
+        return s;
+    }
+
 }

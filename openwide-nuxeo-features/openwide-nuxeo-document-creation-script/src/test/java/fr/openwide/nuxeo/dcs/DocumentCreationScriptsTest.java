@@ -84,10 +84,14 @@ public class DocumentCreationScriptsTest extends AbstractNuxeoTest {
         dcs.runScript(documentManager, "test", folder, false); // Run locally at /folder
         
         PathRef docRef = new PathRef("/folder/fichierLocal");
-        Assert.assertTrue("The document must be created", documentManager.exists(docRef));
+        Assert.assertTrue("The documents must be created", documentManager.exists(docRef));
         DocumentModel document = documentManager.getDocument(docRef);
         Assert.assertEquals("Foo", document.getTitle());
         Assert.assertEquals("Bar", document.getPropertyValue("dc:description"));
+
+        PathRef folderRef = new PathRef("/folder/myfolder");
+        Assert.assertTrue("The documents must be created", documentManager.exists(folderRef));
+        Assert.assertEquals(1, documentManager.getChildren(folderRef).size());
     }
 
 }

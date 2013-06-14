@@ -17,6 +17,8 @@
 <!--                     <type>...</type> -->
 <!--                 </allowedTypes> -->
             </document>
+            <document path="myfolder" doctype="Folder" title="My Folder" />
+            <document path="myfolder/" doctype="File" title="My Content" />
         </script>
     </extension>
 
