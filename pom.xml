@@ -4,13 +4,13 @@
   <parent>
     <groupId>org.nuxeo.ecm.platform</groupId>
     <artifactId>nuxeo-features-parent</artifactId>
-    <version>5.7-SNAPSHOT</version>
+    <version>5.7.1</version>
   </parent>
   
   <groupId>fr.openwide.nuxeo.commons</groupId>
   <artifactId>openwide-nuxeo-commons</artifactId>
-  <version>5.7-SNAPSHOT-0.1.2-SNAPSHOT</version>
-  <name>GED Ekium</name>
+  <version>5.7.1-0.1.2-SNAPSHOT</version>
+  <name>Opnuxeo en Wide : Nuxeo Commons</name>
   <packaging>pom</packaging>
   <description>Reusable resources for Nuxeo projects</description>
 
