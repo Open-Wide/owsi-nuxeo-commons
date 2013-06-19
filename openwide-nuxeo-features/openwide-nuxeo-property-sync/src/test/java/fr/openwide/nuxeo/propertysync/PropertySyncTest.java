@@ -17,7 +17,9 @@ import java.io.Serializable;
 
 import junit.framework.Assert;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.runtime.test.runner.Deploy;
@@ -53,29 +55,38 @@ public class PropertySyncTest extends AbstractNuxeoTest {
 
     private static final Serializable FOLDER_CHILD_TITLE = "fc";
 
-    private static DocumentModel folder1;
+    private DocumentModel folder1;
 
-    private static DocumentModel note1;
-
-    private static DocumentModel file1;
+    private DocumentModel note1;
+    
+    private DocumentModel file1;
 
     @Inject
-    private CoreSession documentManager;
+    private  CoreSession documentManager;
 
-    @Test
-    public void testUpdateOnChildAction() throws Exception {
-        String rootPath = DefaultHierarchy.WORKSPACES_PATH_AS_STRING;
-        
+    private  String rootPath = DefaultHierarchy.WORKSPACES_PATH_AS_STRING;
+
+    @Before
+    public void setUp() throws ClientException {
         folder1 = documentManager.createDocumentModel(rootPath, "f1", TypeFolder.TYPE);
         folder1.setPropertyValue(TypeFolder.XPATH_TITLE, FOLDER_1_TITLE);
         folder1 = documentManager.createDocument(folder1);
-
+        
+        note1 = documentManager.createDocumentModel(folder1.getPathAsString(), "n1", TypeNote.TYPE);
+        note1 = documentManager.createDocument(note1);
+        
+        file1 = documentManager.createDocumentModel(folder1.getPathAsString(), "file1", TypeFile.TYPE);
+        file1.addFacet(MATCHING_FACET);
+        file1 = documentManager.createDocument(file1);
+    }
+    
+    @Test
+    public void testUpdateOnChildAction() throws Exception {
         DocumentModel folder2 = documentManager.createDocumentModel(rootPath, "f2", TypeFolder.TYPE);
         folder2.setPropertyValue(TypeFolder.XPATH_TITLE, FOLDER_2_TITLE);
         folder2 = documentManager.createDocument(folder2);
         
-        note1 = documentManager.createDocumentModel(folder1.getPathAsString(), "n1", TypeNote.TYPE);
-        note1 = documentManager.createDocument(note1);
+        // Match by type
         Assert.assertEquals(FOLDER_1_TITLE, note1.getPropertyValue(TypeNote.XPATH_DESCRIPTION));
         Assert.assertEquals(FOLDER_1_TITLE, note1.getPropertyValue(TypeNote.XPATH_TITLE));
         
@@ -87,9 +98,7 @@ public class PropertySyncTest extends AbstractNuxeoTest {
         note2 = documentManager.move(note1.getRef(), folder1.getRef(), "n2");
         Assert.assertEquals(FOLDER_1_TITLE, note2.getPropertyValue(TypeNote.XPATH_DESCRIPTION));
 
-        file1 = documentManager.createDocumentModel(folder1.getPathAsString(), "file1", TypeFile.TYPE);
-        file1.addFacet(MATCHING_FACET);
-        file1 = documentManager.createDocument(file1);
+        // Match by facet
         Assert.assertEquals(FOLDER_1_TITLE, file1.getPropertyValue(TypeNote.XPATH_DESCRIPTION));
         
         // Creation : Ignore not matching
