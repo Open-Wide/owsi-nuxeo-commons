@@ -25,7 +25,7 @@ This repository provides various tools and features for your Nuxeo projects. Mos
 
 These projects are not (yet) deployed to any public Maven Repository. You'll have to either:
 
-* [Download a release from Githuc](https://github.com/Open-Wide/openwide-nuxeo-commons/releases)
+* [Download a release from Github](https://github.com/Open-Wide/openwide-nuxeo-commons/releases)
 * Clone this repository, then checkout the wanted version tag.
 
 Use `mvn install` to add the latest version of these projects to your local repository.
