@@ -9,7 +9,7 @@
   
   <groupId>fr.openwide.nuxeo.commons</groupId>
   <artifactId>openwide-nuxeo-commons</artifactId>
-  <version>5.7.1-0.1.2</version>
+  <version>0.1.2</version>
   <name>Open Wide : Nuxeo Commons</name>
   <packaging>pom</packaging>
   <description>Reusable resources for Nuxeo projects</description>
