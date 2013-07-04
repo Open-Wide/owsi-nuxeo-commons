@@ -5,6 +5,8 @@ Open Wide : Nuxeo Utils
 
 Miscellaneous utility classes for lazy developers. Additionally, provides an easy way to display the version number of your project.
 
+*Requires **openwide-nuxeo-constants**.*
+
 ## Documentation
 
 The following XML contribution allows to display the version of any bundle in the footer.

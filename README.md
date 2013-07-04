@@ -3,7 +3,7 @@ Open Wide : Nuxeo Commons
 
 ## Introduction
 
-This repository provides various reusable resources for your Nuxeo projects. Most of them have been extracted from actual client projects.
+This repository provides various tools and features for your Nuxeo projects. Most of them have been extracted from actual client projects.
 
 **Core**
 
@@ -21,12 +21,22 @@ This repository provides various reusable resources for your Nuxeo projects. Mos
 
 ## How to
 
-These projects are not (yet) deployed to any public Maven Repository. Clone this repository, then run `git checkout release` and `mvn install` to add the latest version of these projects to your local repository. Alternately, you can download the sources [by tag](https://github.com/Open-Wide/openwide-nuxeo-commons/tags).
+#### Build the modules manually
 
-To use the bundles:
+These projects are not (yet) deployed to any public Maven Repository. You'll have to either:
 
-* If necessary, add the desired Maven dependencies to your Nuxeo modules' POMs
-* Deploy the JARs to your Nuxeo setup the way you prefer (usually either manually or through a Marketplace assembly of your modules).
+* [Download a release from Nuxeo](https://github.com/Open-Wide/openwide-nuxeo-commons/releases)
+* Clone this repository, then checkout the wanted version tag.
+
+Use `mvn install` to add the latest version of these projects to your local repository.
+
+#### Use the bundles in your projects
+
+* If necessary (e.g. to use the `openwide-nuxeo-utils`), add the desired Maven dependencies to your Nuxeo modules' POMs.
+* Deploy the JARs to your Nuxeo setup the way you prefer (usually either manually, or through a Marketplace assembly of your modules). Note that most feature projects require both `openwide-nuxeo-constants` and `openwide-nuxeo-utils` ; for instance, to use the Avatar import, you'll have to deploy:
+  * `openwide-nuxeo-constants-(version).jar`
+  * `openwide-nuxeo-utils-(version).jar`
+  * `openwide-nuxeo-avatar-importer-(version).jar`
 
 ## Licensing
 
@@ -36,3 +46,4 @@ The contents of this repository, unless otherwise mentioned, are licensed under 
 
 * [Open Wide corporate website](http://www.openwide.fr/)
 * [Nuxeo corporate website](http://www.nuxeo.com/fr)
+
