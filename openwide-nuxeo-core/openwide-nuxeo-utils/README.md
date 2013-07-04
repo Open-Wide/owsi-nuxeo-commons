@@ -5,7 +5,7 @@ Open Wide : Nuxeo Utils
 
 Miscellaneous utility classes for lazy developers. Additionally, provides an easy way to display the version number of your project.
 
-*Requires **openwide-nuxeo-constants**.*
+Requires **openwide-nuxeo-constants**.
 
 ## Documentation
 
