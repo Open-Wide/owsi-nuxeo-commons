@@ -1,6 +1,8 @@
 package fr.openwide.nuxeo.avatar;
 
 import java.io.File;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import org.apache.log4j.Logger;
 import org.nuxeo.ecm.core.api.Blob;
@@ -8,6 +10,7 @@ import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.impl.blob.FileBlob;
+import org.nuxeo.ecm.core.storage.sql.DefaultBinaryManager;
 import org.nuxeo.ecm.user.center.profile.UserProfileConstants;
 import org.nuxeo.ecm.user.center.profile.UserProfileService;
 import org.nuxeo.runtime.api.Framework;
@@ -21,6 +24,16 @@ public class AvatarImporterServiceImpl extends DefaultComponent implements Avata
     public static final String EXTENSION_POINT_CONFIG = "config";
     
     private static String avatarFolderPath = null;
+
+    private static MessageDigest messageDigest = null;
+    
+    static {
+        try {
+            messageDigest = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException e) {
+            logger.error("MD5 digest missing from this Java platform", e);
+        }
+    }
     
     @Override
     public void registerContribution(Object contribution, String extensionPoint, ComponentInstance contributor)
@@ -60,8 +73,9 @@ public class AvatarImporterServiceImpl extends DefaultComponent implements Avata
                             Blob previousBlob = (Blob) userProfile.getPropertyValue(UserProfileConstants.USER_PROFILE_AVATAR_FIELD);
                             FileBlob newBlob = new FileBlob(avatarFile);
                             if (previousBlob != null) {
-                                long previousBlobLength = previousBlob.getLength(); // XXX can't compare hashes, getDigest() is only implemented on SQLBlob 
-                                if (previousBlobLength == newBlob.getLength()) {
+                                if (previousBlob.getDigest().equals(
+                                        DefaultBinaryManager.toHexString(messageDigest.digest(newBlob.getByteArray()))
+                                            )) {
                                     replaceBlob = false;
                                 }
                             }
