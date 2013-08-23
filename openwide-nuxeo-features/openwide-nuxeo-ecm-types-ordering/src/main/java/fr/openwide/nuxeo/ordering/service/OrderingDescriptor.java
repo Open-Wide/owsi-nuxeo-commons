@@ -14,6 +14,7 @@
 package fr.openwide.nuxeo.ordering.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.nuxeo.common.xmap.annotation.XNode;
@@ -68,6 +69,9 @@ public class OrderingDescriptor {
     
     @XNodeList(value = "category", type = OrderingCategoryDescriptor[].class, componentType = OrderingCategoryDescriptor.class)
     protected OrderingCategoryDescriptor[] categories;
+
+    @XNodeList(value = "hiddenTypes/type", type = String[].class, componentType = String.class)
+    protected String[] hiddenTypes;
     
     public String getName() {
         return name;
@@ -87,6 +91,10 @@ public class OrderingDescriptor {
     
     public ActionFilter[] getFilters() {
         return filters;
+    }
+    
+    public List<String> getHiddenTypes() {
+        return Arrays.asList(hiddenTypes);
     }
     
     public void addFilterId(String filterId) {

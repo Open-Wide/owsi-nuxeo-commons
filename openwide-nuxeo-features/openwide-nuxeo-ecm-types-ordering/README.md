@@ -23,6 +23,9 @@ This provides an extension point to reorder all document types from the "New doc
       <type>Picture</type>
     </category>
     <category name="misc" default="true" />
+    <hiddenTypes>
+      <type>Forum</type>
+    </hiddenTypes>
   </ordering>
 </extension>
 ```

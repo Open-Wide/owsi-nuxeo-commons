@@ -20,6 +20,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.search.OrTerm;
+
 import org.apache.log4j.Logger;
 import org.nuxeo.ecm.platform.actions.ActionContext;
 import org.nuxeo.ecm.platform.actions.ejb.ActionManager;
@@ -78,6 +80,11 @@ public class EcmTypesOrderingServiceImpl extends DefaultComponent implements Ecm
                 for (Type type : typesCol) {
                     allTypes.put(type.getId(), type);
                 }
+            }
+            
+            // Remove hidden types
+            for (String hiddenType : orderingDescriptor.getHiddenTypes()) {
+                allTypes.remove(hiddenType);
             }
             
             // Sort them by category
