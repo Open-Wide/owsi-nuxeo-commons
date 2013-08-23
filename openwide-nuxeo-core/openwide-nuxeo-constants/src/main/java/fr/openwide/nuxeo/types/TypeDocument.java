@@ -23,12 +23,38 @@ public interface TypeDocument {
     static final String TYPE = "Document";
     
     static final String XPATH_TITLE = "dc:title";
-    
-    static final String XPATH_MODIFIED = "dc:modified";
 
     static final String XPATH_DESCRIPTION = "dc:description";
 
+    static final String XPATH_SUBJECTS = "dc:subjects";
+    
+    static final String XPATH_RIGHTS = "dc:rights";
+
+    static final String XPATH_SOURCE = "dc:source";
+
+    static final String XPATH_COVERAGE = "dc:source";
+
+    static final String XPATH_CREATED = "dc:created";
+    
+    static final String XPATH_MODIFIED = "dc:modified";
+
+    static final String XPATH_LANGUAGE = "dc:language";
+
+    static final String XPATH_ISSUED = "dc:issued";
+
+    static final String XPATH_VALID = "dc:valid";
+    
+    static final String XPATH_EXPIRED = "dc:expired";
+    
+    static final String XPATH_FORMAT = "dc:format";
+    
     static final String XPATH_CREATOR = "dc:creator";
+
+    static final String XPATH_CONTRIBUTORS = "dc:contributors";
+
+    static final String XPATH_LAST_CONTRIBUTOR = "dc:lastContributor";
+
+    static final String XPATH_NATURE = "dc:nature";
     
     /**
      * Holds a path (e.g. "/img/file.png")
