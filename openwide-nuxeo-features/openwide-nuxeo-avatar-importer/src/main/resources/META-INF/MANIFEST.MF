@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Bundle-Vendor: Open Wide
-Bundle-ActivationPolicy: lazy
-Bundle-Name: openwide-nuxeo-avatar-importer
-Bundle-ManifestVersion: 2
-Bundle-SymbolicName: fr.openwide.nuxeo.commons.avatarimporter;singleton:=true
-Nuxeo-Component: OSGI-INF/AvatarImporterService.xml,
- OSGI-INF/event-listener-contrib.xml,
- OSGI-INF/scheduler-contrib.xml

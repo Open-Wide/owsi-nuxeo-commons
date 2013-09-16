@@ -1,0 +1,46 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>fr.openwide.nuxeo.commons</groupId>
+    <artifactId>owsi-nuxeo-commons</artifactId>
+    <version>5.6-0.2.0-SNAPSHOT</version>
+    <relativePath>../..</relativePath>
+  </parent>
+
+  <artifactId>owsi-nuxeo-automation-features</artifactId>
+  <name>Open Wide : Nuxeo Automation Features</name>
+  <packaging>jar</packaging>
+
+  <dependencies>
+    <!-- Open Wide -->
+    <dependency>
+      <groupId>fr.openwide.nuxeo.commons</groupId>
+      <artifactId>owsi-nuxeo-constants</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>fr.openwide.nuxeo.commons</groupId>
+      <artifactId>owsi-nuxeo-utils</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>fr.openwide.nuxeo.commons</groupId>
+      <artifactId>owsi-nuxeo-tests-helper</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Nuxeo -->
+    <dependency>
+      <groupId>org.nuxeo.ecm.automation</groupId>
+      <artifactId>nuxeo-automation-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.nuxeo.ecm.automation</groupId>
+      <artifactId>nuxeo-automation-jsf</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.nuxeo.rating</groupId>
+      <artifactId>nuxeo-rating-api</artifactId>
+      <version>${nuxeo.features.version}</version>
+    </dependency>
+  </dependencies>
+</project>

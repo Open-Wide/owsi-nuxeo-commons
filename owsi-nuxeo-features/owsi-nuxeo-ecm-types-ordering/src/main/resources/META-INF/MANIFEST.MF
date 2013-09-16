@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-Vendor: Open Wide
+Bundle-ActivationPolicy: lazy
+Bundle-Name: owsi-nuxeo-ecm-types-ordering
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: fr.openwide.nuxeo.commons.ecmtypesordering;singleton:=true
+Nuxeo-Component: OSGI-INF/EcmTypesOrderingService.xml
