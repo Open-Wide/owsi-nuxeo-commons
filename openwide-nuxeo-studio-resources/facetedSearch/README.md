@@ -29,6 +29,7 @@ The problem: creating a new "Content View", adding some widgets and simply check
 * Name it *"[Saved searches]"* or whatever
 * Check *"Hide label"*
 * Set **saved_faceted_searches_selector** as the widget type
+* Set a new property with key **outcome** and value **faceted_search_results**
 
 #### Adding the go button
 
