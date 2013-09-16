@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-Vendor: Open Wide
+Bundle-ActivationPolicy: lazy
+Bundle-Name: owsi-nuxeo-configurable-wall
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: fr.openwide.nuxeo.commons.configurablewall;singleton:=true
+Nuxeo-Component: OSGI-INF/automation-contrib.xml,
+ OSGI-INF/pageproviders-contrib.xml,
+ OSGI-INF/ConfigurableWallStreamService.xml,
+ OSGI-INF/theme-contrib.xml,
+ OSGI-INF/gadgets-contrib.xml,
+ OSGI-INF/configurable-wall-stream-contrib.xml

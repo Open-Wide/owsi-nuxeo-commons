@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<component name="fr.openwide.nuxeo.avatar.avatarimporter.contrib.test">
+
+  <extension target="fr.openwide.nuxeo.avatar.AvatarImporterService" point="config">
+    <configuration>
+      <dossierAvatars>target/test-classes/avatars</dossierAvatars>
+    </configuration>
+  </extension>
+
+  <!-- Disable avatar resizer to avoid errors (some of its deps are not deployed during tests) -->
+
+  <require>org.nuxeo.ecm.user.center.profile.listeners.contrib</require>
+  
+  <extension target="org.nuxeo.ecm.core.event.EventServiceComponent"
+    point="listener">
+    <listener name="resizeArticlePictureListener" enabled="false" />
+  </extension>
+  
+</component>

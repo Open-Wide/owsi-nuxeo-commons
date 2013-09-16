@@ -1,7 +1,0 @@
-Manifest-Version: 1.0
-Bundle-Vendor: Open Wide
-Bundle-ActivationPolicy: lazy
-Bundle-Name: openwide-nuxeo-utils
-Bundle-ManifestVersion: 2
-Bundle-SymbolicName: fr.openwide.nuxeo.commons.utils;singleton:=true
-Nuxeo-Component: OSGI-INF/VersionDisplayService.xml

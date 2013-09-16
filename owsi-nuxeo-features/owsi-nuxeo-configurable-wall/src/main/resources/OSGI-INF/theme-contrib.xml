@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<component name="fr.openwide.nuxeo.commons.configurablewall.theme.contrib" version="1.0">
+
+  <extension target="org.nuxeo.theme.services.ThemeService" point="resources">
+    <resource name="gadget-configurablewall.js">
+      <path>scripts/opensocial/gadgets/configurablewall.js</path>
+    </resource>
+  </extension>
+    
+</component>
+    
