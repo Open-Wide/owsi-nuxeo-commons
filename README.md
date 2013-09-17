@@ -21,22 +21,60 @@ This repository provides various tools and features for your Nuxeo projects. Mos
 
 ## How to
 
-#### Build the modules manually
+#### Get the binaries
 
-These projects are not (yet) deployed to any public Maven Repository. You'll have to either:
+The bundles are on Maven Central, meaning you can either:
 
-* [Download a release from Github](https://github.com/Open-Wide/owsi-nuxeo-commons/releases)
-* Clone this repository, then checkout the wanted version tag.
+* [Download them manually](http://search.maven.org/#search|ga|1|g%3A%22fr.openwide.nuxeo.commons%22)
+* Embed them in your Maven project, to use them as libraries and/or include them in your Marketplace package (see `Use the bundles in your projects`).
 
-Use `mvn install` to add the latest version of these projects to your local repository.
+#### Build from sources
 
-#### Use the bundles in your projects
+* Clone this repository
+* Use `mvn install` to add the latest version of these projects to your local repository.
 
-* If necessary (e.g. to use the `owsi-nuxeo-utils`), add the desired Maven dependencies to your Nuxeo modules' POMs.
-* Deploy the JARs to your Nuxeo setup the way you prefer (usually either manually, or through a Marketplace assembly of your modules). Note that most feature projects require both `owsi-nuxeo-constants` and `owsi-nuxeo-utils` ; for instance, to use the Avatar import, you'll have to deploy:
-  * `owsi-nuxeo-constants-(version).jar`
-  * `owsi-nuxeo-utils-(version).jar`
-  * `owsi-nuxeo-avatar-importer-(version).jar`
+#### Deploy the bundes
+
+You can manually put the build bundles in the *nxserver/bundles* folder of Nuxeo, but if your project is built into a Marketplace package, the preferred way is to make them part of your assembly:
+
+**pom.xml**
+
+```
+    ...
+    <dependency>
+      <groupId>fr.openwide.nuxeo.commons</groupId>
+      <artifactId>openwide-nuxeo-constants</artifactId>
+      <version>0.1.3</version>
+    </dependency>
+    <dependency>
+      <groupId>fr.openwide.nuxeo.commons</groupId>
+      <artifactId>openwide-nuxeo-utils</artifactId>
+      <version>0.1.3</version>
+    </dependency>
+    <dependency>
+      <groupId>fr.openwide.nuxeo.commons</groupId>
+      <artifactId>openwide-nuxeo-avatar-importer</artifactId>
+      <version>0.1.3</version>
+    </dependency>
+    ...
+```
+
+**assembly.xml**
+
+```
+<project name="nuxeo-assembly" ...>
+  ...
+  <copy todir="${outdir}/marketplace/install/bundles">
+			<artifact:resolveFile key="fr.openwide.nuxeo.commons:openwide-nuxeo-constants::jar" />
+			<artifact:resolveFile key="fr.openwide.nuxeo.commons:openwide-nuxeo-utils::jar" />
+			<artifact:resolveFile key="fr.openwide.nuxeo.commons:openwide-nuxeo-avatar-importer::jar" />
+			...
+  </copy>
+  ...
+</project>
+```
+
+Note that most features require both `owsi-nuxeo-constants` and `owsi-nuxeo-utils` projects, so make sure to deploy them too.
 
 ## Licensing
 
