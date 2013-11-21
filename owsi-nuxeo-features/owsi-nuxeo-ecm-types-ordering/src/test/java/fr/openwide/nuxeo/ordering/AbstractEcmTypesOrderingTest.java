@@ -26,6 +26,7 @@ import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.DocumentRef;
 import org.nuxeo.ecm.core.api.NuxeoPrincipal;
 import org.nuxeo.ecm.platform.actions.ActionContext;
+import org.nuxeo.ecm.platform.actions.seam.SeamActionContext;
 import org.nuxeo.ecm.platform.types.Type;
 import org.nuxeo.ecm.platform.types.TypeManager;
 import org.nuxeo.runtime.test.runner.Deploy;
@@ -63,7 +64,7 @@ public abstract class AbstractEcmTypesOrderingTest extends AbstractNuxeoTest {
     }
     
     protected ActionContext createActionContext(DocumentRef docRef) throws ClientException {
-        ActionContext actionContext = new ActionContext();
+        ActionContext actionContext = new SeamActionContext();
         actionContext.setDocumentManager(documentManager);
         actionContext.setCurrentPrincipal((NuxeoPrincipal) documentManager.getPrincipal());
         actionContext.setCurrentDocument(documentManager.getDocument(docRef));
