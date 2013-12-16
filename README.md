@@ -19,6 +19,13 @@ This repository provides various tools and features for your Nuxeo projects. Mos
 * `owsi-nuxeo-document-creation-script`: An alternative to the Content Template service.
 * `owsi-nuxeo-generic-properties`: Generic extension point to store simple data.
 
+## Compatibility
+
+Nuxeo version | OWSI Commons version | Comments
+--- | --- | ---
+5.8 | 0.1.3 | No release yet for 5.8, but all should be compatible, except the *owsi-nuxeo-ecm-types-ordering* module.
+5.6 | 0.1.3 | 
+
 ## How to
 
 #### Get the binaries
