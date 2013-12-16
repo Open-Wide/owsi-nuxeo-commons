@@ -200,7 +200,8 @@
               </execution>
             </executions>
             <configuration>
-              <keyname>0F52BAFE</keyname>
+              <!-- keyname>0F52BAFE</keyname --><!-- Marwane Kalam-Alami -->
+              <keyname>B4235B0A</keyname><!-- Marc Dutoo -->
             </configuration>
           </plugin>
           <plugin>
