@@ -23,7 +23,7 @@ This repository provides various tools and features for your Nuxeo projects. Mos
 
 Nuxeo version | OWSI Commons version | Comments
 --- | --- | ---
-5.8 | 0.1.3 | No release yet for 5.8, but all should be compatible, except the *owsi-nuxeo-ecm-types-ordering* module.
+5.8 | 0.1.4 | (Should be compatible with 0.1.3, except the *owsi-nuxeo-ecm-types-ordering* module)
 5.6 | 0.1.3 | 
 
 ## How to
