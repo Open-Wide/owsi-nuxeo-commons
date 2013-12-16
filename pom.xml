@@ -9,7 +9,7 @@
   
   <groupId>fr.openwide.nuxeo.commons</groupId>
   <artifactId>owsi-nuxeo-commons</artifactId>
-  <version>0.1.4</version>
+  <version>0.1.5-SNAPSHOT</version>
   <packaging>pom</packaging>
   
   <name>Open Wide : Nuxeo Commons</name>
