@@ -23,7 +23,7 @@ This repository provides various tools and features for your Nuxeo projects. Mos
 
 Nuxeo version | OWSI Commons version | Comments
 --- | --- | ---
-5.8 | 0.1.4 | (Should be compatible with 0.1.3, except the *owsi-nuxeo-ecm-types-ordering* module)
+5.8 | 0.1.4 | 
 5.6 | 0.1.3 | 
 
 ## How to
@@ -52,17 +52,17 @@ You can just put the binaries in the *nxserver/bundles* folder of Nuxeo, but if 
     <dependency>
       <groupId>fr.openwide.nuxeo.commons</groupId>
       <artifactId>owsi-nuxeo-constants</artifactId>
-      <version>0.1.3</version>
+      <version>0.1.4</version>
     </dependency>
     <dependency>
       <groupId>fr.openwide.nuxeo.commons</groupId>
       <artifactId>owsi-nuxeo-utils</artifactId>
-      <version>0.1.3</version>
+      <version>0.1.4</version>
     </dependency>
     <dependency>
       <groupId>fr.openwide.nuxeo.commons</groupId>
       <artifactId>owsi-nuxeo-avatar-importer</artifactId>
-      <version>0.1.3</version>
+      <version>0.1.4</version>
     </dependency>
     ...
 ```
