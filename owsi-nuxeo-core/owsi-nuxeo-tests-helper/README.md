@@ -12,7 +12,7 @@ This repository provides:
 
 This extension point fixes the 'datasource lookup' errors when manipulating directories from tests, by making each directory use the embedded database instead. Sample contribution:
 
-```
+```xml
 <?xml version="1.0"?>
 <component name="myproject.directoriesfixer.test.contrib">
 
@@ -30,7 +30,7 @@ This extension point fixes the 'datasource lookup' errors when manipulating dire
 
 To make the contribution work, you have both to deploy it and deploy the `tests-helper` bundle that provides the extension point:
 
-```
+```java
 @Deploy({
     "fr.openwide.nuxeo.commons.testshelper"
 })
