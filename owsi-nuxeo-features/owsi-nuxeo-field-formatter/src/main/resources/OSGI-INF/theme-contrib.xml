@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<component name="fr.openwide.nuxeo.formatter.theme.contrib">
+
+  <require>org.nuxeo.theme.nuxeo.default</require>
+
+  <extension target="org.nuxeo.theme.services.ThemeService" point="resources">
+    <resource name="jquery.formatter.js">
+      <path>scripts/jquery/jquery.formatter.min.js</path>
+    </resource>
+  </extension>
+
+  <require>org.nuxeo.theme.nuxeo.default</require>
+
+  <extension point="views" target="org.nuxeo.theme.services.ThemeService">
+    <view merge="true" name="nuxeo5 includes" template-engine="jsf-facelets">
+      <format-type>widget</format-type>
+      <resource>jquery.formatter.js</resource>
+    </view>
+  </extension>
+
+</component>

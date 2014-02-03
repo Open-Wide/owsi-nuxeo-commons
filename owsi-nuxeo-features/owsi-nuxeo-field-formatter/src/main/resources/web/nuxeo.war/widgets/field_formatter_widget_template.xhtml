@@ -1,0 +1,29 @@
+<c:if test="true" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:a4j="https://ajax4jsf.dev.java.net/ajax"
+  xmlns:nxu="http://nuxeo.org/nxweb/util"
+  xmlns:nxp="http://nuxeo.org/nxweb/pdf"
+  xmlns:nxd="http://nuxeo.org/nxweb/document"
+  xmlns:c="http://java.sun.com/jstl/core"
+  xmlns:rich="http://richfaces.org/rich"
+  xmlns:ui="http://java.sun.com/jsf/facelets">
+  
+  <c:if test="#{widget.mode == 'edit' or widget.mode == 'create'}">
+    <h:inputText value="#{field}" class="#{widget.id}_input" />
+    
+    <c:set var="property_pattern" value="#{(!empty widget.properties.patternName) ? fieldFormatter.getPattern(widget.properties.patternName) : ''}" />
+    <c:set var="property_pattern" value="#{(!empty widget.properties.pattern) ? widget.properties.pattern : property_pattern}" />
+    <c:set var="property_persistent" value="#{(!empty widget.properties.persistent) ? widget.properties.persistent : 'false'}" />
+    <script type="text/javascript">
+      jQuery('.' + '#{widget.id}_input').formatter({
+        'pattern': '${property_pattern}',
+        'persistent': ${property_persistent}
+      });
+    </script>
+  </c:if>
+  
+  <c:if test="#{widget.mode != 'edit' and widget.mode != 'create'}">
+    <h:outputText value="#{field}" />
+  </c:if>
+  
+</c:if>

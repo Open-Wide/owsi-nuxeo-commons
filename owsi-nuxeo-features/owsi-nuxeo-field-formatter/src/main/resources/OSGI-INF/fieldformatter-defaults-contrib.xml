@@ -1,0 +1,9 @@
+<component name="fr.openwide.nuxeo.formatter.defaults.contrib">
+
+  <extension target="fr.openwide.nuxeo.formatter.FieldFormatterService" point="patterns">
+    <pattern name="creditCard">{{9999}}-{{9999}}-{{9999}}-{{9999}}</pattern>
+    <pattern name="usaPhone">({{999}}) {{999}}.{{9999}}</pattern>
+    <pattern name="francePhone">{{99}} {{99}} {{99}} {{99}} {{99}}</pattern>
+  </extension>
+
+</component>

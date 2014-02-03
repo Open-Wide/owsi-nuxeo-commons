@@ -18,6 +18,7 @@ This repository provides various tools and features for your Nuxeo projects. Mos
 * `owsi-nuxeo-ecm-types-ordering`: Customizes the appearance of the doctype selection pop-up.
 * `owsi-nuxeo-document-creation-script`: An alternative to the Content Template service.
 * `owsi-nuxeo-generic-properties`: Generic extension point to store simple data.
+* `owsi-nuxeo-field-formatting`: Real-time validation of text inputs.
 
 ## Compatibility
 

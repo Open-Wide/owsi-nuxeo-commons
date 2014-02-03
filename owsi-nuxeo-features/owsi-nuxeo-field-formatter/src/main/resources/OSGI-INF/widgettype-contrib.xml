@@ -1,0 +1,14 @@
+<component name="fr.openwide.nuxeo.formatter.widgettype.contrib">
+
+  <extension point="widgettypes" target="org.nuxeo.ecm.platform.forms.layout.WebLayoutManager">
+    <widgetType name="formatter">
+      <handler-class>
+        org.nuxeo.ecm.platform.forms.layout.facelets.plugins.TemplateWidgetTypeHandler
+      </handler-class>
+      <property name="template">
+        /widgets/field_formatter_widget_template.xhtml
+      </property>
+    </widgetType>
+  </extension>
+
+</component>

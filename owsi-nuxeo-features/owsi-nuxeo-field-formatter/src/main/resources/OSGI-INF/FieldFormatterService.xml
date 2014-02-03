@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<component name="fr.openwide.nuxeo.formatter.FieldFormatterService" version="1.0">
+
+  <service>
+    <provide interface="fr.openwide.nuxeo.formatter.FieldFormatterService" />
+  </service>
+
+  <implementation class="fr.openwide.nuxeo.formatter.FieldFormatterServiceImpl" />
+
+  <extension-point name="pattern">
+    <object class="fr.openwide.nuxeo.formatter.PatternDescriptor" />
+    <documentation>
+      Allows to contribute pre-defined formatting patterns.
+      You can then use the "patternName" property on your formatter widgets to reference them.
+      
+      <code>
+        <pattern name="creditCard">{{9999}}-{{9999}}-{{9999}}-{{9999}}</pattern>
+      </code>
+    </documentation>
+  </extension-point>
+  
+</component>
