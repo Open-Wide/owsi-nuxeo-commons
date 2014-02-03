@@ -47,7 +47,7 @@ You can just put the binaries in the *nxserver/bundles* folder of Nuxeo, but if 
 
 **pom.xml**
 
-```
+```xml
     ...
     <dependency>
       <groupId>fr.openwide.nuxeo.commons</groupId>
@@ -69,7 +69,7 @@ You can just put the binaries in the *nxserver/bundles* folder of Nuxeo, but if 
 
 **assembly.xml**
 
-```
+```xml
 <project name="nuxeo-assembly" ...>
   ...
   <copy todir="${outdir}/marketplace/install/bundles">
