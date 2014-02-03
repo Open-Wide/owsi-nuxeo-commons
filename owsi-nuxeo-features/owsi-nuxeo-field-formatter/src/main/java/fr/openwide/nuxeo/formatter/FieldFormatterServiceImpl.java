@@ -41,7 +41,6 @@ public class FieldFormatterServiceImpl extends DefaultComponent implements Field
         if (EXTENSION_POINT_PATTERNS.equals(extensionPoint)) {
             PatternDescriptor patternDescriptor = (PatternDescriptor) contribution;
             registerPattern(patternDescriptor.getName(), patternDescriptor.getPattern());
-            
         }
     }
 

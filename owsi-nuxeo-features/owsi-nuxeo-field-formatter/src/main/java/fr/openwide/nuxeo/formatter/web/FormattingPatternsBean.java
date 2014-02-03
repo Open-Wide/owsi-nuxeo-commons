@@ -11,32 +11,32 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  ******************************************************************************/
-package fr.openwide.nuxeo.formatter;
+package fr.openwide.nuxeo.formatter.web;
 
-import org.nuxeo.common.xmap.annotation.XContent;
-import org.nuxeo.common.xmap.annotation.XNode;
-import org.nuxeo.common.xmap.annotation.XObject;
+import static org.jboss.seam.ScopeType.CONVERSATION;
+
+import java.io.Serializable;
+
+import org.jboss.seam.annotations.Install;
+import org.jboss.seam.annotations.Name;
+import org.jboss.seam.annotations.Scope;
+import org.nuxeo.runtime.api.Framework;
+
+import fr.openwide.nuxeo.formatter.FieldFormatterService;
 
 /**
  * 
  * @author mkalam-alami
- *
+ * 
  */
-@XObject("pattern")
-public class PatternDescriptor {
+@Name("formattingPatterns")
+@Scope(CONVERSATION)
+@Install(precedence = Install.FRAMEWORK)
+public class FormattingPatternsBean implements Serializable {
 
-    @XNode("@name")
-    protected String name;
+    private static final long serialVersionUID = 1L;
 
-    @XContent
-    protected String pattern;
-    
-    public String getName() {
-        return name;
+    public String getPattern(String name) throws Exception {
+        return Framework.getService(FieldFormatterService.class).getPattern(name);
     }
-    
-    public String getPattern() {
-        return pattern.trim();
-    }
-    
 }

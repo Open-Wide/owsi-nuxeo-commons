@@ -7,7 +7,7 @@
 
   <implementation class="fr.openwide.nuxeo.formatter.FieldFormatterServiceImpl" />
 
-  <extension-point name="pattern">
+  <extension-point name="patterns">
     <object class="fr.openwide.nuxeo.formatter.PatternDescriptor" />
     <documentation>
       Allows to contribute pre-defined formatting patterns.

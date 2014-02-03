@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-Vendor: Open Wide
 Bundle-ActivationPolicy: lazy
-Bundle-Name: Faiveley Nuxeo POC Web
+Bundle-Name: owsi-nuxeo-field-formatter
 Bundle-ManifestVersion: 2
-Bundle-SymbolicName: fr.openwide.faiveley.faiveley-poc.web;singleton:=true
+Bundle-SymbolicName: fr.openwide.nuxeo.commons.formatter;singleton:=true
 Nuxeo-Component: OSGI-INF/FieldFormatterService.xml,
  OSGI-INF/fieldformatter-defaults-contrib.xml,
  OSGI-INF/theme-contrib.xml,
