@@ -7,7 +7,7 @@ Property Sync is a tool that allows to synchronize properties from a document to
 
 Its behavior can be configured through XML contributions.
 
-**Module state:** Incubation (but adapted from production code)
+**Module state:** Put into in production
 
 ## Example
 
