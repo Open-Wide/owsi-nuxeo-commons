@@ -13,6 +13,7 @@
  ******************************************************************************/
 package fr.openwide.nuxeo.propertysync.listener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.nuxeo.ecm.core.api.ClientException;
@@ -48,23 +49,28 @@ public class PropertySyncFromParentsRunner extends AbstractPropertySyncRunner {
         
         for (RuleDescriptor d : descriptors) {
             try {
+                List<String> overridenProperties = new ArrayList<String>();
                 for (PropertyDescriptor propertyDescriptor : d.getPropertyDescriptors()) {
-                    DocumentModel ancestor = session.getDocument(doc.getParentRef());
-                    boolean found = false;
-                    while (ancestor != null && ! TypeRoot.TYPE.equals(ancestor.getType())) {
-                        if (DocumentUtils.isAssignable(ancestor.getType(), propertyDescriptor.getAncestorType())) {
-                            found = true;
-                            break;
+                    if (!overridenProperties.contains(propertyDescriptor.getXpath())) {
+                        DocumentModel ancestor = session.getDocument(doc.getParentRef());
+                        boolean found = false;
+                        while (ancestor != null && ! TypeRoot.TYPE.equals(ancestor.getType())) {
+                            if (DocumentUtils.isAssignable(ancestor.getType(), propertyDescriptor.getAncestorType())) {
+                                found = true;
+                                break;
+                            }
+                            if (ancestor.getPathAsString().equals("/")) break;
+                            ancestor = session.getDocument(ancestor.getParentRef());
                         }
-                        if (ancestor.getPathAsString().equals("/")) break;
-                        ancestor = session.getDocument(ancestor.getParentRef());
+    
+                        if (found) {
+                            boolean valueCopied = this.copyPropertyValue(ancestor, propertyDescriptor.getAncestorXpath(),
+                                    doc, propertyDescriptor.getXpath(), propertyDescriptor.getOnlyIfNull());
+                            if (valueCopied) {
+                                overridenProperties.add(propertyDescriptor.getXpath());
+                            }
+                        }
                     }
-
-                    if (found) {
-                        this.copyPropertyValue(ancestor, propertyDescriptor.getAncestorXpath(),
-                                doc, propertyDescriptor.getXpath(), propertyDescriptor.getOnlyIfNull());
-                    }
-
                 }
             }
             catch (ClientException e) {

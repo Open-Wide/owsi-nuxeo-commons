@@ -83,14 +83,15 @@ public class PropertySyncChildrenRunner extends AbstractPropertySyncRunner {
     protected void copyToChildren(CoreSession coreSession, DocumentModel doc, String childrenQuery, RuleDescriptor d)
             throws ClientException {
         try {
-            // TODO Update only when the properties to copy are specifically modified
             DocumentModelList children = coreSession.query(childrenQuery);
             for (PropertyDescriptor propertyDescriptor : d.getPropertyDescriptors()) {
-                if (DocumentUtils.isAssignable(doc.getType(), propertyDescriptor.getAncestorType())) {
-                    for (DocumentModel child : children) {
-                        copyPropertyValue(doc, propertyDescriptor.getAncestorXpath(), child, propertyDescriptor.getXpath(),
-                                propertyDescriptor.getOnlyIfNull());
-                        child.putContextData(PropertySyncService.CONTEXT_TRIGGERED_BY_PROPERTY_SYNC, true);
+                if (doc.getProperty(propertyDescriptor.getAncestorXpath()).isDirty()) {
+                    if (DocumentUtils.isAssignable(doc.getType(), propertyDescriptor.getAncestorType())) {
+                        for (DocumentModel child : children) {
+                            copyPropertyValue(doc, propertyDescriptor.getAncestorXpath(), child, propertyDescriptor.getXpath(),
+                                    propertyDescriptor.getOnlyIfNull());
+                            child.putContextData(PropertySyncService.CONTEXT_TRIGGERED_BY_PROPERTY_SYNC, true);
+                        }
                     }
                 }
             }

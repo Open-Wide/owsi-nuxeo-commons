@@ -43,7 +43,17 @@ public abstract class AbstractPropertySyncRunner extends UnrestrictedSessionRunn
         this.doc = doc;
     }
 
-    protected void copyPropertyValue(DocumentModel fromModel, String fromXPath, DocumentModel toModel, String toXPath,
+    /**
+     * 
+     * @param fromModel
+     * @param fromXPath
+     * @param toModel
+     * @param toXPath
+     * @param onlyIfNull if true, only copies the property if toModel.getPropertyValue(toXPath) is null.
+     * @return true if an actual copy occurred
+     * @throws ClientException
+     */
+    protected boolean copyPropertyValue(DocumentModel fromModel, String fromXPath, DocumentModel toModel, String toXPath,
             boolean onlyIfNull) throws ClientException {
         Property prop = null;
         try {
@@ -72,6 +82,7 @@ public abstract class AbstractPropertySyncRunner extends UnrestrictedSessionRunn
             Serializable oldValue = prop.getValue();
             if (!onlyIfNull || oldValue == null) {
                 prop.setValue(value);
+                return true;
             }
 
             // Merge (TODO Allow to choose merge policy)
@@ -95,6 +106,8 @@ public abstract class AbstractPropertySyncRunner extends UnrestrictedSessionRunn
                      } else prop.setValue(new Object[]{value});
                  }*/
         }
+        
+        return false;
     }
 
 }
