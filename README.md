@@ -5,20 +5,24 @@ Open Wide : Nuxeo Commons
 
 This repository provides various tools and features for your Nuxeo projects. Most of them have been extracted from actual client projects.
 
-**Core**
-
-* `owsi-nuxeo-constants`: Various constants exposed on Java classes, mainly to ease the manipulation of documents.
-* `owsi-nuxeo-tests-helper`: Thin helper to set up tests.
-* `owsi-nuxeo-utils`: Miscellaneous utility methods, plus an extension point to display your project version.
-
 **Features**
 
-* `owsi-nuxeo-property-sync`: Synchronizes properties from documents to their children.
-* `owsi-nuxeo-avatar-importer`: Watches a given folder to import its contents as avatars.
-* `owsi-nuxeo-ecm-types-ordering`: Customizes the appearance of the doctype selection pop-up.
-* `owsi-nuxeo-document-creation-script`: An alternative to the Content Template service.
-* `owsi-nuxeo-generic-properties`: Generic extension point to store simple data.
-* `owsi-nuxeo-field-formatting`: Real-time validation of text inputs.
+Name | Description
+--- | ---
+`owsi-nuxeo-property-sync` | Synchronizes properties from documents to their children.
+`owsi-nuxeo-avatar-importer` | Watches a given folder to import its contents as avatars.
+`owsi-nuxeo-ecm-types-ordering` | Customizes the appearance of the doctype selection pop-up.
+`owsi-nuxeo-document-creation-script` | An alternative to the Content Template service.
+`owsi-nuxeo-generic-properties` | Generic extension point to store simple data.
+`owsi-nuxeo-field-formatting` | Real-time validation of text inputs.
+
+**Core projects**
+
+Name | Description
+--- | ---
+ `owsi-nuxeo-constants` | Various constants exposed on Java classes, mainly to ease the manipulation of documents. |
+ `owsi-nuxeo-tests-helper` | Thin helper to set up tests. |
+ `owsi-nuxeo-utils` | Miscellaneous utility methods, plus an extension point to display your project version. |
 
 ## Compatibility
 
