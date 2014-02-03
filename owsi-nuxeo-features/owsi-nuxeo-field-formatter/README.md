@@ -3,7 +3,7 @@ Open Wide : Nuxeo Field Formatter
 
 ## Introduction
 
-This plugin integrates Nuxeo with [Formatter.js](http://firstopinion.github.io/formatter.js/) to enable complex, real-time validation of text input ([see demos here](http://firstopinion.github.io/formatter.js/demos.html)). All configuration can be done through XML.
+This plugin integrates Nuxeo with [Formatter.js](http://firstopinion.github.io/formatter.js/) to enable real-time validation of text input ([see demos here](http://firstopinion.github.io/formatter.js/demos.html)). All configuration can be done through XML.
 
 **Module state:** Incubation
 
