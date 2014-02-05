@@ -77,15 +77,24 @@ public abstract class AbstractPropertySyncRunner extends UnrestrictedSessionRunn
             }
             value = prop2.getValue();
         }
-        if (value != null) {
-            // Override
+        
+        // Override de property, taking in account the "onlyIsNull" param
+        boolean overrideAllowed = true;
+        if (value == null) {
+            overrideAllowed = false;
+        }
+        else if (onlyIfNull) {
             Serializable oldValue = prop.getValue();
-            if (!onlyIfNull || oldValue == null) {
-                prop.setValue(value);
-                return true;
+            if (oldValue instanceof String[]) {
+                overrideAllowed = ((String[]) oldValue).length == 0;
             }
-
-            // Merge (TODO Allow to choose merge policy)
+            else {
+                overrideAllowed = oldValue == null;
+            }
+        }
+        if (overrideAllowed) {
+            prop.setValue(value);
+         // Merge (TODO Allow to choose merge policy)
             /* if (prop.isScalar()) {
                      prop.setValue(value);
                  } else {
@@ -105,9 +114,11 @@ public abstract class AbstractPropertySyncRunner extends UnrestrictedSessionRunn
                          }
                      } else prop.setValue(new Object[]{value});
                  }*/
+            return true;
         }
-        
-        return false;
+        else {
+            return false;
+        }
     }
 
 }
