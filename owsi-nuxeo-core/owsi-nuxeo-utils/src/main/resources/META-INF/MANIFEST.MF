@@ -4,4 +4,5 @@ Bundle-ActivationPolicy: lazy
 Bundle-Name: owsi-nuxeo-utils
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: fr.openwide.nuxeo.commons.utils;singleton:=true
-Nuxeo-Component: OSGI-INF/VersionDisplayService.xml
+Nuxeo-Component: OSGI-INF/VersionDisplayService.xml,
+ OSGI-INF/adapter-contrib.xml

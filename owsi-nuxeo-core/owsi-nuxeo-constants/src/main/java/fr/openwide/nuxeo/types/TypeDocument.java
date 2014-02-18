@@ -13,6 +13,11 @@
  ******************************************************************************/
 package fr.openwide.nuxeo.types;
 
+import java.io.Serializable;
+
+import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.model.PropertyException;
+
 /**
  * 
  * @author mkalam-alami
@@ -21,6 +26,10 @@ package fr.openwide.nuxeo.types;
 public interface TypeDocument {
 
     static final String TYPE = "Document";
+
+    static final String XPATH_UUID = "ecm:uuid";
+    
+    static final String XPATH_NAME = "ecm:name";
     
     static final String XPATH_TITLE = "dc:title";
 
@@ -60,5 +69,26 @@ public interface TypeDocument {
      * Holds a path (e.g. "/img/file.png")
      */
     static final String XPATH_ICON = "icon";
+
+   
+   // adapter setter/getters :
+
+   String getType();
+   
+   String getUuid();
+
+   String getName();
+
+   String getTitle() throws ClientException;
+
+   void setTitle(String title) throws PropertyException, ClientException;
+
+   String getDescription() throws ClientException;
+
+   void setDescription(String description) throws PropertyException, ClientException;
+
+   Object getProperty(String xpath) throws Exception;
+
+   void setProperty(String xpath, Serializable value) throws Exception;
     
 }

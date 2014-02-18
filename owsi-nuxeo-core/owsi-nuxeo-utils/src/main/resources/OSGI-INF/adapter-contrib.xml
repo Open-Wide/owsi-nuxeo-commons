@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<component name="fr.openwide.commons.base.adapter.contrib">
+
+  <!-- ================ -->
+  <!-- Doctype adapters -->
+  <!-- ================ -->
+  
+  <extension target="org.nuxeo.ecm.core.api.DocumentAdapterService"
+    point="adapters">
+    <adapter class="fr.openwide.nuxeo.types.TypeDocument"
+      factory="fr.openwide.nuxeo.base.adapters.BaseTypesAdapterFactory" />
+      
+  </extension>
+
+</component>
