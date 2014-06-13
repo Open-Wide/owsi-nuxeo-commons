@@ -1,0 +1,18 @@
+{
+   "lines": [
+      {
+         "lineId": 0,
+         "cells": [
+            {
+               "columnId": 0,
+               "value": "hello"
+            }
+            {
+               "columnId": 1,
+               "value": "world"
+            }
+         ]
+      }
+   ],
+   "name": "my table"
+}

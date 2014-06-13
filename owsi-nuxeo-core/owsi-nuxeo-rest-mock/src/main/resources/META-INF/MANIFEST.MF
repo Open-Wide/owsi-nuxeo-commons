@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-Vendor: Open Wide
+Bundle-ActivationPolicy: lazy
+Bundle-Name: owsi-nuxeo-rest-mock
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: fr.openwide.nuxeo.commons.rest.mock;singleton:=true
+Nuxeo-WebModule: org.nuxeo.ecm.webengine.jaxrs.scan.DynamicApplicationFactory

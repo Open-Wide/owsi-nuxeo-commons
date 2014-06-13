@@ -21,8 +21,10 @@ Name | Description
 Name | Description
 --- | ---
  `owsi-nuxeo-constants` | Various constants exposed on Java classes, mainly to ease the manipulation of documents. |
- `owsi-nuxeo-tests-helper` | Thin helper to set up tests. |
+ `owsi-nuxeo-tests-helper` | Thin helper to set up tests, including Web Engine ones. |
  `owsi-nuxeo-utils` | Miscellaneous utility methods, plus an extension point to display your project version. |
+ `owsi-nuxeo-rest` | REST client helpers, see tests for how to use it. |
+ `owsi-nuxeo-rest-mock` | Simple REST JSON mock for testing purpose, see tests for how to use it. |
 
 ## Compatibility
 

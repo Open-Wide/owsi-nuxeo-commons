@@ -1,0 +1,60 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>fr.openwide.nuxeo.commons</groupId>
+    <artifactId>owsi-nuxeo-commons</artifactId>
+    <version>0.1.5-SNAPSHOT</version>
+    <relativePath>../..</relativePath>
+  </parent>
+
+  <artifactId>owsi-nuxeo-rest</artifactId>
+  <name>Open Wide : Nuxeo REST Utils</name>
+  <packaging>jar</packaging>
+
+  <dependencies>
+    <!-- Open Wide Commons -->
+    <dependency>
+      <groupId>fr.openwide.nuxeo.commons</groupId>
+      <artifactId>owsi-nuxeo-utils</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>fr.openwide.nuxeo.commons</groupId>
+      <artifactId>owsi-nuxeo-tests-helper</artifactId>
+    </dependency>
+
+    <!-- Nuxeo REST : -->
+    
+    <!-- JSON using Jackson (still has to be configured, not mandatory) -->
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-core-asl</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-mapper-asl</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-jaxrs</artifactId><!-- brings JacksonJsonProvider, to be configured in clients
+      (NOT required if custom impls of MessageBodyReader etc.) -->
+    </dependency>
+
+    <dependency>
+      <groupId>javax.ws.rs</groupId>
+      <artifactId>jsr311-api</artifactId><!-- Nuxeo's -->
+    </dependency>
+
+    <!-- Jersey Client -->
+    <dependency>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-client</artifactId>
+    </dependency>
+    
+    <!-- tests -->
+    <dependency>
+      <groupId>fr.openwide.nuxeo.commons</groupId>
+      <artifactId>owsi-nuxeo-rest-mock</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>
