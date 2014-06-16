@@ -65,6 +65,18 @@ public class DocumentAdapter implements TypeDocument {
         documentModel.setPropertyValue(TypeDocument.XPATH_DESCRIPTION, description);
     }
 
+
+    @Override
+    public String getCreated() throws ClientException {
+       return (String) documentModel.getPropertyValue(TypeDocument.XPATH_CREATED);
+    }
+    
+
+    @Override
+    public String getModified() throws ClientException {
+       return (String) documentModel.getPropertyValue(TypeDocument.XPATH_MODIFIED);
+    }
+
     @Override
     public Object getProperty(String xpath) throws Exception {
         return documentModel.getPropertyValue(xpath);

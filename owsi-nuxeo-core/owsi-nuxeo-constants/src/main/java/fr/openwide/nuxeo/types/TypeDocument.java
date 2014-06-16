@@ -87,6 +87,10 @@ public interface TypeDocument {
 
    void setDescription(String description) throws PropertyException, ClientException;
 
+   String getCreated() throws ClientException;
+   
+   String getModified() throws ClientException;
+
    Object getProperty(String xpath) throws Exception;
 
    void setProperty(String xpath, Serializable value) throws Exception;
