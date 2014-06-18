@@ -2,6 +2,7 @@ package fr.openwide.nuxeo.commons.rest.mock;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -14,6 +15,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import org.apache.commons.io.IOUtils;
+import org.nuxeo.runtime.api.Framework;
 
 /**
  * Simulates a JSON server by returning data from a sample JSON file
@@ -47,13 +49,15 @@ public class JsonMockServer {
    @POST
    public String doPost(@PathParam("filePathWithoutExtension") String filePathWithoutExtension) {
       try {
-         // HACK somehow : wouldn't work in perfect OSGi world where accessing
-         // the Bundle (Activator) would be required instead
-         String resourcePathInClassoader = PATH_PREFIX + filePathWithoutExtension + ".json";
-         InputStream in = this.getClass().getClassLoader().getResourceAsStream(resourcePathInClassoader);
+         String resourcePath = PATH_PREFIX + filePathWithoutExtension + ".json";
+         URL url = Framework.getRuntime().getContext().getResource(resourcePath);
+         // NB. this is better OSGi practice than getClass().getClassLoader().getResourceAsStream()
+         // (though it would be better done from the -rest-mock bundle itself),
+         // and Framework.getResourceLoader().getResourceAsStream() doesn't work (is a sub-classloader of it)
+         InputStream in = url.openStream();
          if (in == null) {
             throw new WebApplicationException(Response.status(Status.NOT_FOUND)
-                     .entity(resourcePathInClassoader).build());
+                     .entity(resourcePath).build());
          }
          return IOUtils.toString(in);
          ///return FileUtils.readFileToString(new File("src/main/resources/" + "restmock/" + filePathWithoutExtension + ".json"));
