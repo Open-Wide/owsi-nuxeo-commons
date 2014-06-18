@@ -60,13 +60,15 @@ public class ClientBuilder<T> {
    }
 
    /**
-    * Creates an all-purpose, authenticated REST HTTP client to Nuxeo
+    * Creates an all-purpose, HTTP Basic-authenticated REST HTTP client to Nuxeo
     * (prefer specific ones if you can)
     * @return
     */
    public Client createClient() {
       Client client = Client.create(constructClientConfig());
-      client.addFilter(new HTTPBasicAuthFilter(username, password));
+      if (username != null && username.length() != 0) {
+         client.addFilter(new HTTPBasicAuthFilter(username, password));
+      }
       return client;
    }
 

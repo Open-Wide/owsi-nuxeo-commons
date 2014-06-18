@@ -21,9 +21,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
@@ -39,6 +41,8 @@ import fr.openwide.nuxeo.types.TypeDocument;
  */
 public class DocumentUtils {
 
+   private static final Log log = LogFactory.getLog(DocumentUtils.class);
+   
     /**
      * @return The name of the the default repository, in a way that also works
      *         for tests.
@@ -132,6 +136,16 @@ public class DocumentUtils {
         Set<String> superTypes = new HashSet<String>();
         Collections.addAll(superTypes, typeManager.getSuperTypes(from));
         return superTypes.contains(to);
+    }
+
+    public static String getDocumentTypeLabel(String doctype) {
+        try {
+            TypeManager typeManager = Framework.getService(TypeManager.class);
+            return typeManager.getType(doctype).getLabel();
+        } catch (Exception e) {
+            log.warn("Failed to fetch document type label, falling back to type name instead.");
+            return doctype;
+        }
     }
 
     /**
