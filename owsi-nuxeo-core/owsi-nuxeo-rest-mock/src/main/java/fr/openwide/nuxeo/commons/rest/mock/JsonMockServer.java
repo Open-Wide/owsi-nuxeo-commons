@@ -52,7 +52,8 @@ public class JsonMockServer {
          String resourcePath = PATH_PREFIX + filePathWithoutExtension + ".json";
          URL url = Framework.getRuntime().getContext().getResource(resourcePath);
          // NB. this is better OSGi practice than getClass().getClassLoader().getResourceAsStream()
-         // (though it would be better done from the -rest-mock bundle itself),
+         // (though it would be better done from the -rest-mock bundle itself ex. from
+         // contributor.getContext() or extension.getContext() in registered ones in Component),
          // and Framework.getResourceLoader().getResourceAsStream() doesn't work (is a sub-classloader of it)
          InputStream in = url.openStream();
          if (in == null) {
