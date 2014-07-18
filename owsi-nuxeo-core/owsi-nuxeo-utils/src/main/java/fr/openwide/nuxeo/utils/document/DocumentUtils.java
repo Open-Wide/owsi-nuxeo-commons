@@ -42,6 +42,26 @@ import fr.openwide.nuxeo.types.TypeDocument;
 public class DocumentUtils {
 
    private static final Log log = LogFactory.getLog(DocumentUtils.class);
+
+   /** for localCopy */
+   @SuppressWarnings("serial")
+   private static Set<String> DC_PROPERTIES_NOT_TO_COPY = new HashSet<String>() {{
+      add("creator");
+      add("created");
+      add("modified");
+      add("contributors");
+      add("lastContributor");
+   }};
+   /** for localCopy */
+   @SuppressWarnings("serial")
+   private static Set<String> SCHEMAS_NOT_TO_COPY = new HashSet<String>() {{
+      add("uid");
+      add("dublincore");
+      //add("common"); // could allow for custom icon
+      //add("webcontainer"); // could allow for ??
+      add("publishing");
+   }};
+   
    
     /**
      * @return The name of the the default repository, in a way that also works
@@ -88,6 +108,7 @@ public class DocumentUtils {
     public static DocumentModel createDocument(CoreSession session, String type, String parentPath, String name,
             String title) throws ClientException {
         Map<String, Serializable> properties = new HashMap<String, Serializable>();
+        // setting title for better document display :
         properties.put(TypeDocument.XPATH_TITLE, title);
         return createDocument(session, type, parentPath, name, properties);
     }
@@ -111,8 +132,85 @@ public class DocumentUtils {
                 model.setPropertyValue(property.getKey(), property.getValue());
             }
         }
+        if (properties == null || properties.containsKey(TypeDocument.XPATH_TITLE)) {
+           // setting title if none for better document display
+           model.setPropertyValue(TypeDocument.XPATH_TITLE, name);
+        }
         return session.createDocument(model);
     }
+
+    /**
+     * Creates a new document that has all all properties except those that must not / can't
+     * be copied i.e. DC_PROPERTIES_NOT_TO_COPY dc props and SCHEMAS_NOT_TO_COPY props.
+     * NB. for non-customized recursive copy, prefer CoreSession.copy().
+     * @param sourceModel
+     * @param destinationDocumentModel
+     * @param newDocName
+     * @return
+     * @throws ClientException
+     */
+    public static DocumentModel localCopy(DocumentModel sourceModel, DocumentModel destinationDocumentModel,
+          String newDocName) throws ClientException {
+        CoreSession documentManager = sourceModel.getCoreSession();
+        newDocName = (newDocName != null) ? newDocName : sourceModel.getName();
+        Map<String,Serializable> properties = new HashMap<String,Serializable>();
+        /*
+        schema props for ex. ICP Project :
+ (uid : id version...)
+ dublincore : title, description (creator, created, modified, contributors, lastContributor)
+ files, file
+ (common : icon...)
+ icprequireddocuments!
+ icpphasedata, icpprojectclassificationdata NOT USED
+ icpapprovabledocument NOT YET
+ icpassembleddocument!
+ (webcontainer : webc:logo)
+ icpphase : used ?
+ icprequireddocument!
+ (publishing : sections)
+         */
+        for (Map.Entry<String, Object> dcPropEntry : sourceModel.getProperties("dublincore").entrySet()) {
+           if (DC_PROPERTIES_NOT_TO_COPY.contains(dcPropEntry.getKey())) {
+              continue;
+           }
+           properties.put(dcPropEntry.getKey(), (Serializable) dcPropEntry.getValue());
+        }
+           
+        for (String schema : sourceModel.getSchemas()) {
+           if (SCHEMAS_NOT_TO_COPY.contains(schema)) {
+              continue;
+           }
+           //@SuppressWarnings("unchecked")
+           //Map<? extends String, ? extends Serializable> schemaProps = (Map<? extends String, ? extends Serializable>) projectModel.getProperties(schema);
+           Map<String, Object> schemaProps = (Map<String, Object>) sourceModel.getProperties(schema);
+           for(String key : schemaProps.keySet()){
+             //properties.putAll(schemaProps);
+              properties.put(key, (Serializable) schemaProps.get(key));
+           }
+        }
+        DocumentModel newProjectElement = DocumentUtils.createDocument(documentManager, sourceModel.getType(),
+              destinationDocumentModel.getPathAsString(), newDocName, properties);
+       return newProjectElement;
+    }
+    /**
+     * RATHER USE CoreSession.copy(), provided only to show how to use localCopy,
+     * as a base for customized behaviours
+     * @param modelElementDoc
+     * @param newProjectInstanceParentElement
+     * @param newName
+     * @return
+     * @throws ClientException
+     */
+    public static DocumentModel recursiveCopy(DocumentModel sourceDoc, DocumentModel destParentDoc, String newName) 
+             throws ClientException {
+          CoreSession documentManager = sourceDoc.getCoreSession();
+          DocumentModel destDoc = DocumentUtils.localCopy(
+                   sourceDoc, destParentDoc, newName);
+          for (DocumentModel modelChildDoc : documentManager.getChildren(sourceDoc.getRef())) {
+             recursiveCopy(modelChildDoc, destDoc, null);
+          }
+          return destDoc;
+      }
 
     /**
      * Returns true if and only if the "to" doctype is a supertype of "from"

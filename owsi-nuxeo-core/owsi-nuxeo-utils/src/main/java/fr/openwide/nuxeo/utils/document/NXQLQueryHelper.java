@@ -11,6 +11,8 @@ public class NXQLQueryHelper {
     public static final String NXQL_SELECT_FROM = "SELECT * FROM ";
     public static final String NXQL_WHERE = " WHERE ";
     public static final String NXQL_AND = " AND ";
+    public static final String NXQL_OR = " OR ";
+    public static final String NXQL_IS_NULL = " IS NULL";
     public static final String NXQL_QUOTE = "'";
 
     public static final String NXQL_IS_NOT_DELETED = NXQL.ECM_LIFECYCLESTATE + " != 'deleted'";

@@ -7,20 +7,27 @@ import org.nuxeo.ecm.core.api.UnrestrictedSessionRunner;
 
 public abstract class DocumentUnrestrictedSessionRunner extends UnrestrictedSessionRunner {
 
-    protected DocumentModel doc;
+    private DocumentModel doc;
 
     protected DocumentUnrestrictedSessionRunner(CoreSession session, DocumentModel doc) {
         super(session);
         this.doc = doc;
     }
     
-    public DocumentModel getDocumentModel() {
-        return doc;
+    /**
+     * Use this instead of doc to get the document within the unrestricted session ;
+     * NOO still fails, because of session sid in doc ?? so rather give enough permissions
+     * (anyway this problem occurs only at permission change level ex. createProjectInstance
+     * @return
+     * @throws ClientException
+     */
+    public DocumentModel getDocumentModel() throws ClientException {
+        return session.getDocument(doc.getRef()); // else would use the wrong session within unrestricted
     }
     
     public DocumentModel runUnrestrictedAndGetModel() throws ClientException {
         runUnrestricted();
-        return doc;
+        return session.getDocument(doc.getRef()); // else would use the wrong session within unrestricted
     }
 
 }
