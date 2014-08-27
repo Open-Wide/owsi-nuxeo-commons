@@ -5,6 +5,17 @@ import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.UnrestrictedSessionRunner;
 
+
+/**
+ * BEWARE :
+ * - it changes the user, so to get the actual user name rather use
+ * ((NuxeoPrincipal) session.getPrincipal()).getOriginatingUser()
+ * - this.doc is NOT updated because in another session, remember to
+ * update it (by session.getDocument(doc.getRef()))
+ * 
+ * @author mdutoo
+ *
+ */
 public abstract class DocumentUnrestrictedSessionRunner extends UnrestrictedSessionRunner {
 
     private DocumentModel doc;

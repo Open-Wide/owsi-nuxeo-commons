@@ -20,6 +20,7 @@ import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
 import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.core.api.CoreSession;
+import org.nuxeo.ecm.core.test.TransactionalFeature;
 import org.nuxeo.ecm.platform.test.PlatformFeature;
 import org.nuxeo.runtime.test.runner.Features;
 import org.nuxeo.runtime.test.runner.FeaturesRunner;
@@ -27,6 +28,8 @@ import org.nuxeo.runtime.test.runner.FeaturesRunner;
 import com.google.inject.Inject;
 
 /**
+ * NB. add to features TransactionalFeature.class in order to avoid
+ * "[TransactionHelper] No user transaction" warnings
  * 
  * @author mkalam-alami
  *
@@ -35,6 +38,10 @@ import com.google.inject.Inject;
 @Features(PlatformFeature.class)
 public class AbstractNuxeoTest {
 
+   /**
+    * BEWARE its "Administrator" user is NOT in administrators group, so add
+    * dedicated ACLs !
+    */
     @Inject
     protected CoreSession documentManager;
 
