@@ -153,44 +153,48 @@ public class DocumentUtils {
           String newDocName) throws ClientException {
         CoreSession documentManager = sourceModel.getCoreSession();
         newDocName = (newDocName != null) ? newDocName : sourceModel.getName();
-        Map<String,Serializable> properties = new HashMap<String,Serializable>();
-        /*
-        schema props for ex. ICP Project :
- (uid : id version...)
- dublincore : title, description (creator, created, modified, contributors, lastContributor)
- files, file
- (common : icon...)
- icprequireddocuments!
- icpphasedata, icpprojectclassificationdata NOT USED
- icpapprovabledocument NOT YET
- icpassembleddocument!
- (webcontainer : webc:logo)
- icpphase : used ?
- icprequireddocument!
- (publishing : sections)
-         */
-        for (Map.Entry<String, Object> dcPropEntry : sourceModel.getProperties("dublincore").entrySet()) {
-           if (DC_PROPERTIES_NOT_TO_COPY.contains(dcPropEntry.getKey())) {
-              continue;
-           }
-           properties.put(dcPropEntry.getKey(), (Serializable) dcPropEntry.getValue());
-        }
-           
-        for (String schema : sourceModel.getSchemas()) {
-           if (SCHEMAS_NOT_TO_COPY.contains(schema)) {
-              continue;
-           }
-           //@SuppressWarnings("unchecked")
-           //Map<? extends String, ? extends Serializable> schemaProps = (Map<? extends String, ? extends Serializable>) projectModel.getProperties(schema);
-           Map<String, Object> schemaProps = (Map<String, Object>) sourceModel.getProperties(schema);
-           for(String key : schemaProps.keySet()){
-             //properties.putAll(schemaProps);
-              properties.put(key, (Serializable) schemaProps.get(key));
-           }
-        }
+        Map<String, Serializable> properties = copyProperties(sourceModel);
         DocumentModel newProjectElement = DocumentUtils.createDocument(documentManager, sourceModel.getType(),
               destinationDocumentModel.getPathAsString(), newDocName, properties);
        return newProjectElement;
+    }
+    public static Map<String, Serializable> copyProperties(DocumentModel sourceModel) throws ClientException {
+       Map<String,Serializable> properties = new HashMap<String,Serializable>();
+       /*
+       schema props for ex. ICP Project :
+(uid : id version...)
+dublincore : title, description (creator, created, modified, contributors, lastContributor)
+files, file
+(common : icon...)
+icprequireddocuments!
+icpphasedata, icpprojectclassificationdata NOT USED
+icpapprovabledocument NOT YET
+icpassembleddocument!
+(webcontainer : webc:logo)
+icpphase : used ?
+icprequireddocument!
+(publishing : sections)
+        */
+       for (Map.Entry<String, Object> dcPropEntry : sourceModel.getProperties("dublincore").entrySet()) {
+          if (DC_PROPERTIES_NOT_TO_COPY.contains(dcPropEntry.getKey())) {
+             continue;
+          }
+          properties.put(dcPropEntry.getKey(), (Serializable) dcPropEntry.getValue());
+       }
+          
+       for (String schema : sourceModel.getSchemas()) {
+          if (SCHEMAS_NOT_TO_COPY.contains(schema)) {
+             continue;
+          }
+          //@SuppressWarnings("unchecked")
+          //Map<? extends String, ? extends Serializable> schemaProps = (Map<? extends String, ? extends Serializable>) projectModel.getProperties(schema);
+          Map<String, Object> schemaProps = (Map<String, Object>) sourceModel.getProperties(schema);
+          for(String key : schemaProps.keySet()){
+            //properties.putAll(schemaProps);
+             properties.put(key, (Serializable) schemaProps.get(key));
+          }
+       }
+       return properties;
     }
     /**
      * RATHER USE CoreSession.copy(), provided only to show how to use localCopy,
