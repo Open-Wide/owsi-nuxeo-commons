@@ -61,7 +61,7 @@ public class PropertySyncChildrenRunner extends AbstractPropertySyncRunner {
                 RuleDescriptor descriptor = entry.getValue();
                 if (!descriptor.getNoMassUpdate()) {
                     String queryByDoctype = NXQLQueryBuilder.getQuery(TEMPLATE_QUERY_CHILDREN_BY_DOCTYPE,
-                            new String[]{ entry.getKey(), doc.getPathAsString() }, false, true);
+                            new String[]{ entry.getKey(), doc.getPathAsString() }, false, true, null);
                     copyToChildren(session, doc, queryByDoctype, descriptor);
                 }
             }
@@ -73,7 +73,7 @@ public class PropertySyncChildrenRunner extends AbstractPropertySyncRunner {
                 RuleDescriptor descriptor = entry.getValue();
                 if (!descriptor.getNoMassUpdate()) {
                     String queryByFacets = NXQLQueryBuilder.getQuery(TEMPLATE_QUERY_CHILDREN_BY_FACET,
-                            new String[]{ entry.getKey(), doc.getPathAsString() }, false, true);
+                            new String[]{ entry.getKey(), doc.getPathAsString() }, false, true, null);
                     copyToChildren(session, doc, queryByFacets, descriptor);
                 }
             }

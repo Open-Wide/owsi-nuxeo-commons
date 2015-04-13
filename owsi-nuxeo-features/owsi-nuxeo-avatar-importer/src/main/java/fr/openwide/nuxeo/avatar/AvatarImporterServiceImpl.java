@@ -10,7 +10,7 @@ import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.impl.blob.FileBlob;
-import org.nuxeo.ecm.core.storage.sql.DefaultBinaryManager;
+import org.nuxeo.ecm.core.storage.binary.DefaultBinaryManager;
 import org.nuxeo.ecm.user.center.profile.UserProfileConstants;
 import org.nuxeo.ecm.user.center.profile.UserProfileService;
 import org.nuxeo.runtime.api.Framework;

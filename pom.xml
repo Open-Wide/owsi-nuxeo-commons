@@ -4,12 +4,12 @@
   <parent>
     <groupId>org.nuxeo.ecm.platform</groupId>
     <artifactId>nuxeo-features-parent</artifactId>
-    <version>5.8</version>
+    <version>6.0</version>
   </parent>
   
   <groupId>fr.openwide.nuxeo.commons</groupId>
   <artifactId>owsi-nuxeo-commons</artifactId>
-  <version>0.1.5-SNAPSHOT</version>
+  <version>1.6.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   
   <name>Open Wide : Nuxeo Commons</name>

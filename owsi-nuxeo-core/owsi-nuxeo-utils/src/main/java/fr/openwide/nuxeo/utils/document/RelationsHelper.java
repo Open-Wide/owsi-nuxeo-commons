@@ -1,6 +1,5 @@
 package fr.openwide.nuxeo.utils.document;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -163,8 +162,8 @@ public class RelationsHelper {
 	private static DocumentModel getDocumentModel(CoreSession session, RelationManager relations, Node node) throws ClientException {
         if (node.isQNameResource()) {
             QNameResource resource = (QNameResource) node;
-            Map<String, Serializable> context = new HashMap<String, Serializable>();
-            context.put(ResourceAdapter.CORE_SESSION_ID_CONTEXT_KEY,
+            Map<String, Object> context = new HashMap<String, Object>();
+            context.put(ResourceAdapter.CORE_SESSION_CONTEXT_KEY,
                     session.getSessionId());
             Object o = relations.getResourceRepresentation(
                     resource.getNamespace(), resource, context);

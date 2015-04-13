@@ -61,7 +61,7 @@ public class DocumentCreationScriptsTest extends AbstractNuxeoTest {
         script.appendDocumentCreation(new DocumentCreationDescriptor("/test", TypeDomain.TYPE)
                 .addFacet("HiddenInNavigation")
                 .addProperty(TypeDomain.XPATH_TITLE, "Hello")
-                .addACE("Members", "Read", false)
+                .addACE("Members", "Read", true) // NB. negative ACLs are not supported anymore starting from nuxeo 6.0
                 .addAllowedType(TypeFile.TYPE));
         dcs.registerScript(script);
         
@@ -82,7 +82,7 @@ public class DocumentCreationScriptsTest extends AbstractNuxeoTest {
         ACE ace = localAcl.getACEs()[1];
         Assert.assertEquals("Local ACL must be set (2/4)", "Members", ace.getUsername());
         Assert.assertEquals("Local ACL must be set (3/4)", "Read", ace.getPermission());
-        Assert.assertEquals("Local ACL must be set (4/4)", false, ace.isGranted());
+        Assert.assertEquals("Local ACL must be set (4/4)", true, ace.isGranted());
         
         Assert.assertTrue("Local config must be enabled", domain.hasFacet("UITypesLocalConfiguration"));
         String[] allowedTypes = (String[]) domain.getPropertyValue("uitypesconf:allowedTypes");

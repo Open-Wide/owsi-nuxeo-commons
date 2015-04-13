@@ -91,11 +91,11 @@ public class PropertySyncTest extends AbstractNuxeoTest {
         Assert.assertEquals(FOLDER_1_TITLE, note1.getPropertyValue(TypeNote.XPATH_TITLE));
         
         // Copy
-        DocumentModel note2 = documentManager.copy(note1.getRef(), folder2.getRef(), "n2");
-        Assert.assertEquals(FOLDER_2_TITLE, note2.getPropertyValue(TypeNote.XPATH_DESCRIPTION));
+        DocumentModel note2copied = documentManager.copy(note1.getRef(), folder2.getRef(), "n2");
+        Assert.assertEquals(FOLDER_2_TITLE, note2copied.getPropertyValue(TypeNote.XPATH_DESCRIPTION));
         
         // Move
-        note2 = documentManager.move(note1.getRef(), folder1.getRef(), "n2");
+        DocumentModel note2 = documentManager.move(note1.getRef(), folder1.getRef(), "n2");
         Assert.assertEquals(FOLDER_1_TITLE, note2.getPropertyValue(TypeNote.XPATH_DESCRIPTION));
 
         // Match by facet
@@ -111,6 +111,12 @@ public class PropertySyncTest extends AbstractNuxeoTest {
         note3.setPropertyValue(TypeNote.XPATH_TITLE, "n3");
         note3 = documentManager.createDocument(note3);
         Assert.assertEquals("n3", note3.getPropertyValue(TypeNote.XPATH_TITLE));
+        
+        // update
+        folder2.setPropertyValue(TypeFolder.XPATH_TITLE, "f2modified");
+        folder2 = documentManager.saveDocument(folder2);
+        note2copied = documentManager.getDocument(note2copied.getRef()); // refresh doc model
+        Assert.assertEquals("f2modified", note2copied.getPropertyValue(TypeNote.XPATH_DESCRIPTION));
     }
     
     @Test
