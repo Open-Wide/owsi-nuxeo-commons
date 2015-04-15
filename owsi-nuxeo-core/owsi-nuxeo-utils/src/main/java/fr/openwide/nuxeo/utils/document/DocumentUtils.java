@@ -110,7 +110,7 @@ public class DocumentUtils {
         Map<String, Serializable> properties = new HashMap<String, Serializable>();
         // setting title for better document display :
         properties.put(TypeDocument.XPATH_TITLE, title);
-        return createDocument(session, type, parentPath, name, properties);
+        return createDocument(session, type, parentPath, name, properties, null);
     }
 
     /**
@@ -121,12 +121,20 @@ public class DocumentUtils {
      * @param parentPath
      * @param name
      * @param properties
+    * @param set 
      * @return
      * @throws ClientException
      */
     public static DocumentModel createDocument(CoreSession session, String type, String parentPath, String name,
-            Map<String, Serializable> properties) throws ClientException {
+            Map<String, Serializable> properties, Set<String> facets) throws ClientException {
         DocumentModel model = session.createDocumentModel(parentPath, name, type);
+        if (facets != null) {
+           for (String facet : facets) {
+              if (!model.hasFacet(facet)) {
+                 model.addFacet(facet); // else PropertyNotFoundException: thumb:thumbnail on docs
+              }
+           }
+        }
         if (properties != null) {
             for (Entry<String, Serializable> property : properties.entrySet()) {
                 model.setPropertyValue(property.getKey(), property.getValue());
@@ -155,7 +163,7 @@ public class DocumentUtils {
         newDocName = (newDocName != null) ? newDocName : sourceModel.getName();
         Map<String, Serializable> properties = copyProperties(sourceModel);
         DocumentModel newProjectElement = DocumentUtils.createDocument(documentManager, sourceModel.getType(),
-              destinationDocumentModel.getPathAsString(), newDocName, properties);
+              destinationDocumentModel.getPathAsString(), newDocName, properties, sourceModel.getFacets());
        return newProjectElement;
     }
     public static Map<String, Serializable> copyProperties(DocumentModel sourceModel) throws ClientException {

@@ -47,7 +47,7 @@
   
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <!-- nuxeo.version>5.8</nuxeo.version --><!-- gotten from parent -->
+    <!-- nuxeo.version>6.0</nuxeo.version --><!-- gotten from parent -->
     <java.version>1.7</java.version><!-- required by Nuxeo starting from 5.7 -->
     <jackson.version>1.8.1</jackson.version>
   </properties>
