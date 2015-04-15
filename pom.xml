@@ -34,13 +34,11 @@
     <developer>
       <id>schambon</id>
       <name>Sylvain Chambon</name>
-      <email>sylvain.chambon@openwide.fr</email>
       <organization>Open Wide</organization>
     </developer>
     <developer>
       <id>mkalam-alami</id>
       <name>Marwane Kalam-Alami</name>
-      <email>marwane.kalam-alami@openwide.fr</email>
       <organization>Open Wide</organization>
     </developer>
   </developers>
