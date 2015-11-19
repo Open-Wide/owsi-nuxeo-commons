@@ -6,11 +6,11 @@ import java.security.NoSuchAlgorithmException;
 
 import org.apache.log4j.Logger;
 import org.nuxeo.ecm.core.api.Blob;
-import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.api.impl.blob.FileBlob;
-import org.nuxeo.ecm.core.storage.binary.DefaultBinaryManager;
+import org.nuxeo.ecm.core.blob.binary.DefaultBinaryManager;
 import org.nuxeo.ecm.user.center.profile.UserProfileConstants;
 import org.nuxeo.ecm.user.center.profile.UserProfileService;
 import org.nuxeo.runtime.api.Framework;
@@ -36,22 +36,24 @@ public class AvatarImporterServiceImpl extends DefaultComponent implements Avata
     }
     
     @Override
-    public void registerContribution(Object contribution, String extensionPoint, ComponentInstance contributor)
-            throws Exception {
+    public void registerContribution(Object contribution, String extensionPoint, ComponentInstance contributor) {
         if (EXTENSION_POINT_CONFIG.equals(extensionPoint)) {
             registerConfiguration((AvatarImporterConfigDescriptor) contribution);
         }
     }
     
+    @Override
     public void registerConfiguration(AvatarImporterConfigDescriptor config) {
         avatarFolderPath = config.dossierAvatars;
     }
 
+    @Override
     public String getAvatarFolderPath() {
         return avatarFolderPath;
     }
 
-    public void importAvatars(CoreSession coreSession) throws ClientException {
+    @Override
+    public void importAvatars(CoreSession coreSession) throws NuxeoException {
         if (avatarFolderPath != null) {
             File avatarFolder = new File(avatarFolderPath);
             if (avatarFolder.exists() && avatarFolder.isDirectory()) {
@@ -89,7 +91,7 @@ public class AvatarImporterServiceImpl extends DefaultComponent implements Avata
                         }
                     }
                 } catch (Exception e) {
-                    throw new ClientException(e);
+                    throw new NuxeoException(e);
                 }
                 if (replacedAvatars > 0) {
                     logger.info(replacedAvatars + " avatars imported from " + avatarFolderPath);

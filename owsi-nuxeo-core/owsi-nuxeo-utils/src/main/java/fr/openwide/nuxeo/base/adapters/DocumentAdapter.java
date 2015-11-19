@@ -2,9 +2,9 @@ package fr.openwide.nuxeo.base.adapters;
 
 import java.io.Serializable;
 
-import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.core.api.DocumentModel;
-import org.nuxeo.ecm.core.api.model.PropertyException;
+import org.nuxeo.ecm.core.api.NuxeoException;
+import org.nuxeo.ecm.core.api.PropertyException;
 
 import fr.openwide.nuxeo.types.TypeDocument;
 
@@ -46,34 +46,34 @@ public class DocumentAdapter implements TypeDocument {
     }
 
     @Override
-    public String getTitle() throws ClientException {
+    public String getTitle() throws NuxeoException {
         return documentModel.getTitle();
     }
 
     @Override
-    public void setTitle(String title) throws PropertyException, ClientException {
+    public void setTitle(String title) throws PropertyException, NuxeoException {
         documentModel.setPropertyValue(TypeDocument.XPATH_TITLE, title);
     }
 
     @Override
-    public String getDescription() throws ClientException {
+    public String getDescription() throws NuxeoException {
         return (String) documentModel.getPropertyValue(TypeDocument.XPATH_DESCRIPTION);
     }
 
     @Override
-    public void setDescription(String description) throws PropertyException, ClientException {
+    public void setDescription(String description) throws PropertyException, NuxeoException {
         documentModel.setPropertyValue(TypeDocument.XPATH_DESCRIPTION, description);
     }
 
 
     @Override
-    public String getCreated() throws ClientException {
+    public String getCreated() throws NuxeoException {
        return (String) documentModel.getPropertyValue(TypeDocument.XPATH_CREATED);
     }
     
 
     @Override
-    public String getModified() throws ClientException {
+    public String getModified() throws NuxeoException {
        return (String) documentModel.getPropertyValue(TypeDocument.XPATH_MODIFIED);
     }
 

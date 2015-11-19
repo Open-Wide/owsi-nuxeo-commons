@@ -4,12 +4,12 @@
   <parent>
     <groupId>org.nuxeo.ecm.platform</groupId>
     <artifactId>nuxeo-features-parent</artifactId>
-    <version>6.0</version>
+    <version>7.10</version>
   </parent>
   
   <groupId>fr.openwide.nuxeo.commons</groupId>
   <artifactId>owsi-nuxeo-commons</artifactId>
-  <version>1.6.0-SNAPSHOT</version>
+  <version>1.7.10-SNAPSHOT</version>
   <packaging>pom</packaging>
   
   <name>Open Wide : Nuxeo Commons</name>
@@ -45,8 +45,7 @@
   
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <!-- nuxeo.version>6.0</nuxeo.version --><!-- gotten from parent -->
-    <java.version>1.7</java.version><!-- required by Nuxeo starting from 5.7 -->
+    <java.version>1.8</java.version><!-- required by Nuxeo starting from 7.10 -->
     <jackson.version>1.8.1</jackson.version>
   </properties>
 

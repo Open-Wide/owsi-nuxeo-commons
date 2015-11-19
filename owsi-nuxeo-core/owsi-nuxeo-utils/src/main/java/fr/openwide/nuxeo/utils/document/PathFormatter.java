@@ -17,7 +17,7 @@ import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.security.SecurityConstants;
@@ -90,10 +90,10 @@ public class PathFormatter {
      * 
      * @param documentModel
      * @return
-     * @throws ClientException
+     * @throws NuxeoException
      */
     public String getFormattedPath(DocumentModel documentModel)
-            throws ClientException {
+            throws NuxeoException {
         List<String> pathFragments = new ArrayList<String>();
         if (showLeaf) {
             getPathFragments(documentModel, pathFragments);
@@ -120,7 +120,7 @@ public class PathFormatter {
     }
 
     protected void getPathFragments(DocumentModel documentModel,
-            List<String> pathFragments) throws ClientException {
+            List<String> pathFragments) throws NuxeoException {
         pathFragments.add(documentModel.getTitle());
         if (DocumentUtils.isAssignable(documentModel.getType(), rootType)
                 || "/".equals(documentModel.getPathAsString())) {

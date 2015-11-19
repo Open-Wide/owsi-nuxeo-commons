@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 import org.nuxeo.common.utils.IdUtils;
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.PathRef;
@@ -56,6 +56,7 @@ public class DocumentCreationScriptImpl implements DocumentCreationScript {
         this.creationDescriptors = creationDescriptors;
     }
     
+    @Override
     public void appendDocumentCreation(DocumentCreationDescriptor descriptor) throws InvalidParameterException {
         if (descriptor.path == null && descriptor.title == null) {
             throw new InvalidParameterException("Path and title can't be both null");
@@ -64,12 +65,12 @@ public class DocumentCreationScriptImpl implements DocumentCreationScript {
     }
 
     @Override
-    public void run(CoreSession session, boolean overwrite) throws ClientException {
+    public void run(CoreSession session, boolean overwrite) throws NuxeoException {
         run(session, session.getRootDocument(), overwrite);
     }
     
     @Override
-    public void run(CoreSession session, DocumentModel context, boolean overwrite) throws ClientException {
+    public void run(CoreSession session, DocumentModel context, boolean overwrite) throws NuxeoException {
         String contextPath = "/";
         if (context != null && !"/".equals(context.getPathAsString())) {
             contextPath = context.getPathAsString().concat("/");
@@ -182,7 +183,7 @@ public class DocumentCreationScriptImpl implements DocumentCreationScript {
     // Taken from PathSegmentServiceDefault
     public Pattern stupidRegexp = Pattern.compile("^[- .,;?!:/\\\\'\"]*$");
     public int maxSize = 24;
-    protected String generatePathSegment(String s) throws ClientException {
+    protected String generatePathSegment(String s) throws NuxeoException {
         if (s == null) {
             s = "";
         }

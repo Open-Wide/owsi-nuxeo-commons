@@ -19,7 +19,7 @@ import org.nuxeo.ecm.automation.core.annotations.Context;
 import org.nuxeo.ecm.automation.core.annotations.Operation;
 import org.nuxeo.ecm.automation.core.annotations.OperationMethod;
 import org.nuxeo.ecm.automation.core.annotations.Param;
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.PathRef;
 
@@ -51,7 +51,7 @@ public class DocumentCreationScriptOperation {
     private boolean overwrite;
 
     @OperationMethod
-    public void run() throws ClientException {
+    public void run() throws NuxeoException {
         if (!StringUtils.isBlank(contextPath)) {
             CoreSession coreSession = ctx.getCoreSession();
             PathRef contextRef = new PathRef(contextPath);
@@ -60,7 +60,7 @@ public class DocumentCreationScriptOperation {
                         coreSession.getDocument(contextRef), overwrite);
             }
             else {
-                throw new ClientException("Document not found at path: '" + contextPath + "'");
+                throw new NuxeoException("Document not found at path: '" + contextPath + "'");
             }
         }
         else {

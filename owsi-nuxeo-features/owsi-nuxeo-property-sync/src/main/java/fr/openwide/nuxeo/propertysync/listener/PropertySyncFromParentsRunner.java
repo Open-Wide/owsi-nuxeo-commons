@@ -16,7 +16,7 @@ package fr.openwide.nuxeo.propertysync.listener;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
 
@@ -45,7 +45,8 @@ public class PropertySyncFromParentsRunner extends AbstractPropertySyncRunner {
         this.save = save;
     }
 
-    public void run() throws ClientException {
+    @Override
+    public void run() throws NuxeoException {
         
         for (RuleDescriptor d : descriptors) {
             try {
@@ -73,7 +74,7 @@ public class PropertySyncFromParentsRunner extends AbstractPropertySyncRunner {
                     }
                 }
             }
-            catch (ClientException e) {
+            catch (NuxeoException e) {
                 throw new PropertySyncException("Error while applying descriptor '" + d.name + "'", e);
             }
         }

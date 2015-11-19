@@ -36,8 +36,8 @@ public class FieldFormatterServiceImpl extends DefaultComponent implements Field
     
     private Map<String, String> patterns = new HashMap<String, String>();
 
-    public void registerContribution(Object contribution, String extensionPoint, ComponentInstance contributor)
-            throws Exception {
+    @Override
+    public void registerContribution(Object contribution, String extensionPoint, ComponentInstance contributor) {
         if (EXTENSION_POINT_PATTERNS.equals(extensionPoint)) {
             PatternDescriptor patternDescriptor = (PatternDescriptor) contribution;
             registerPattern(patternDescriptor.getName(), patternDescriptor.getPattern());

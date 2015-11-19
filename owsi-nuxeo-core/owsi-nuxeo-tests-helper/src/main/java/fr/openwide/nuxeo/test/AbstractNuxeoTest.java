@@ -18,7 +18,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.platform.test.PlatformFeature;
 import org.nuxeo.runtime.test.runner.Features;
@@ -57,7 +57,7 @@ public class AbstractNuxeoTest {
     }
 
     @After
-    public void logRepository() throws ClientException {
+    public void logRepository() throws NuxeoException {
         if (logRepositoryAfterEachTest) {
             documentManager.save();
             repositoryLogger.logAllRepository(name.getMethodName());

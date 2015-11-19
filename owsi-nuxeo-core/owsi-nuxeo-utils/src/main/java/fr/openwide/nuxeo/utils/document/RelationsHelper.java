@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.DocumentModelList;
@@ -115,13 +115,13 @@ public class RelationsHelper {
 	// Methods copied from GetRelations/CreateRelation automation operations
 	
 	private static QNameResource getDocumentResource(RelationManager relations, DocumentModel document)
-            throws ClientException {
+            throws NuxeoException {
         return (QNameResource) relations.getResource(
                 RelationConstants.DOCUMENT_NAMESPACE, document, null);
     }
     
 	private static DocumentModelList getDocuments(RelationManager relations, CoreSession session, QNameResource res,
-            Resource predicate, boolean outgoing) throws ClientException {
+            Resource predicate, boolean outgoing) throws NuxeoException {
         if (outgoing) {
             List<Statement> statements = getOutgoingStatements(relations, res, predicate);
             DocumentModelList docs = new DocumentModelListImpl(
@@ -148,18 +148,18 @@ public class RelationsHelper {
     }
     
 	private static List<Statement> getIncomingStatements(RelationManager relations, QNameResource res,
-            Resource predicate) throws ClientException {
+            Resource predicate) throws NuxeoException {
         return relations.getGraphByName(RelationConstants.GRAPH_NAME).getStatements(null,
                 predicate, res);
     }
 
 	private static List<Statement> getOutgoingStatements(RelationManager relations, QNameResource res,
-            Resource predicate) throws ClientException {
+            Resource predicate) throws NuxeoException {
         return relations.getGraphByName(RelationConstants.GRAPH_NAME).getStatements(res,
                 predicate, null);
     }
 
-	private static DocumentModel getDocumentModel(CoreSession session, RelationManager relations, Node node) throws ClientException {
+	private static DocumentModel getDocumentModel(CoreSession session, RelationManager relations, Node node) throws NuxeoException {
         if (node.isQNameResource()) {
             QNameResource resource = (QNameResource) node;
             Map<String, Object> context = new HashMap<String, Object>();

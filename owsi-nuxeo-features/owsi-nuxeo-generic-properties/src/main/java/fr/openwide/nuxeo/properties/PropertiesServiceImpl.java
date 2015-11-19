@@ -29,8 +29,9 @@ public class PropertiesServiceImpl extends DefaultComponent implements Propertie
 
     private static Map<String, PropertyDescriptor> properties = new HashMap<String, PropertyDescriptor>();
     
+    @Override
     public void registerContribution(Object contribution,
-            String extensionPoint, ComponentInstance contributor) throws Exception {
+            String extensionPoint, ComponentInstance contributor) {
         PropertyDescriptor descriptor = (PropertyDescriptor) contribution;
         properties.put(descriptor.getName(), descriptor);
     }

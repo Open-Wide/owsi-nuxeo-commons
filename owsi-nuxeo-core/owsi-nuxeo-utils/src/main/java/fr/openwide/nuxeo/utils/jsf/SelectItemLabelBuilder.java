@@ -13,7 +13,7 @@
  ******************************************************************************/
 package fr.openwide.nuxeo.utils.jsf;
 
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.api.DocumentModel;
 
 /**
@@ -22,6 +22,6 @@ import org.nuxeo.ecm.core.api.DocumentModel;
  */
 public interface SelectItemLabelBuilder {
     
-    String getLabel(DocumentModel model) throws ClientException;
+    String getLabel(DocumentModel model) throws NuxeoException;
 
 }

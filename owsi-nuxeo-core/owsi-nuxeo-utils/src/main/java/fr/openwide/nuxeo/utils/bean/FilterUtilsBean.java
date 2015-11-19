@@ -21,7 +21,7 @@ import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Install;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Scope;
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.platform.query.nxql.NXQLQueryBuilder;
 
@@ -66,7 +66,7 @@ public class FilterUtilsBean implements Serializable {
      *   #{filterUtils.escape(...)}
      * 
      */
-    public String getChildrenSelectionQueryPart() throws ClientException {
+    public String getChildrenSelectionQueryPart() throws NuxeoException {
         if (isSearchDocumentEmpty()) {
             return "ecm:parentId = '" + currentDocument.getId() + "'";
         } else {
@@ -74,11 +74,11 @@ public class FilterUtilsBean implements Serializable {
         }
     }
 
-    public String escape(String s) throws ClientException {
+    public String escape(String s) throws NuxeoException {
         return NXQLQueryBuilder.prepareStringLiteral(s, false, true);
     }
 
-    public boolean isSearchDocumentEmpty() throws ClientException {
+    public boolean isSearchDocumentEmpty() throws NuxeoException {
         if (searchDocument != null) {
             for (String schema : searchDocument.getSchemas()) {
                 for (Object value : searchDocument.getProperties(schema).values()) {

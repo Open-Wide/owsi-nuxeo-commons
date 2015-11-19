@@ -15,8 +15,8 @@ package fr.openwide.nuxeo.types;
 
 import java.io.Serializable;
 
-import org.nuxeo.ecm.core.api.ClientException;
-import org.nuxeo.ecm.core.api.model.PropertyException;
+import org.nuxeo.ecm.core.api.NuxeoException;
+import org.nuxeo.ecm.core.api.PropertyException;
 
 /**
  * 
@@ -79,17 +79,17 @@ public interface TypeDocument {
 
    String getName();
 
-   String getTitle() throws ClientException;
+   String getTitle() throws NuxeoException;
 
-   void setTitle(String title) throws PropertyException, ClientException;
+   void setTitle(String title) throws PropertyException, NuxeoException;
 
-   String getDescription() throws ClientException;
+   String getDescription() throws NuxeoException;
 
-   void setDescription(String description) throws PropertyException, ClientException;
+   void setDescription(String description) throws PropertyException, NuxeoException;
 
-   String getCreated() throws ClientException;
+   String getCreated() throws NuxeoException;
    
-   String getModified() throws ClientException;
+   String getModified() throws NuxeoException;
 
    Object getProperty(String xpath) throws Exception;
 

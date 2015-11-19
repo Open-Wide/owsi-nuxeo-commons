@@ -14,7 +14,7 @@
 
 package fr.openwide.nuxeo.utils.jsf;
 
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.api.DocumentModel;
 
 import fr.openwide.nuxeo.types.TypeDocument;
@@ -35,7 +35,8 @@ public class SimpleSelectItemLabelBuilder implements SelectItemLabelBuilder {
         xpath = property;
     }
     
-    public String getLabel(DocumentModel model) throws ClientException {
+    @Override
+    public String getLabel(DocumentModel model) throws NuxeoException {
         return (String) model.getPropertyValue(xpath);
     }
     

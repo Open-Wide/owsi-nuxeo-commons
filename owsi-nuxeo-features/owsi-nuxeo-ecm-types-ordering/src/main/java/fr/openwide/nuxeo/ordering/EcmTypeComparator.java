@@ -30,6 +30,7 @@ public class EcmTypeComparator implements Comparator<Type> {
         this.sortMethod = sortMethod;
     }
     
+    @Override
     public int compare(Type t1, Type t2) {
         if (sortMethod == EcmTypeSortMethod.ALPHABETICAL) {
             return t1.getLabel().compareTo(t2.getLabel());

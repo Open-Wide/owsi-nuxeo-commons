@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<component name="fr.openwide.nuxeo.commons.configurablewall.configurablewall.contrib">
-
-  <extension target="fr.openwide.nuxeo.automation.wall.service.ConfigurableWallStreamService" point="handler">
-    <handler class="fr.openwide.nuxeo.automation.wall.automation.UserSocialWorkspacesStreamHandler" />
-  </extension>
-
-</component>

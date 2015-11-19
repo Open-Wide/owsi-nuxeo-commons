@@ -22,7 +22,7 @@ import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Install;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Scope;
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.api.DocumentModel;
 
 /**
@@ -50,7 +50,7 @@ public class ContentViewFiltersBean implements Serializable {
      * Important: If used through Studio, disable the "Quote" and "Escape"
      * checkboxes from the content view advanced options.
      */
-    public String getDocumentContextNXQLClause() throws ClientException {
+    public String getDocumentContextNXQLClause() throws NuxeoException {
         if (isSearchDocumentEmpty()) {
             return " ecm:parentId = '" + currentDocument.getId() + "' ";
         }
@@ -59,7 +59,7 @@ public class ContentViewFiltersBean implements Serializable {
         }
     }
     
-    public boolean isSearchDocumentEmpty() throws ClientException {
+    public boolean isSearchDocumentEmpty() throws NuxeoException {
         if (searchDocument != null) {
             for (String schema : searchDocument.getSchemas()) {
                 for (Object value : searchDocument.getProperties(schema).values()) {

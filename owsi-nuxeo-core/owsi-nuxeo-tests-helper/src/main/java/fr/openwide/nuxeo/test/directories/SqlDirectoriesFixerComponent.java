@@ -32,8 +32,7 @@ public class SqlDirectoriesFixerComponent extends DefaultComponent {
     private final Logger logger = Logger.getLogger(SqlDirectoriesFixerComponent.class);
     
     @Override
-    public void registerContribution(Object contribution, String extensionPoint, ComponentInstance contributor)
-            throws Exception {
+    public void registerContribution(Object contribution, String extensionPoint, ComponentInstance contributor) {
         SqlDirectoryReferenceDescriptor descriptor = (SqlDirectoryReferenceDescriptor) contribution;
         String directoryName = descriptor.getName();
 

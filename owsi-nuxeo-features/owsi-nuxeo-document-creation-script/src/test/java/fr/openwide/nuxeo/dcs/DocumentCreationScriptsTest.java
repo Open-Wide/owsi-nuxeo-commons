@@ -13,7 +13,7 @@
  ******************************************************************************/
 package fr.openwide.nuxeo.dcs;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import org.junit.Test;
 import org.nuxeo.ecm.core.api.CoreSession;

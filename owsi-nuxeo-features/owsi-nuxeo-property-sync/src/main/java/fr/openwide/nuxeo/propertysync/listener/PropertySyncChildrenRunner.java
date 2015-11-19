@@ -16,7 +16,7 @@ package fr.openwide.nuxeo.propertysync.listener;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.DocumentModelList;
@@ -52,7 +52,8 @@ public class PropertySyncChildrenRunner extends AbstractPropertySyncRunner {
         this.propertySyncService = propertySyncService;
     }
 
-    public void run() throws ClientException {
+    @Override
+    public void run() throws NuxeoException {
         String doctype = doc.getType();
         
         Map<String, RuleDescriptor> descriptorsByDoctypes = propertySyncService.getTargetDoctypes(doctype);
@@ -81,7 +82,7 @@ public class PropertySyncChildrenRunner extends AbstractPropertySyncRunner {
     }
 
     protected void copyToChildren(CoreSession coreSession, DocumentModel doc, String childrenQuery, RuleDescriptor d)
-            throws ClientException {
+            throws NuxeoException {
         try {
             DocumentModelList children = coreSession.query(childrenQuery);
             for (PropertyDescriptor propertyDescriptor : d.getPropertyDescriptors()) {
@@ -96,7 +97,7 @@ public class PropertySyncChildrenRunner extends AbstractPropertySyncRunner {
                 }
             }
             coreSession.saveDocuments(children.toArray(new DocumentModel[] {}));
-        } catch (ClientException e) {
+        } catch (NuxeoException e) {
             throw new PropertySyncException("Error while applying descriptor '" + d.name + "'", e);
         }
     }

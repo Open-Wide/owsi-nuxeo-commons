@@ -26,7 +26,7 @@ import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.platform.types.TypeManager;
@@ -103,10 +103,10 @@ public class DocumentUtils {
      * @param name
      * @param title
      * @return
-     * @throws ClientException
+     * @throws NuxeoException
      */
     public static DocumentModel createDocument(CoreSession session, String type, String parentPath, String name,
-            String title) throws ClientException {
+            String title) throws NuxeoException {
         Map<String, Serializable> properties = new HashMap<String, Serializable>();
         // setting title for better document display :
         properties.put(TypeDocument.XPATH_TITLE, title);
@@ -123,10 +123,10 @@ public class DocumentUtils {
      * @param properties
     * @param set 
      * @return
-     * @throws ClientException
+     * @throws NuxeoException
      */
     public static DocumentModel createDocument(CoreSession session, String type, String parentPath, String name,
-            Map<String, Serializable> properties, Set<String> facets) throws ClientException {
+            Map<String, Serializable> properties, Set<String> facets) throws NuxeoException {
         DocumentModel model = session.createDocumentModel(parentPath, name, type);
         if (facets != null) {
            for (String facet : facets) {
@@ -155,10 +155,10 @@ public class DocumentUtils {
      * @param destinationDocumentModel
      * @param newDocName
      * @return
-     * @throws ClientException
+     * @throws NuxeoException
      */
     public static DocumentModel localCopy(DocumentModel sourceModel, DocumentModel destinationDocumentModel,
-          String newDocName) throws ClientException {
+          String newDocName) throws NuxeoException {
         CoreSession documentManager = sourceModel.getCoreSession();
         newDocName = (newDocName != null) ? newDocName : sourceModel.getName();
         Map<String, Serializable> properties = copyProperties(sourceModel);
@@ -166,7 +166,7 @@ public class DocumentUtils {
               destinationDocumentModel.getPathAsString(), newDocName, properties, sourceModel.getFacets());
        return newProjectElement;
     }
-    public static Map<String, Serializable> copyProperties(DocumentModel sourceModel) throws ClientException {
+    public static Map<String, Serializable> copyProperties(DocumentModel sourceModel) throws NuxeoException {
        Map<String,Serializable> properties = new HashMap<String,Serializable>();
        /*
        schema props for ex. ICP Project :
@@ -211,10 +211,10 @@ icprequireddocument!
      * @param newProjectInstanceParentElement
      * @param newName
      * @return
-     * @throws ClientException
+     * @throws NuxeoException
      */
     public static DocumentModel recursiveCopy(DocumentModel sourceDoc, DocumentModel destParentDoc, String newName) 
-             throws ClientException {
+             throws NuxeoException {
           CoreSession documentManager = sourceDoc.getCoreSession();
           DocumentModel destDoc = DocumentUtils.localCopy(
                    sourceDoc, destParentDoc, newName);
@@ -276,9 +276,9 @@ icprequireddocument!
      * @param m1
      * @param m2
      * @return A list of xpaths
-     * @throws ClientException
+     * @throws NuxeoException
      */
-    public static List<String> getDifferingProperties(DocumentModel m1, DocumentModel m2) throws ClientException {
+    public static List<String> getDifferingProperties(DocumentModel m1, DocumentModel m2) throws NuxeoException {
         List<String> differingProperties = new ArrayList<String>();
 
         Set<String> schemas = new HashSet<String>();

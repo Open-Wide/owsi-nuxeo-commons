@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.runtime.test.runner.Deploy;
 
@@ -21,7 +21,7 @@ import fr.openwide.nuxeo.utils.document.PathFormatter;
 public class DocumentUtilsTest extends AbstractNuxeoTest  {
 
     @Test
-    public void testDiff() throws ClientException {
+    public void testDiff() throws NuxeoException {
         DocumentModel testFile = documentManager.createDocumentModel("/", "test", TypeFile.TYPE);
         testFile.setPropertyValue(TypeFile.XPATH_TITLE, "Hello");
         testFile = documentManager.createDocument(testFile);
@@ -37,7 +37,7 @@ public class DocumentUtilsTest extends AbstractNuxeoTest  {
     }
     
     @Test
-    public void testPathFormatter() throws ClientException {
+    public void testPathFormatter() throws NuxeoException {
         PathFormatter pathFormatter = new PathFormatter(documentManager);
         
         // General usage

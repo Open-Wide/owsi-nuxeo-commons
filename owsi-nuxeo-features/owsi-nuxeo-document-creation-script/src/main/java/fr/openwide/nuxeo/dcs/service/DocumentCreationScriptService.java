@@ -13,7 +13,7 @@
  ******************************************************************************/
 package fr.openwide.nuxeo.dcs.service;
 
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
 
@@ -35,7 +35,7 @@ public interface DocumentCreationScriptService {
 
     void setScriptEnabled(String name, boolean enabled);
     
-    void runScript(CoreSession session, String name, boolean overwrite) throws ClientException;
+    void runScript(CoreSession session, String name, boolean overwrite) throws NuxeoException;
     
-    void runScript(CoreSession session, String name, DocumentModel context, boolean overwrite) throws ClientException;
+    void runScript(CoreSession session, String name, DocumentModel context, boolean overwrite) throws NuxeoException;
 }

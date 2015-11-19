@@ -2,7 +2,7 @@ package fr.openwide.nuxeo.utils;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.runtime.test.runner.Deploy;
 import org.nuxeo.runtime.test.runner.LocalDeploy;
 
@@ -20,13 +20,13 @@ public class VersionDisplayServiceTest extends AbstractNuxeoTest  {
     VersionDisplayService versionDisplayService;
     
     @Test
-    public void testExtensionPoint() throws ClientException {
+    public void testExtensionPoint() throws NuxeoException {
         Assert.assertEquals("hello", versionDisplayService.getVersionPrefix());
         Assert.assertEquals("world", versionDisplayService.getBundleMatchPattern().toString());
     }
     
     @Test
-    public void testVersionParsing() throws ClientException {
+    public void testVersionParsing() throws NuxeoException {
         VersionDisplayBean versionDisplayBean = new VersionDisplayBean();
         Assert.assertEquals("1.0", versionDisplayBean.extractVersion("hello-1.0.jar"));
         Assert.assertEquals("1.1", versionDisplayBean.extractVersion("hello-1-world-1.1.jar"));

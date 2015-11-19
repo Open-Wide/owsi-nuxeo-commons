@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.platform.types.Type;
 import org.nuxeo.runtime.test.runner.LocalDeploy;
@@ -34,7 +34,7 @@ import fr.openwide.nuxeo.types.TypeFolder;
 public class EcmTypesOrderingServiceTest extends AbstractEcmTypesOrderingTest {
     
     @Test
-    public void testOrdering() throws ClientException {
+    public void testOrdering() throws NuxeoException {
         DocumentModel folderModel = documentManager.createDocumentModel(
                 DefaultHierarchy.WORKSPACES_PATH_AS_STRING, "folder", TypeFolder.TYPE);
         folderModel = documentManager.createDocument(folderModel);

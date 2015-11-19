@@ -19,7 +19,7 @@ import java.util.Map.Entry;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.DocumentModelList;
@@ -41,6 +41,7 @@ public class RepositoryLogger {
     private final Level level;
     
     private RepositoryLoggerMatcher matcher = new RepositoryLoggerMatcher() {
+        @Override
         public boolean matches(DocumentModel model) {
             return false;
         }
@@ -75,12 +76,12 @@ public class RepositoryLogger {
             for (DocumentModel domain : domains) {
                 logDocumentAndChildren(domain, null);
             }
-        } catch (ClientException e) {
+        } catch (NuxeoException e) {
             logger.log(level, "ERROR: Failed to log a document", e);
         }
     }
 
-    public void logDocumentAndChildren(DocumentModel model) throws ClientException {
+    public void logDocumentAndChildren(DocumentModel model) throws NuxeoException {
         logDocumentAndChildren(model, model.getTitle());
     }
     
@@ -93,13 +94,13 @@ public class RepositoryLogger {
                 }
                 // Contents
                 logDocumentAndChildren(model, 0);
-            } catch (ClientException e) {
+            } catch (NuxeoException e) {
                 logger.log(level, "ERROR: Failed to log document or a document child", e);
             }
         }
     }
     
-    private void logDocumentAndChildren(DocumentModel model, int indent) throws ClientException {
+    private void logDocumentAndChildren(DocumentModel model, int indent) throws NuxeoException {
         // Log document
         if (matcher.matches(model)) {
             logDetailed(indent, model);
@@ -123,7 +124,7 @@ public class RepositoryLogger {
         String line = getSpaces(indent) + "* [" + type + "] ";
         try {
             line += model.getTitle();
-        } catch (ClientException e) {
+        } catch (NuxeoException e) {
             line += "<title unknown>";
         }
         logger.log(level, line);

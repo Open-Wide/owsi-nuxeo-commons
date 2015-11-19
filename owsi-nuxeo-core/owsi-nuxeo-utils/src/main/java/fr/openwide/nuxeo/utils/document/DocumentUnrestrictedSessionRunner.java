@@ -1,6 +1,6 @@
 package fr.openwide.nuxeo.utils.document;
 
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.UnrestrictedSessionRunner;
@@ -30,13 +30,13 @@ public abstract class DocumentUnrestrictedSessionRunner extends UnrestrictedSess
      * NOO still fails, because of session sid in doc ?? so rather give enough permissions
      * (anyway this problem occurs only at permission change level ex. createProjectInstance
      * @return
-     * @throws ClientException
+     * @throws NuxeoException
      */
-    public DocumentModel getDocumentModel() throws ClientException {
+    public DocumentModel getDocumentModel() throws NuxeoException {
         return session.getDocument(doc.getRef()); // else would use the wrong session within unrestricted
     }
     
-    public DocumentModel runUnrestrictedAndGetModel() throws ClientException {
+    public DocumentModel runUnrestrictedAndGetModel() throws NuxeoException {
         runUnrestricted();
         return session.getDocument(doc.getRef()); // else would use the wrong session within unrestricted
     }

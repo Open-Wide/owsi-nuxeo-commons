@@ -1,6 +1,6 @@
 package fr.openwide.nuxeo.avatar;
 
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.api.CoreSession;
 
 /**
@@ -13,6 +13,6 @@ public interface AvatarImporterService {
     
     public String getAvatarFolderPath();
 
-    public void importAvatars(CoreSession coreSession) throws ClientException;
+    public void importAvatars(CoreSession coreSession) throws NuxeoException;
 
 }

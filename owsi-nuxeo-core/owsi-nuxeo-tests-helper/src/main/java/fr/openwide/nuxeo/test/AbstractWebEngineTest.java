@@ -3,7 +3,7 @@ package fr.openwide.nuxeo.test;
 import java.net.URL;
 import java.net.URLConnection;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import org.apache.log4j.Logger;
 import org.junit.After;
@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.test.annotations.Granularity;
 import org.nuxeo.ecm.core.test.annotations.RepositoryConfig;
@@ -55,7 +55,7 @@ public abstract class AbstractWebEngineTest {
     }
     
     @After
-    public void logRepository() throws ClientException {
+    public void logRepository() throws NuxeoException {
         if (logRepositoryAfterEachTest) {
         	documentManager.save();
          repositoryLogger.logAllRepository(name.getMethodName());

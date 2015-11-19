@@ -55,8 +55,9 @@ public class EcmTypesOrderingServiceImpl extends DefaultComponent implements Ecm
 
     private ActionManager actionManager;
     
+    @Override
     public void registerContribution(Object contribution,
-            String extensionPoint, ComponentInstance contributor) throws Exception {
+            String extensionPoint, ComponentInstance contributor) {
         if (EXTENSION_POINT_ORDERING.equals(extensionPoint)) {
             OrderingDescriptor descriptor = (OrderingDescriptor) contribution;
             orderingDescriptors.put(descriptor.getName(), descriptor); // Warning: Merging not implemented
@@ -66,10 +67,12 @@ public class EcmTypesOrderingServiceImpl extends DefaultComponent implements Ecm
         }
     }
     
+    @Override
     public int getColumnSize() {
         return orderingConfig.getColumnSize();
     }
 
+    @Override
     public Map<String, List<Type>> orderTypes(Map<String, List<Type>> types, ActionContext context) {
         OrderingDescriptor orderingDescriptor = getOrderingDescriptor(context);
         if (orderingDescriptor != null) {

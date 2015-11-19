@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.DocumentRef;
@@ -24,7 +24,7 @@ public class NuxeoListUtils {
         return list;
     }
     
-    public static String toCsv(Collection<String> values) throws ClientException {
+    public static String toCsv(Collection<String> values) throws NuxeoException {
         if (values == null || values.isEmpty()) {
             return "";
         }
@@ -40,7 +40,7 @@ public class NuxeoListUtils {
         return valuesSbuf.toString();
     }
     
-    public static String toLiteral(Collection<String> values) throws ClientException {
+    public static String toLiteral(Collection<String> values) throws NuxeoException {
         return '(' + toCsv(values) + ')';
     }
 
@@ -49,13 +49,13 @@ public class NuxeoListUtils {
      * @param session
      * @param proxies
      * @return
-     * @throws ClientException
+     * @throws NuxeoException
      */
-    public static String getProxiedIdLiteralList(CoreSession session, List<DocumentModel> proxies) throws ClientException {
+    public static String getProxiedIdLiteralList(CoreSession session, List<DocumentModel> proxies) throws NuxeoException {
         return toLiteral(getProxiedIds(session, proxies));
     }
 
-    public static ArrayList<String> getProxiedIds(CoreSession session, List<DocumentModel> proxies) throws ClientException {
+    public static ArrayList<String> getProxiedIds(CoreSession session, List<DocumentModel> proxies) throws NuxeoException {
         ArrayList<String> proxiedIds = new ArrayList<String>();
         for (DocumentModel proxy : proxies) {
             proxiedIds.add(session.getSourceDocument(proxy.getRef()).getId());
@@ -63,7 +63,7 @@ public class NuxeoListUtils {
         return proxiedIds;
     }
 
-    public static ArrayList<String> getProxyIds(CoreSession session, List<DocumentModel> docs, DocumentRef root) throws ClientException {
+    public static ArrayList<String> getProxyIds(CoreSession session, List<DocumentModel> docs, DocumentRef root) throws NuxeoException {
         ArrayList<String> proxyIds = new ArrayList<String>();
         for (DocumentModel doc : docs) {
             for (DocumentModel proxy : session.getProxies(doc.getRef(), root)) {
@@ -73,7 +73,7 @@ public class NuxeoListUtils {
         return proxyIds;
     }
 
-    public static ArrayList<String> getProxyIds(CoreSession session, Collection<String> docIds, DocumentRef root) throws ClientException {
+    public static ArrayList<String> getProxyIds(CoreSession session, Collection<String> docIds, DocumentRef root) throws NuxeoException {
         ArrayList<String> proxyIds = new ArrayList<String>();
         for (String docId : docIds) {
             for (DocumentModel proxy : session.getProxies(new IdRef(docId), root)) {
@@ -83,7 +83,7 @@ public class NuxeoListUtils {
         return proxyIds;
     }
     
-    public static ArrayList<String> getParentIds(List<DocumentModel> docs) throws ClientException {
+    public static ArrayList<String> getParentIds(List<DocumentModel> docs) throws NuxeoException {
         ArrayList<String> parentIds = new ArrayList<String>();
         for (DocumentModel doc : docs) {
             parentIds.add(doc.getParentRef().reference().toString());
@@ -91,7 +91,7 @@ public class NuxeoListUtils {
         return parentIds;
     }
     
-    public static ArrayList<String> getIds(List<DocumentModel> docModels) throws ClientException {
+    public static ArrayList<String> getIds(List<DocumentModel> docModels) throws NuxeoException {
         ArrayList<String> ids = new ArrayList<String>(docModels.size());
         for (DocumentModel doc : docModels) {
             ids.add(doc.getId());

@@ -21,7 +21,7 @@ import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 import org.junit.BeforeClass;
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.DocumentRef;
 import org.nuxeo.ecm.core.api.NuxeoPrincipal;
@@ -63,7 +63,7 @@ public abstract class AbstractEcmTypesOrderingTest extends AbstractNuxeoTest {
         setLogRepositoryAfterEachTest(false);
     }
     
-    protected ActionContext createActionContext(DocumentRef docRef) throws ClientException {
+    protected ActionContext createActionContext(DocumentRef docRef) throws NuxeoException {
         ActionContext actionContext = new SeamActionContext();
         actionContext.setDocumentManager(documentManager);
         actionContext.setCurrentPrincipal((NuxeoPrincipal) documentManager.getPrincipal());
@@ -75,7 +75,7 @@ public abstract class AbstractEcmTypesOrderingTest extends AbstractNuxeoTest {
         return typeManager.getTypeMapForDocumentType(doctype, null);
     }
 
-    protected Map<String, List<Type>> getTypesMap(DocumentRef docRef) throws ClientException {
+    protected Map<String, List<Type>> getTypesMap(DocumentRef docRef) throws NuxeoException {
         DocumentModel documentModel = documentManager.getDocument(docRef);
         return typeManager.getTypeMapForDocumentType(documentModel.getType(), documentModel);
     }

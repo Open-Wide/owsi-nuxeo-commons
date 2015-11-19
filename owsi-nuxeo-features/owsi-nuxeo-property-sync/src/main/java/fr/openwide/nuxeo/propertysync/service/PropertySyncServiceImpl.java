@@ -53,8 +53,7 @@ public class PropertySyncServiceImpl extends DefaultComponent implements Propert
 
 
     @Override
-    public void registerContribution(Object contribution, String extensionPoint, ComponentInstance contributor)
-            throws Exception {
+    public void registerContribution(Object contribution, String extensionPoint, ComponentInstance contributor) {
         if (EXTENSION_POINT_RULE.equals(extensionPoint)) {
             registerRule((RuleDescriptor) contribution);
         }

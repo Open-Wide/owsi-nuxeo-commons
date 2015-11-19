@@ -18,7 +18,7 @@ import java.util.List;
 
 import javax.faces.model.SelectItem;
 
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.DocumentModelList;
 
@@ -32,17 +32,17 @@ import fr.openwide.nuxeo.schemas.SchemaXVocabulary;
  */
 public class JsfUtils {
 
-    public static List<SelectItem> modelsToSelectItems(DocumentModelList models) throws ClientException {
+    public static List<SelectItem> modelsToSelectItems(DocumentModelList models) throws NuxeoException {
         return modelsToSelectItems(models, new SimpleSelectItemLabelBuilder(), false);
     }
             
     public static List<SelectItem> modelsToSelectItems(DocumentModelList models,
-            SelectItemLabelBuilder labelBuilder) throws ClientException {
+            SelectItemLabelBuilder labelBuilder) throws NuxeoException {
         return modelsToSelectItems(models, labelBuilder, false);
     }
     
     public static List<SelectItem> modelsToSelectItems(DocumentModelList models,
-            SelectItemLabelBuilder labelBuilder, boolean usePathAsValue) throws ClientException {
+            SelectItemLabelBuilder labelBuilder, boolean usePathAsValue) throws NuxeoException {
         
         List<SelectItem> selectItems = new ArrayList<SelectItem>();
         for (DocumentModel model : models) {

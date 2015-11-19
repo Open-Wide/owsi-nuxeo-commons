@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.runtime.model.ComponentInstance;
@@ -42,8 +42,7 @@ public class DocumentCreationScriptServiceImpl extends DefaultComponent implemen
     private static Map<String, DocumentCreationScript> disabledScripts = new HashMap<String, DocumentCreationScript>();
 
     @Override
-    public void registerContribution(Object contribution, String extensionPoint, ComponentInstance contributor)
-            throws Exception {
+    public void registerContribution(Object contribution, String extensionPoint, ComponentInstance contributor) {
         DocumentCreationScriptDescriptor descriptor = (DocumentCreationScriptDescriptor) contribution;
         if (descriptor.name != null) {
             // Fetch, create or reset
@@ -71,10 +70,12 @@ public class DocumentCreationScriptServiceImpl extends DefaultComponent implemen
         }
     }
 
+    @Override
     public void registerScript(DocumentCreationScript script) {
         scripts.put(script.getName(), script);
     }
 
+    @Override
     public void setScriptEnabled(String name, boolean enabled) {
         if (enabled) {
             DocumentCreationScript documentCreationScript = disabledScripts.remove(name);
@@ -91,7 +92,7 @@ public class DocumentCreationScriptServiceImpl extends DefaultComponent implemen
     }
 
     @Override
-    public void runScript(CoreSession session, String name, boolean overwrite) throws ClientException {
+    public void runScript(CoreSession session, String name, boolean overwrite) throws NuxeoException {
         DocumentCreationScript script = scripts.get(name);
         if (script != null) {
             script.run(session, overwrite);
@@ -103,7 +104,7 @@ public class DocumentCreationScriptServiceImpl extends DefaultComponent implemen
 
     @Override
     public void runScript(CoreSession session, String name, DocumentModel context, boolean overwrite)
-            throws ClientException {
+            throws NuxeoException {
         DocumentCreationScript script = scripts.get(name);
         if (script != null) {
             script.run(session, context, overwrite);

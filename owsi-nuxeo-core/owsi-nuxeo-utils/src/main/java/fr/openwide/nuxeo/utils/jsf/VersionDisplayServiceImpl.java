@@ -29,8 +29,7 @@ public class VersionDisplayServiceImpl extends DefaultComponent implements Versi
     private Pattern bundleMatchPattern = null;
     
     @Override
-    public void registerContribution(Object contribution, String extensionPoint, ComponentInstance contributor)
-            throws Exception {
+    public void registerContribution(Object contribution, String extensionPoint, ComponentInstance contributor) {
         if (EXTENSION_POINT_CONFIG.equals(extensionPoint)) {
             VersionDisplayConfigDescriptor descriptor = (VersionDisplayConfigDescriptor) contribution;
             versionPrefix = descriptor.getVersionNumberPrefix();
@@ -38,18 +37,22 @@ public class VersionDisplayServiceImpl extends DefaultComponent implements Versi
         }
     }
     
+    @Override
     public String getVersionPrefix() {
         return versionPrefix;
     }
     
+    @Override
     public void setVersionPrefix(String versionPrefix) {
         this.versionPrefix = versionPrefix;
     }
     
+    @Override
     public Pattern getBundleMatchPattern() {
         return bundleMatchPattern;
     }
     
+    @Override
     public void setBundleMatchPattern(Pattern bundleMatchPattern) {
         this.bundleMatchPattern = bundleMatchPattern;
     }

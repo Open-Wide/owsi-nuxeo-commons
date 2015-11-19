@@ -17,7 +17,7 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.event.DocumentEventTypes;
@@ -41,7 +41,7 @@ public class PropertySyncListener implements EventListener {
     private PropertySyncService propertySyncService;
 
     @Override
-    public void handleEvent(Event event) throws ClientException {
+    public void handleEvent(Event event) throws NuxeoException {
         PropertySyncService propertySync = getPropertySyncService();
         DocumentEventContext ctx = (DocumentEventContext) event.getContext();
         DocumentModel doc = ctx.getSourceDocument();
@@ -76,14 +76,14 @@ public class PropertySyncListener implements EventListener {
         }
     }
 
-    private PropertySyncService getPropertySyncService() throws ClientException {
+    private PropertySyncService getPropertySyncService() throws NuxeoException {
         try {
             if (propertySyncService == null) {
                 propertySyncService = Framework.getService(PropertySyncService.class);
             }
             return propertySyncService;
         } catch (Exception e) {
-            throw new ClientException("Cannot get service", e);
+            throw new NuxeoException("Cannot get service", e);
         }
     }
 }

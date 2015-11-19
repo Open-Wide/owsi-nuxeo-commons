@@ -1,7 +1,7 @@
 package fr.openwide.nuxeo.avatar;
 
 import org.apache.log4j.Logger;
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.event.Event;
 import org.nuxeo.ecm.core.event.EventListener;
 
@@ -19,7 +19,8 @@ public class AvatarImporterSchedule implements EventListener {
     private static boolean schedulerLock = false; 
 
     
-    public void handleEvent(Event event) throws ClientException {
+    @Override
+    public void handleEvent(Event event) throws NuxeoException {
         if (!schedulerLock) {
             schedulerLock = true;
             try {

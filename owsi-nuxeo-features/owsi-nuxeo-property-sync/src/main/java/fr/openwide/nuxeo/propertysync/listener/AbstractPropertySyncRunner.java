@@ -16,12 +16,12 @@ package fr.openwide.nuxeo.propertysync.listener;
 import java.io.Serializable;
 
 import org.apache.log4j.Logger;
-import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
+import org.nuxeo.ecm.core.api.NuxeoException;
+import org.nuxeo.ecm.core.api.PropertyException;
 import org.nuxeo.ecm.core.api.UnrestrictedSessionRunner;
 import org.nuxeo.ecm.core.api.model.Property;
-import org.nuxeo.ecm.core.api.model.PropertyException;
 
 import fr.openwide.nuxeo.propertysync.PropertySyncException;
 import fr.openwide.nuxeo.propertysync.service.PropertySyncService;
@@ -51,10 +51,10 @@ public abstract class AbstractPropertySyncRunner extends UnrestrictedSessionRunn
      * @param toXPath
      * @param onlyIfNull if true, only copies the property if toModel.getPropertyValue(toXPath) is null.
      * @return true if an actual copy occurred
-     * @throws ClientException
+     * @throws NuxeoException
      */
     protected boolean copyPropertyValue(DocumentModel fromModel, String fromXPath, DocumentModel toModel, String toXPath,
-            boolean onlyIfNull) throws ClientException {
+            boolean onlyIfNull) throws NuxeoException {
         Property prop = null;
         try {
             prop = toModel.getProperty(toXPath);

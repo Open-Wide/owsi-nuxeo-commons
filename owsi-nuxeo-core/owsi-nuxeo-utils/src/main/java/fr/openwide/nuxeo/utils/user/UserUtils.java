@@ -16,7 +16,7 @@ package fr.openwide.nuxeo.utils.user;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.api.NuxeoPrincipal;
 
 /**
@@ -44,7 +44,7 @@ public class UserUtils {
        return title.toString();
    }
 
-   public static List<String> getUserMails(List<NuxeoPrincipal> users) throws ClientException {
+   public static List<String> getUserMails(List<NuxeoPrincipal> users) throws NuxeoException {
       List<String> userEmails = new ArrayList<String>(users.size());
       for (NuxeoPrincipal user : users) {
          userEmails.add(user.getEmail());
@@ -53,7 +53,7 @@ public class UserUtils {
    }
    
    
-   public static List<String> getUserNames(List<NuxeoPrincipal> users) throws ClientException {
+   public static List<String> getUserNames(List<NuxeoPrincipal> users) throws NuxeoException {
       List<String> userNames = new ArrayList<String>(users.size());
       for (NuxeoPrincipal user : users) {
          userNames.add(user.getName());

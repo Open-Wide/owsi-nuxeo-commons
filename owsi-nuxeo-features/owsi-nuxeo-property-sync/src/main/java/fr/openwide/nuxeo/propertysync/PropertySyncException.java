@@ -13,14 +13,14 @@
  ******************************************************************************/
 package fr.openwide.nuxeo.propertysync;
 
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 
 /**
  * 
  * @author mkalam-alami
  *
  */
-public class PropertySyncException extends ClientException {
+public class PropertySyncException extends NuxeoException {
     
     private static final long serialVersionUID = 1L;
 
@@ -31,7 +31,7 @@ public class PropertySyncException extends ClientException {
         super(message);
     }
 
-    public PropertySyncException(String message, ClientException cause) {
+    public PropertySyncException(String message, NuxeoException cause) {
         super(message, cause);
     }
 
@@ -43,7 +43,7 @@ public class PropertySyncException extends ClientException {
         super(cause);
     }
 
-    public PropertySyncException(ClientException cause) {
+    public PropertySyncException(NuxeoException cause) {
         super(cause);
     }
 

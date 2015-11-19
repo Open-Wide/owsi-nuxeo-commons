@@ -15,11 +15,11 @@ package fr.openwide.nuxeo.propertysync;
 
 import java.io.Serializable;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.nuxeo.ecm.core.api.ClientException;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.runtime.test.runner.Deploy;
@@ -67,7 +67,7 @@ public class PropertySyncTest extends AbstractNuxeoTest {
     private  String rootPath = DefaultHierarchy.WORKSPACES_PATH_AS_STRING;
 
     @Before
-    public void setUp() throws ClientException {
+    public void setUp() throws NuxeoException {
         folder1 = documentManager.createDocumentModel(rootPath, "f1", TypeFolder.TYPE);
         folder1.setPropertyValue(TypeFolder.XPATH_TITLE, FOLDER_1_TITLE);
         folder1 = documentManager.createDocument(folder1);
