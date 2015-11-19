@@ -30,6 +30,8 @@ Name | Description
 
 Nuxeo version | OWSI Commons version | Comments
 --- | --- | ---
+7.10 | 1.7.10-SNAPSHOT | 
+6.0 | 1.6.0-SNAPSHOT | 
 5.8 | 0.1.4 | 
 5.6 | 0.1.3 | 
 
