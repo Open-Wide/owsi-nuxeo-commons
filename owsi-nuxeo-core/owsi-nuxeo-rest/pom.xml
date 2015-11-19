@@ -38,12 +38,7 @@
       <artifactId>jackson-jaxrs</artifactId><!-- brings JacksonJsonProvider, to be configured in clients
       (NOT required if custom impls of MessageBodyReader etc.) -->
     </dependency>
-
-    <dependency>
-      <groupId>javax.ws.rs</groupId>
-      <artifactId>jsr311-api</artifactId><!-- Nuxeo's -->
-    </dependency>
-
+    
     <!-- Jersey Client -->
     <dependency>
       <groupId>com.sun.jersey</groupId>

@@ -45,9 +45,9 @@ public class DocumentUtilsTest extends AbstractNuxeoTest  {
                 .createDocumentModel(DefaultHierarchy.WORKSPACES_PATH_AS_STRING, "myfile", TypeFile.TYPE);
         fileModel.setPropertyValue(TypeFile.XPATH_TITLE, "Foo");
         fileModel = documentManager.createDocument(fileModel);
-        Assert.assertEquals("Default domain > Workspaces > Foo", pathFormatter.getFormattedPath(fileModel));
+        Assert.assertEquals("Domain > Workspaces > Foo", pathFormatter.getFormattedPath(fileModel));
         pathFormatter.setSeparator("/");
-        Assert.assertEquals("Default domain/Workspaces/Foo", pathFormatter.getFormattedPath(fileModel));
+        Assert.assertEquals("Domain/Workspaces/Foo", pathFormatter.getFormattedPath(fileModel));
         pathFormatter.setRootType(TypeWorkspaceRoot.TYPE);
         Assert.assertEquals("Workspaces/Foo", pathFormatter.getFormattedPath(fileModel));
         pathFormatter.setShowLeaf(false);

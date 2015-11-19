@@ -4,7 +4,7 @@
   <require>org.nuxeo.ecm.directories</require>
 
   <extension target="fr.openwide.nuxeo.test.directories.SqlDirectoriesFixer" point="directories">
-    <directory name="country" />
+<!--     <directory name="country" /> -->
   </extension>
 
 </component>
