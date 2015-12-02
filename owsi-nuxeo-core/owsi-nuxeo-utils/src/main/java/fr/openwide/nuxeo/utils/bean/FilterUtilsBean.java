@@ -35,6 +35,8 @@ import org.nuxeo.ecm.platform.query.nxql.NXQLQueryBuilder;
 @Install(precedence = Install.APPLICATION)
 public class FilterUtilsBean implements Serializable {
 
+    private static final String CONTENT_VIEW_DISPLAY_SCHEMA = "content_view_display";
+    
     private static final long serialVersionUID = 1L;
 
     @In
@@ -81,15 +83,17 @@ public class FilterUtilsBean implements Serializable {
     public boolean isSearchDocumentEmpty() throws NuxeoException {
         if (searchDocument != null) {
             for (String schema : searchDocument.getSchemas()) {
-                for (Object value : searchDocument.getProperties(schema).values()) {
-                    if (value != null) {
-                        if (value instanceof String[] && ((String[]) value).length == 0) {
-                            continue;
+                if (!CONTENT_VIEW_DISPLAY_SCHEMA.equals(schema)) {
+                    for (Object value : searchDocument.getProperties(schema).values()) {
+                        if (value != null) {
+                            if (value instanceof String[] && ((String[]) value).length == 0) {
+                                continue;
+                            }
+                            if (value instanceof String && StringUtils.isBlank((String) value)) {
+                                continue;
+                            }
+                            return false;
                         }
-                        if (value instanceof String && StringUtils.isBlank((String) value)) {
-                            continue;
-                        }
-                        return false;
                     }
                 }
             }
