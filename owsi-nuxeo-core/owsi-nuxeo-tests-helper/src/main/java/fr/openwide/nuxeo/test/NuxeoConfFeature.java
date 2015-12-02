@@ -1,8 +1,8 @@
 package fr.openwide.nuxeo.test;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map.Entry;
 import java.util.Properties;
 
@@ -19,22 +19,22 @@ import org.nuxeo.runtime.test.runner.SimpleFeature;
  */
 public class NuxeoConfFeature extends SimpleFeature {
 
-    public static final String PATH_NUXEO_CONF = "./nuxeo.conf";
-
     private static Log logger = LogFactory.getLog(NuxeoConfFeature.class);
 
     @Override
     public void initialize(FeaturesRunner runner) throws Exception {
-        File nuxeoConf = new File(PATH_NUXEO_CONF);
-        if (nuxeoConf.exists()) {
-            Properties properties = new Properties();
+        InputStream is = getClass().getResourceAsStream("/nuxeo.conf");
+        if (is != null) {
             try {
-                properties.load(new FileInputStream(nuxeoConf));
+                Properties properties = new Properties();
+                properties.load(is);
                 for (Entry<Object, Object> entry : properties.entrySet()) {
                     System.setProperty((String) entry.getKey(), (String) entry.getValue());
                 }
             } catch (IOException e) {
                 logger.error(e);
+            } finally {
+                is.close();
             }
         }
     }

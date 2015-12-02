@@ -10,7 +10,7 @@ public class NuxeoConfFeatureTest extends AbstractNuxeoTest {
     private static final String PROPERTY_NAME_TEST = "test.property";
 
     @Test
-    public void testCountryAccess() throws DirectoryException {
+    public void testPropertyLoader() throws DirectoryException {
         Assert.assertTrue("nuxeo.conf file incorrectly loaded", Framework.isBooleanPropertyTrue(PROPERTY_NAME_TEST));
     }
 
