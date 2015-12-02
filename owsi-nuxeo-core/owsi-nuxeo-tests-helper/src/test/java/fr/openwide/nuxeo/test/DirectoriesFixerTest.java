@@ -1,4 +1,4 @@
-package fr.openwide.nuxeo.test.directories;
+package fr.openwide.nuxeo.test;
 
 import org.junit.Test;
 import org.nuxeo.ecm.directory.DirectoryException;

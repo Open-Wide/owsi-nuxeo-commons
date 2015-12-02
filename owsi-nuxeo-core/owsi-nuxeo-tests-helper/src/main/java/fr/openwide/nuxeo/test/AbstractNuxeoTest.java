@@ -24,6 +24,7 @@ import org.nuxeo.ecm.core.test.DefaultRepositoryInit;
 import org.nuxeo.ecm.core.test.annotations.Granularity;
 import org.nuxeo.ecm.core.test.annotations.RepositoryConfig;
 import org.nuxeo.ecm.platform.test.PlatformFeature;
+import org.nuxeo.runtime.test.runner.Deploy;
 import org.nuxeo.runtime.test.runner.Features;
 import org.nuxeo.runtime.test.runner.FeaturesRunner;
 
@@ -37,10 +38,13 @@ import com.google.inject.Inject;
  *
  */
 @RunWith(FeaturesRunner.class)
-@Features(PlatformFeature.class)
+@Features({NuxeoConfFeature.class, PlatformFeature.class})
 @RepositoryConfig(init = DefaultRepositoryInit.class, cleanup = Granularity.CLASS)
+@Deploy({
+    "org.nuxeo.ecm.directory.sql.tests:test-sql-directories-security.xml" // Fix default directories & allow Studio projects deploys
+})
 public class AbstractNuxeoTest {
-
+    
    /**
     * BEWARE its "Administrator" user is NOT in administrators group, so add
     * dedicated ACLs !
@@ -59,7 +63,7 @@ public class AbstractNuxeoTest {
     public void setUpAbstractNuxeoTest() {
         repositoryLogger = new RepositoryLogger(documentManager);
     }
-
+    
     @After
     public void logRepository() throws NuxeoException {
         if (logRepositoryAfterEachTest) {
