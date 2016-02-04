@@ -30,8 +30,8 @@ Name | Description
 
 Nuxeo version | OWSI Commons version | Comments
 --- | --- | ---
-7.10 | 1.7.10-SNAPSHOT | 
-6.0 | 1.6.0-SNAPSHOT | 
+7.10 | 1.7.10 | 
+6.0 | 1.6.0-SNAPSHOT *(unreleased)* | 
 5.8 | 0.1.4 | 
 5.6 | 0.1.3 | 
 
@@ -61,17 +61,17 @@ You can just put the binaries in the *nxserver/bundles* folder of Nuxeo, but if 
     <dependency>
       <groupId>fr.openwide.nuxeo.commons</groupId>
       <artifactId>owsi-nuxeo-constants</artifactId>
-      <version>0.1.4</version>
+      <version>1.7.10</version>
     </dependency>
     <dependency>
       <groupId>fr.openwide.nuxeo.commons</groupId>
       <artifactId>owsi-nuxeo-utils</artifactId>
-      <version>0.1.4</version>
+      <version>1.7.10</version>
     </dependency>
     <dependency>
       <groupId>fr.openwide.nuxeo.commons</groupId>
       <artifactId>owsi-nuxeo-avatar-importer</artifactId>
-      <version>0.1.4</version>
+      <version>1.7.10</version>
     </dependency>
     ...
 ```
