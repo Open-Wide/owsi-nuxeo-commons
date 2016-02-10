@@ -33,6 +33,7 @@ The way to execute these contributions is up to the user, this module only provi
               <type>File</type>
               <type>Note</type>
           </allowedTypes>
+      </document>
   </script>
 </extension>
 ```
