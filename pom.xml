@@ -208,7 +208,6 @@
     </pluginManagement>
   </build>
 
-
   <repositories>
     <!-- Nuxeo repositories -->
     <repository>
@@ -235,18 +234,28 @@
   
   <distributionManagement>
     <repository>
-      <id>sonatype-nexus-staging</id>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+      <id>nexus-owsi-nuxeo</id>
+      <url>https://projects.openwide.fr/services/nexus/content/repositories/owsi-nuxeo</url>
     </repository>
     <snapshotRepository>
-      <id>sonatype-nexus-snapshots</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <id>nexus-owsi-nuxeo-snapshots</id>
+      <url>https://projects.openwide.fr/services/nexus/content/repositories/owsi-nuxeo-snapshots</url>
     </snapshotRepository>
   </distributionManagement>
 
   <profiles>
     <profile>
       <id>release</id>
+	  <distributionManagement>
+		<repository>
+		  <id>sonatype-nexus-staging</id>
+		  <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+		</repository>
+		<snapshotRepository>
+		  <id>sonatype-nexus-snapshots</id>
+		  <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+	  </distributionManagement>
       <build>
         <plugins>
           <plugin>
