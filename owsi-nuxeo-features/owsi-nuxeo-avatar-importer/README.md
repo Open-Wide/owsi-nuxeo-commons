@@ -5,6 +5,8 @@ Open Wide : Nuxeo Avatar Importer
 
 This module watches a given folder to import its content as avatars.
 
+**Module state:** Used in production
+
 ## Documentation
 
 Configure the folder location with:

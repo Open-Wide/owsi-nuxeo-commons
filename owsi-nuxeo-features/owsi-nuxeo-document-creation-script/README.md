@@ -9,6 +9,8 @@ The way to execute these contributions is up to the user, this module only provi
 
 (**TODO**: Contribute improvements the Content Template service instead, to support the use cases targeted by this module)
 
+**Module state:** Used in production
+
 ## Documentation
 
 **Creating a script through XML contribution:**
