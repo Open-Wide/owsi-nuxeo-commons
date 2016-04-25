@@ -3,7 +3,7 @@
 
   <extension target="fr.openwide.nuxeo.avatar.AvatarImporterService" point="config">
     <configuration>
-      <dossierAvatars>target/test-classes/avatars</dossierAvatars>
+      <avatarFolder>target/test-classes/avatars</avatarFolder>
     </configuration>
   </extension>
 

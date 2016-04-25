@@ -6,7 +6,11 @@ import org.nuxeo.common.xmap.annotation.XObject;
 @XObject("configuration")
 public class AvatarImporterConfigDescriptor {
 
-    @XNode("dossierAvatars")
-    public String dossierAvatars = null; 
+    @XNode("avatarFolder")
+    private String avatarFolder = null; 
+    
+    public String getAvatarFolder() {
+        return avatarFolder;
+    }
     
 }

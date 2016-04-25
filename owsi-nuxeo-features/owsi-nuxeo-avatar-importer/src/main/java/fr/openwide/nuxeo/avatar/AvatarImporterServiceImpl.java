@@ -44,7 +44,7 @@ public class AvatarImporterServiceImpl extends DefaultComponent implements Avata
     
     @Override
     public void registerConfiguration(AvatarImporterConfigDescriptor config) {
-        avatarFolderPath = config.dossierAvatars;
+        avatarFolderPath = config.getAvatarFolder();
     }
 
     @Override
@@ -63,30 +63,45 @@ public class AvatarImporterServiceImpl extends DefaultComponent implements Avata
                     UserProfileService userProfileService = Framework.getService(UserProfileService.class);
                     File[] avatarFiles = avatarFolder.listFiles();
                     for (File avatarFile : avatarFiles) {
+                        if (avatarFile.isFile()) {
                         
-                        // Look for the related user
-                        String filename = avatarFile.getName();
-                        String username = filename.substring(0, filename.lastIndexOf("."));
-                        DocumentModel userProfile = userProfileService.getUserProfileDocument(username, coreSession);
-                        if (userProfile != null) {
-                            boolean replaceBlob = true;
-                            
-                            // Compare pictures
-                            Blob previousBlob = (Blob) userProfile.getPropertyValue(UserProfileConstants.USER_PROFILE_AVATAR_FIELD);
-                            FileBlob newBlob = new FileBlob(avatarFile);
-                            if (previousBlob != null) {
-                                if (previousBlob.getDigest().equals(
-                                        DefaultBinaryManager.toHexString(messageDigest.digest(newBlob.getByteArray()))
-                                            )) {
-                                    replaceBlob = false;
-                                }
+                            // Look for the related user
+                            String filename = avatarFile.getName();
+                            String username = filename.substring(0, filename.lastIndexOf("."));
+                            DocumentModel userProfile = null;
+                            try {
+                                userProfile = userProfileService.getUserProfileDocument(username, coreSession);
                             }
-                            
-                            // (Over)write picture
-                            if (replaceBlob) {
-                                userProfile.setPropertyValue(UserProfileConstants.USER_PROFILE_AVATAR_FIELD, newBlob);
-                                coreSession.saveDocument(userProfile);
-                                replacedAvatars++;
+                            catch (NuxeoException e) {
+                                logger.error("Could not get user profile for '" + username 
+                                        + "', skipping it (file: " + avatarFile.getAbsolutePath()
+                                        + ", cause: " + e.getMessage() + ")");
+                            }
+                            if (userProfile != null) {
+                                boolean replaceBlob = true;
+                                
+                                // Compare pictures
+                                Blob previousBlob = (Blob) userProfile.getPropertyValue(UserProfileConstants.USER_PROFILE_AVATAR_FIELD);
+                                FileBlob newBlob = new FileBlob(avatarFile);
+                                if (previousBlob != null) {
+                                    if (previousBlob.getDigest().equals(
+                                            DefaultBinaryManager.toHexString(messageDigest.digest(newBlob.getByteArray()))
+                                                )) {
+                                        replaceBlob = false;
+                                    }
+                                }
+                                
+                                // (Over)write picture
+                                if (replaceBlob) {
+                                    userProfile.setPropertyValue(UserProfileConstants.USER_PROFILE_AVATAR_FIELD, newBlob);
+                                    coreSession.saveDocument(userProfile);
+                                    try {
+                                        coreSession.saveDocument(userProfile);
+                                    } catch (Exception e) {
+                                        throw new NuxeoException("Error while saving user profile for " + username + " (avatar path: " + avatarFile.getAbsolutePath() + ")", e);
+                                    }
+                                    replacedAvatars++;
+                                }
                             }
                         }
                     }
@@ -98,7 +113,7 @@ public class AvatarImporterServiceImpl extends DefaultComponent implements Avata
                 }
             }
             else {
-                logger.warn("Cannot import avatars, folder not found : " + avatarFolderPath);
+                logger.warn("Cannot import avatars, folder not found: " + avatarFolderPath);
             }
         }
     }

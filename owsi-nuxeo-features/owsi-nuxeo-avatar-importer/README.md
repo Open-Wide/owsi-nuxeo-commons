@@ -12,7 +12,7 @@ Configure the folder location with:
 ```xml
   <extension target="fr.openwide.nuxeo.avatar.AvatarImporterService" point="config">
     <configuration>
-      <dossierAvatars>/path/to/avatars</dossierAvatars>
+      <avatarFolder>/path/to/avatars</avatarFolder>
     </configuration>
   </extension>
 ```
@@ -22,6 +22,8 @@ If this folder, for instance, contains a file named *Administrator.jpg* (any ima
 By default, an import is run every minute. You can override this with:
 
 ```xml
+  <require>fr.openwide.nuxeo.avatar.scheduler.contrib</require>
+  
   <extension target="org.nuxeo.ecm.core.scheduler.SchedulerService" point="schedule">
     <schedule id="avatarImporter">
       <username>USERNAME</username> <!-- Example: "Administrator" -->
