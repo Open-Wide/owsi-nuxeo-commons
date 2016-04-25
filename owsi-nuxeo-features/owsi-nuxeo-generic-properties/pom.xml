@@ -3,7 +3,7 @@
   <parent>
     <groupId>fr.openwide.nuxeo.commons</groupId>
     <artifactId>owsi-nuxeo-commons</artifactId>
-    <version>1.6.0-SNAPSHOT</version>
+    <version>1.6.0</version>
     <relativePath>../..</relativePath>
   </parent>
   

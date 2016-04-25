@@ -9,7 +9,7 @@
   
   <groupId>fr.openwide.nuxeo.commons</groupId>
   <artifactId>owsi-nuxeo-commons</artifactId>
-  <version>1.6.0-SNAPSHOT</version>
+  <version>1.6.0</version>
   <packaging>pom</packaging>
   
   <name>Open Wide : Nuxeo Commons</name>
@@ -62,6 +62,7 @@
     <module>owsi-nuxeo-features/owsi-nuxeo-document-creation-script</module>
     <module>owsi-nuxeo-features/owsi-nuxeo-ecm-types-ordering</module>
     <module>owsi-nuxeo-features/owsi-nuxeo-field-formatter</module>
+    <module>owsi-nuxeo-features/owsi-nuxeo-automation-features</module>
   </modules>
 
   <dependencies>
