@@ -1,0 +1,10 @@
+<component name="${nuxeoModuleId}.core.version">
+
+  <extension target="fr.openwide.commons.utils.jsf.VersionDisplayService" point="config">
+    <config>
+      <versionNumberPrefix>${name} v</versionNumberPrefix>
+      <bundleMatchRegexp>${rootArtifactId}-.*</bundleMatchRegexp>
+    </config>
+  </extension>
+
+</component>

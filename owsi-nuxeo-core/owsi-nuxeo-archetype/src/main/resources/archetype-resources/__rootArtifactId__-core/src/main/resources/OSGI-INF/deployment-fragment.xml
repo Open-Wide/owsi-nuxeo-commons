@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<fragment version="1">
+  
+  <!-- Required modules -->
+  #if($hasStudioProject != 'false')
+  <require>studio.extensions.${studioProjectName}</require>
+  
+  #end<!-- Module registration -->
+  <extension target="application#MODULE">
+    <module>
+      <ejb>${bundle.fileName}</ejb>
+    </module>
+  </extension>
+  
+</fragment>

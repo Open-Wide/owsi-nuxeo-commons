@@ -1,0 +1,42 @@
+<project name="nuxeo-assembly" default="build" xmlns:nx="urn:nuxeo-build" xmlns:artifact="urn:nuxeo-artifact">
+	<taskdef resource="org/nuxeo/build/antlib.xml" uri="urn:nuxeo-build" />
+	<taskdef resource="org/nuxeo/build/artifact/antlib.xml" uri="urn:nuxeo-artifact" />
+
+	<property name="outdir" value="${maven.project.build.directory}" />
+
+	<target name="build" description="Build Marketplace package">
+		<!-- Set up package base -->
+		<tstamp />
+		<delete failonerror="false" dir="${outdir}/marketplace" />
+		<mkdir dir="${outdir}/marketplace" />
+		<copy todir="${outdir}/marketplace">
+			<fileset dir="src/main/resources" />
+			<filterset>
+				<filter token="VERSION" value="${${nuxeoModuleId}.version}" />
+				<filter token="DISTRIB_VERSION" value="${nuxeo.version}" />
+			</filterset>
+		</copy>
+
+		<!-- Add package bundles -->
+		<copy todir="${outdir}/marketplace/install/bundles">
+			<artifact:resolveFile key="fr.openwide.nuxeo.commons:owsi-nuxeo-constants::jar" />
+			<artifact:resolveFile key="fr.openwide.nuxeo.commons:owsi-nuxeo-utils::jar" />
+#if($hasStudioProject != 'false')			
+			<artifact:resolveFile key="${studioProjectGroupId}:${studioProjectArtifactId}::jar" />
+#end			
+			<artifact:resolveFile key="${groupId}:${rootArtifactId}-core::jar" />
+			<artifact:resolveFile key="${groupId}:${rootArtifactId}-web::jar" />
+		</copy>
+
+		<!-- Add package libraries -->
+		<mkdir dir="${outdir}/marketplace/install/lib" />
+		<!-- <copy todir="${outdir}/marketplace/install/lib">
+			<artifact:resolveFile key="..." />
+		</copy>-->
+
+		<!-- Zip package -->
+		<zip destfile="${outdir}/${maven.project.artifactId}-${${nuxeoModuleId}.version}.zip" basedir="${outdir}/marketplace" />
+		<artifact:attach file="${outdir}/${maven.project.artifactId}-${${nuxeoModuleId}.version}.zip" target="${maven.project.groupId}:${maven.project.artifactId}" type="zip" />
+	</target>
+
+</project>

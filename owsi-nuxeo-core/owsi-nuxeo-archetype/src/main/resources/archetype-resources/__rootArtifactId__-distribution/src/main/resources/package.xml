@@ -1,0 +1,21 @@
+<!-- See documentation at http://doc.nuxeo.com/x/HgIz -->
+<package type="addon" name="${rootArtifactId}" version="@VERSION@">
+  <title>${name}</title>
+  <vendor>${vendor}</vendor>
+
+  <installer restart="true" />
+  <uninstaller restart="true" />
+  <nuxeo-validation>none</nuxeo-validation>
+  <production-state>testing</production-state>
+  <supported>false</supported>
+  
+  #set($nuxeoVersionWithoutHotfix = $nuxeoVersion.replaceAll('-.*', ''))
+  <platforms>
+    <platform>cap-${nuxeoVersionWithoutHotfix}</platform>
+  </platforms>
+  <dependencies>
+    <dependencies>
+      <package>nuxeo-dm-${nuxeoVersionWithoutHotfix}</package>
+    </dependencies>
+  </dependencies>
+</package>

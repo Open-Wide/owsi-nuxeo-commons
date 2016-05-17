@@ -1,0 +1,53 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                      http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+  <!-- Put these servers in your ~/.m2/settings.xml -->
+
+  <servers>
+  
+#if($hasStudioProject != 'false')    
+    <server>
+      <id>nuxeo-studio</id>
+      <username>${nuxeoConnectUsername}</username>
+      <password>${nuxeoConnectPassword}</password>
+    </server>
+    <server>
+      <id>nuxeo-studio-snapshots</id>
+      <username>${nuxeoConnectUsername}</username>
+      <password>${nuxeoConnectPassword}</password>
+    </server>
+#end    
+    
+#if($isOpenwideProject != 'false')    
+    <server>
+      <id>OWSI-Nuxeo</id>
+      <username>${openwideRepoUsername}</username>
+      <password>${openwideRepoPassword}</password>
+    </server>
+    <server>
+      <id>OWSI-Nuxeo-Snapshots</id>
+      <username>${openwideRepoUsername}</username>
+      <password>${openwideRepoPassword}</password>
+    </server>
+    <server>
+      <id>OWSI-Proxy-Central</id>
+      <username>${openwideRepoUsername}</username>
+      <password>${openwideRepoPassword}</password>
+    </server>
+#end    
+  </servers>
+  
+#if($isOpenwideProject != 'false')  
+  <mirrors>
+    <mirror>
+      <id>OWSI-Proxy-Central</id>
+      <name>Local proxy of central repo</name>
+      <url>https://projects.openwide.fr/services/nexus/content/repositories/central/</url>
+      <mirrorOf>central</mirrorOf>
+    </mirror>
+  </mirrors>
+#end  
+  
+</settings>

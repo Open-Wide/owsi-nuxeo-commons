@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-Vendor: ${vendor}
+Bundle-ActivationPolicy: lazy
+Bundle-Name: ${name} Core
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: ${nuxeoModuleId}.core;singleton:=true
+Nuxeo-Component: OSGI-INF/version-display-contrib.xml

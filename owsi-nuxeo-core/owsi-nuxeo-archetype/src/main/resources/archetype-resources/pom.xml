@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.nuxeo.ecm.platform</groupId>
+    <artifactId>nuxeo-features-parent</artifactId>
+    <version>${nuxeoVersion}</version>
+  </parent>
+  <groupId>${groupId}</groupId>
+  <artifactId>${artifactId}</artifactId>
+  <version>${version}</version>
+  <name>${name}</name>
+  <packaging>pom</packaging>
+
+  <organization>
+    <name>${vendor}</name>
+  </organization>
+  
+  <developers>
+  </developers>
+
+  <properties>
+    <${nuxeoModuleId}.version>${project.version}</${nuxeoModuleId}.version>
+#if($hasStudioProject != 'false')    
+    <${nuxeoModuleId}.studio.version>0.0.0-SNAPSHOT</${nuxeoModuleId}.studio.version>
+#end    
+    <nuxeo.version>${nuxeoVersion}</nuxeo.version>
+    <openwide.nuxeo.commons.version>1.7.10</openwide.nuxeo.commons.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <mockito.version>1.9.5</mockito.version>
+  </properties>
+#if($hasStudioProject != 'false')  
+  <profiles>
+    <profile>
+      <id>release</id>
+      <properties>
+        <${groupId}.studio.version>${project.version}</${groupId}.studio.version>
+      </properties>
+    </profile>
+  </profiles>
+#end  
+  <modules>
+    <module>${artifactId}-core</module>
+    <module>${artifactId}-web</module>
+    <module>${artifactId}-distribution</module>
+  </modules>
+
+  <dependencies>
+#if($hasStudioProject != 'false')    
+    <!-- Studio project -->
+    <dependency>
+      <groupId>${studioProjectGroupId}</groupId>
+      <artifactId>${studioProjectArtifactId}</artifactId>
+    </dependency>
+    
+#end    
+    <!-- Open Wide Commons -->
+    <dependency>
+      <groupId>fr.openwide.nuxeo.commons</groupId>
+      <artifactId>owsi-nuxeo-constants</artifactId>
+      <version>${openwide.nuxeo.commons.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>fr.openwide.nuxeo.commons</groupId>
+      <artifactId>owsi-nuxeo-utils</artifactId>
+      <version>${openwide.nuxeo.commons.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>fr.openwide.nuxeo.commons</groupId>
+      <artifactId>owsi-nuxeo-tests-helper</artifactId>
+      <version>${openwide.nuxeo.commons.version}</version>
+      <scope>test</scope>
+    </dependency>
+    
+    <!-- Nuxeo -->
+    <dependency>
+      <groupId>org.nuxeo.ecm.core</groupId>
+      <artifactId>nuxeo-core-api</artifactId>
+    </dependency>
+    
+    <!-- Nuxeo test framework -->
+    <dependency>
+      <groupId>org.nuxeo.runtime</groupId>
+      <artifactId>nuxeo-runtime-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.nuxeo.ecm.core</groupId>
+      <artifactId>nuxeo-core-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.nuxeo.ecm.platform</groupId>
+      <artifactId>nuxeo-features-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.nuxeo.ecm.platform</groupId>
+      <artifactId>nuxeo-platform-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    
+    <!-- Test libraries -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-all</artifactId>
+      <scope>test</scope>
+      <version>${mockito.version}</version>
+    </dependency>
+  </dependencies>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- ${name} modules -->
+#if($hasStudioProject != 'false')      
+      <dependency>
+        <groupId>${studioProjectGroupId}</groupId>
+        <artifactId>${studioProjectArtifactId}</artifactId>
+        <version>${${nuxeoModuleId}.studio.version}</version>
+      </dependency>
+#end      
+      <dependency>
+        <groupId>${groupId}</groupId>
+        <artifactId>${artifactId}-core</artifactId>
+        <version>${${nuxeoModuleId}.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${groupId}</groupId>
+        <artifactId>${artifactId}-web</artifactId>
+        <version>${${nuxeoModuleId}.version}</version>
+      </dependency>
+      
+      <!-- Open Wide commons -->
+      <dependency>
+        <groupId>fr.openwide.nuxeo.commons</groupId>
+        <artifactId>owsi-nuxeo-constants</artifactId>
+        <version>${fr.openwide.nuxeo.commons.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>fr.openwide.nuxeo.commons</groupId>
+        <artifactId>owsi-nuxeo-utils</artifactId>
+        <version>${fr.openwide.nuxeo.commons.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>fr.openwide.nuxeo.commons</groupId>
+        <artifactId>owsi-nuxeo-tests-helper</artifactId>
+        <version>${fr.openwide.nuxeo.commons.version}</version>
+        <scope>test</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <repositories>
+    <repository>
+      <id>nuxeo-public</id>
+      <url>http://maven.nuxeo.org/nexus/content/groups/public</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+#if($hasStudioProject != 'false')    
+    <repository>
+      <id>nuxeo-studio</id>
+      <url>https://connect.nuxeo.com/nuxeo/site/studio/maven</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>nuxeo-studio-snapshots</id>
+      <url>https://connect.nuxeo.com/nuxeo/site/studio/maven</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
+    </repository>
+#end    
+#if($isOpenwideProject != 'false')    
+    <repository>
+      <id>OWSI-Nuxeo</id>
+      <url>https://projects.openwide.fr/services/nexus/content/repositories/owsi-nuxeo</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>OWSI-Nuxeo-Snapshots</id>
+      <url>https://projects.openwide.fr/services/nexus/content/repositories/owsi-nuxeo-snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+#end    
+  </repositories>
+  
+</project>

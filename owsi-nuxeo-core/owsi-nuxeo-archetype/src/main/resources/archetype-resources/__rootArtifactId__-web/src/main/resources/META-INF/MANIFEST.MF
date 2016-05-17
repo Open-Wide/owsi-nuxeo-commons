@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Bundle-Vendor: ${vendor}
+Bundle-ActivationPolicy: lazy
+Bundle-Name: ${name} Web
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: ${nuxeoModuleId}.web;singleton:=true

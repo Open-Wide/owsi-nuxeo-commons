@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype-descriptor
+  xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0 http://maven.apache.org/xsd/archetype-descriptor-1.0.0.xsd"
+  name="service-parent" xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <requiredProperties>
+    <!-- Maven info -->
+    <requiredProperty key="version">
+      <defaultValue>0.0.0-SNAPSHOT</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="nuxeoVersion">
+      <defaultValue>5.6.0-HF20</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="name">
+      <defaultValue>${artifactId}</defaultValue>
+    </requiredProperty>
+    
+    <!-- Nuxeo info -->
+    <requiredProperty key="nuxeoModuleId">
+      <defaultValue>${groupId}.${artifactId}</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="vendor">
+      <defaultValue>${artifactId}</defaultValue>
+    </requiredProperty>
+
+    <!-- Nuxeo Studio info -->
+    <requiredProperty key="hasStudioProject">
+      <defaultValue>false</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="studioProjectGroupId">
+      <defaultValue>nuxeo-studio</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="studioProjectArtifactId">
+      <defaultValue>${artifactId}-studio</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="nuxeoConnectUsername">
+      <defaultValue>YOUR-USERNAME</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="nuxeoConnectPassword">
+      <defaultValue>YOUR-PASSWORD</defaultValue>
+    </requiredProperty>
+
+    <!-- Open Wide-specific info -->
+    <requiredProperty key="isOpenwideProject">
+      <defaultValue>false</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="openwideRepoUsername">
+      <defaultValue>YOUR-USERNAME</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="openwideRepoPassword">
+      <defaultValue>YOUR-PASSWORD</defaultValue>
+    </requiredProperty>
+  </requiredProperties>
+
+  <fileSets>
+    <fileSet filtered="true" encoding="UTF-8">
+      <directory></directory>
+      <includes>
+        <include>settings.xml.part</include>
+        <include>nuxeo-config.default.rb</include>
+        <include>nuxeo-config.rb</include>
+        <include>.gitignore</include>
+      </includes>
+    </fileSet>
+    <fileSet>
+      <directory>__rootArtifactId__-studio-resources/images</directory>
+    </fileSet>
+    <fileSet>
+      <directory>__rootArtifactId__-studio-resources/widgets</directory>
+    </fileSet>
+  </fileSets>
+
+  <modules>
+    <module id="${rootArtifactId}-core" dir="__rootArtifactId__-core" name="${rootArtifactId} : Core">
+      <fileSets>
+        <fileSet packaged="true" encoding="UTF-8">
+          <directory>src/main/java</directory>
+        </fileSet>
+        <fileSet packaged="true" encoding="UTF-8">
+          <directory>src/test/java</directory>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+          <directory>src/</directory>
+          <includes>
+            <include>**/*.*</include>
+          </includes>
+        </fileSet>
+      </fileSets>
+    </module>
+    <module id="${rootArtifactId}-web" dir="__rootArtifactId__-web" name="${rootArtifactId} : Web">
+      <fileSets>
+        <fileSet packaged="true" encoding="UTF-8">
+          <directory>src/main/java</directory>
+        </fileSet>
+        <fileSet packaged="true" encoding="UTF-8">
+          <directory>src/test/java</directory>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+          <directory>src/</directory>
+          <includes>
+            <include>**/*.*</include>
+          </includes>
+        </fileSet>
+        <fileSet>
+          <directory>src/main/resources/web/nuxeo.war</directory>
+        </fileSet>
+      </fileSets>
+    </module>
+    <module id="${rootArtifactId}-distribution" dir="__rootArtifactId__-distribution" name="${rootArtifactId} : Marketplace distribution">
+      <fileSets>
+        <fileSet filtered="true" encoding="UTF-8">
+          <directory></directory>
+          <includes>
+            <include>assembly.xml</include>
+          </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+          <directory>src/</directory>
+          <includes>
+            <include>**/*.*</include>
+          </includes>
+        </fileSet>
+        <fileSet>
+          <directory>src/main/resources/install/templates/__rootArtifactId__-default/config</directory>
+        </fileSet>
+      </fileSets>
+    </module>
+  </modules>
+
+</archetype-descriptor>
