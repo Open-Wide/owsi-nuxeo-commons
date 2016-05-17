@@ -56,6 +56,7 @@
     <module>owsi-nuxeo-core/owsi-nuxeo-utils</module>
     <module>owsi-nuxeo-core/owsi-nuxeo-rest</module>
     <module>owsi-nuxeo-core/owsi-nuxeo-rest-mock</module>
+    <module>owsi-nuxeo-core/owsi-nuxeo-archetype</module>
     <module>owsi-nuxeo-features/owsi-nuxeo-property-sync</module>
     <module>owsi-nuxeo-features/owsi-nuxeo-generic-properties</module>
     <module>owsi-nuxeo-features/owsi-nuxeo-avatar-importer</module>
@@ -155,6 +156,11 @@
       <dependency>
         <groupId>fr.openwide.nuxeo.commons</groupId>
         <artifactId>owsi-nuxeo-document-creation-script</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>fr.openwide.nuxeo.commons</groupId>
+        <artifactId>owsi-nuxeo-archetype</artifactId>
         <version>${project.version}</version>
       </dependency>
       
