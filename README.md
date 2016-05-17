@@ -30,8 +30,8 @@ Name | Description
 
 Nuxeo version | OWSI Commons version | Comments
 --- | --- | ---
-7.10 | 1.7.10 | 
-6.0 | 1.6.0-SNAPSHOT *(unreleased)* | 
+7.10 | 1.7.10 (TODO publish 1.7.10.1 to Central) | 
+6.0 | 1.6.0 | 
 5.8 | 0.1.4 | 
 5.6 | 0.1.3 | 
 

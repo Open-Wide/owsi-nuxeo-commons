@@ -30,59 +30,46 @@ public class DocumentAdapter implements TypeDocument {
     }
 
     /** may be overriden (but there should be no need ??) */
-    @Override
     public String getType() {
        return documentModel.getType();
     }
 
-    @Override
     public String getUuid() {
         return documentModel.getId();
     }
 
-    @Override
     public String getName() {
         return documentModel.getName();
     }
 
-    @Override
     public String getTitle() throws NuxeoException {
         return documentModel.getTitle();
     }
 
-    @Override
     public void setTitle(String title) throws PropertyException, NuxeoException {
         documentModel.setPropertyValue(TypeDocument.XPATH_TITLE, title);
     }
 
-    @Override
     public String getDescription() throws NuxeoException {
         return (String) documentModel.getPropertyValue(TypeDocument.XPATH_DESCRIPTION);
     }
 
-    @Override
     public void setDescription(String description) throws PropertyException, NuxeoException {
         documentModel.setPropertyValue(TypeDocument.XPATH_DESCRIPTION, description);
     }
 
-
-    @Override
     public String getCreated() throws NuxeoException {
        return (String) documentModel.getPropertyValue(TypeDocument.XPATH_CREATED);
     }
     
-
-    @Override
     public String getModified() throws NuxeoException {
        return (String) documentModel.getPropertyValue(TypeDocument.XPATH_MODIFIED);
     }
 
-    @Override
     public Object getProperty(String xpath) throws Exception {
         return documentModel.getPropertyValue(xpath);
     }
 
-    @Override
     public void setProperty(String xpath, Serializable value) throws Exception {
         documentModel.setPropertyValue(xpath, value);
     }

@@ -5,7 +5,7 @@ Open Wide : Nuxeo Generic Properties
 
 Generic Properties provides a generic XML extension point to store and retrieve basic data (strings, numbers, lists, maps). See this as a "quick'n'dirty" way to store configuration ; the cleaner approach would be to create your own extension points.
 
-**Module state:** Put into production
+**Module state:** Used in production
 
 ## Example
   
