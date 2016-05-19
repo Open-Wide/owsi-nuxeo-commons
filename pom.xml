@@ -63,7 +63,6 @@
     <module>owsi-nuxeo-features/owsi-nuxeo-document-creation-script</module>
     <module>owsi-nuxeo-features/owsi-nuxeo-ecm-types-ordering</module>
     <module>owsi-nuxeo-features/owsi-nuxeo-field-formatter</module>
-    <module>owsi-nuxeo-server-control</module>
   </modules>
 
   <dependencies>
